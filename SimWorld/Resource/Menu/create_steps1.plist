@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Title</key>
+	<string>TXT_KEY_MAP_OPTION_TEMPERATURE</string>
+	<key>Hint</key>
+	<string>TXT_KEY_MAP_OPTION_TEMPERATURE_HINT</string>
+	<key>Steps</key>
+	<array>
+		<dict>
+			<key>Name</key>
+			<string>TXT_KEY_MAP_OPTION_COOL</string>
+			<key>Description</key>
+			<string>Cool</string>
+			<key>Key</key>
+			<string>TXT_KEY_MAP_OPTION_COOL</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>TXT_KEY_MAP_OPTION_TEMPERATE</string>
+			<key>Description</key>
+			<string>Temperate</string>
+			<key>Map</key>
+			<string>TXT_KEY_MAP_OPTION_TEMPERATE</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>TXT_KEY_MAP_OPTION_HOT</string>
+			<key>Description</key>
+			<string>Old</string>
+			<key>Map</key>
+			<string>TXT_KEY_MAP_OPTION_HOT</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>TXT_KEY_MAP_OPTION_RANDOM</string>
+			<key>Description</key>
+			<string>Random</string>
+			<key>Map</key>
+			<string>TXT_KEY_MAP_OPTION_RANDOM</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,66 @@
+/* 
+  Localization.strings
+  SimWorld
+
+  Created by Michael Rommel on 17.12.14.
+  Copyright (c) 2014 Michael Rommel. All rights reserved.
+*/
+
+/** main */
+"TXT_KEY_MAIN_SETUP" = "Setup";
+"TXT_KEY_MAIN_LOAD_MAP" = "Load Map";
+"TXT_KEY_MAIN_ABOUT" = "About";
+
+/** setup - leader */
+"TXT_KEY_MAP_OPTION_LEADER" = "Leader Name";
+"TXT_KEY_MAP_OPTION_RANDOM_LEADER" = "Random Leader";
+"TXT_KEY_MAP_OPTION_RANDOM_LEADER_HINT" = "The game will randomly pick one of the leaders for you to play.";
+"TXT_KEY_LEADER_ALEXANDER" = "Alexander the Great";
+"TXT_KEY_LEADER_ALEXANDER_HINT" = "Alexander the Great (July 356 BC - June 323 BC) was a king of Macedon and creator of a vast empire later divided up among his generals.";
+"TXT_KEY_LEADER_AUGUSTUS" = "Augustus Caesar";
+"TXT_KEY_LEADER_AUGUSTUS_HINT" = "Augustus Caesar (23 September 63 BC - 19 August 14 AD) is considered the first emperor of the Roman Empire, though he himself insisted upon the title of Princeps Civitatis and at least in theory was invested with all of his power by the Senate.";
+"TXT_KEY_LEADER_BISMARCK" = "Bismarck";
+"TXT_KEY_LEADER_BISMARCK_HINT" = "Otto von Bismarck (1 April 1815 - 30 July 1898) was a Prussian statesman and the first Chancellor of Germany.";
+"TXT_KEY_LEADER_DARIUS" = "Darius";
+"TXT_KEY_LEADER_DARIUS_HINT" = "Darius (c. 550 BC - October 486 BC) was the third emperor of the Achaemenid Empire.";
+
+/** setup - map type */
+"TXT_KEY_MAP_OPTION_TYPE" = "Select Map Type";
+"TXT_KEY_MAP_OPTION_TYPE_HINT" = "";
+"TXT_KEY_MAP_TYPE_CONTINENTS_TITLE" = "Continents";
+"TXT_KEY_MAP_TYPE_CONTINENTS_DESCRIPTION" = "The world will consist of a few large landmasses and some smaller islands.";
+"TXT_KEY_MAP_TYPE_ARCHIPELAGO_TITLE" = "Archipelago";
+"TXT_KEY_MAP_TYPE_ARCHIPELAGO_DESCRIPTION" = "This world will consist of many islands.";
+"TXT_KEY_MAP_TYPE_PANGAEA_TITLE" = "Pangaea";
+"TXT_KEY_MAP_TYPE_PANGAEA_DESCRIPTION" = "All players start on one large landmass. There may be small islands off of the main continent.";
+"TXT_KEY_MAP_TYPE_EARTH_TITLE" = "Earth";
+"TXT_KEY_MAP_TYPE_EARTH_DESCRIPTION" = "A map that spans the entire planet.";
+"TXT_KEY_MAP_TYPE_RANDOM_TITLE" = "Random Map Type";
+"TXT_KEY_MAP_TYPE_RANDOM_DESCRIPTION" = "The game will randomly pick one of the map types for you to play (not Earth). You will not be told what was picked.";
+
+/** setup - map size */
+"TXT_KEY_MAP_OPTION_MAP_SIZE" = "Choose Map Size";
+"TXT_KEY_MAP_SIZE_RANDOM_TITLE" = "Random Map Size";
+"TXT_KEY_MAP_SIZE_RANDOM_DESCRIPTION" = "The game will randomly pick one of the map types for you to play (not Earth). You will not be told what was picked.";
+
+/** setup - difficulty */
+"TXT_KEY_MAP_OPTION_HANDICAP" = "Difficulty Level";
+"TXT_KEY_MAP_OPTION_HANDICAP_HINT" = "";
+"TXT_KEY_HANDICAP_SETTLER" = "Settler";
+"TXT_KEY_HANDICAP_SETTLER_HINT" = "For learning the game.";
+"TXT_KEY_HANDICAP_CHIEFTAIN" = "Chieftain";
+"TXT_KEY_HANDICAP_CHIEFTAIN_HINT" = "Beginner";
+"TXT_KEY_HANDICAP_WARLORD" = "Warlord";
+"TXT_KEY_HANDICAP_WARLORD_HINT" = "Easy";
+"TXT_KEY_HANDICAP_PRINCE" = "Prince";
+"TXT_KEY_HANDICAP_PRINCE_HINT" = "Normal Difficulty";
+"TXT_KEY_HANDICAP_KING" = "King";
+"TXT_KEY_HANDICAP_KING_HINT" = "Hard. The AI players receive small advantages to improve their play.";
+"TXT_KEY_HANDICAP_EMPEROR" = "Emperor";
+"TXT_KEY_HANDICAP_EMPEROR_HINT" = "Very Hard. The AI players receive advantages to improve their play.";
+"TXT_KEY_HANDICAP_IMMORTAL" = "Immortal";
+"TXT_KEY_HANDICAP_IMMORTAL_HINT" = "Extremely Difficult. The AI players receive large advantages to improve their play.";
+"TXT_KEY_HANDICAP_DEITY" = "Deity";
+"TXT_KEY_HANDICAP_DEITY_HINT" = "Only the best players in the world will beat this level.";
+
+"TXT_KEY_ABOUT_TEXT" = "Michael Rommel (MiRo)\n\nSimWorld is a simple show case application for iOS devices to create, load and display Civ5 maps.";

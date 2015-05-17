@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Title</key>
+	<string>TXT_KEY_MAP_OPTION_TYPE</string>
+	<key>Hint</key>
+	<string>TXT_KEY_MAP_OPTION_TYPE_HINT</string>
+	<key>Steps</key>
+	<array>
+		<dict>
+			<key>Name</key>
+			<string>TXT_KEY_MAP_TYPE_CONTINENTS_TITLE</string>
+			<key>Description</key>
+			<string>TXT_KEY_MAP_TYPE_CONTINENTS_DESCRIPTION</string>
+			<key>Key</key>
+			<string>MAP_TYPE_CONTINENTS</string>
+			<key>Image</key>
+			<string>Continents</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>TXT_KEY_MAP_TYPE_ARCHIPELAGO_TITLE</string>
+			<key>Description</key>
+			<string>TXT_KEY_MAP_TYPE_ARCHIPELAGO_DESCRIPTION</string>
+			<key>Key</key>
+			<string>MAP_TYPE_ARCHIPELAGO</string>
+			<key>Image</key>
+			<string>Archipelago</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>TXT_KEY_MAP_TYPE_PANGAEA_TITLE</string>
+			<key>Description</key>
+			<string>TXT_KEY_MAP_TYPE_PANGAEA_DESCRIPTION</string>
+			<key>Key</key>
+			<string>MAP_TYPE_PANGAEA</string>
+			<key>Image</key>
+			<string>Pangaea</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>TXT_KEY_MAP_TYPE_EARTH_TITLE</string>
+			<key>Description</key>
+			<string>TXT_KEY_MAP_TYPE_EARTH_DESCRIPTION</string>
+			<key>Key</key>
+			<string>MAP_TYPE_EARTH</string>
+			<key>Image</key>
+			<string>Earth</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>TXT_KEY_MAP_TYPE_RANDOM_TITLE</string>
+			<key>Description</key>
+			<string>TXT_KEY_MAP_TYPE_RANDOM_DESCRIPTION</string>
+			<key>Key</key>
+			<string>MAP_TYPE_RANDOM</string>
+			<key>Image</key>
+			<string>Random</string>
+		</dict>
+	</array>
+</dict>
+</plist>

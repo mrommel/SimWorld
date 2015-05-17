@@ -1,0 +1,33 @@
+//
+//  PrefixHeader.pch
+//  SimWorld
+//
+//  Created by Michael Rommel on 18.01.15.
+//  Copyright (c) 2015 Michael Rommel. All rights reserved.
+//
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+#ifdef __OBJC__
+
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <Availability.h>
+
+#include <OpenGLES/ES2/gl.h>
+#include <OpenGLES/ES2/glext.h>
+
+#import "Rend.h"
+
+#endif
+
+#ifndef SimWorld_PrefixHeader_pch
+#define SimWorld_PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+
+#endif

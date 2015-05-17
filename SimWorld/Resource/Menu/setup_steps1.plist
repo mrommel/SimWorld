@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Title</key>
+	<string>TXT_KEY_MAP_OPTION_LEADER</string>
+	<key>Hint</key>
+	<string>TXT_KEY_MAP_OPTION_LEADER_HINT</string>
+	<key>Atlas</key>
+	<string>LeaderAtlas</string>
+	<key>Steps</key>
+	<array>
+		<dict>
+			<key>Name</key>
+			<string>TXT_KEY_MAP_OPTION_RANDOM_LEADER</string>
+			<key>Description</key>
+			<string>TXT_KEY_MAP_OPTION_RANDOM_LEADER_HINT</string>
+			<key>Key</key>
+			<string>LEADER_RANDOM</string>
+			<key>Image</key>
+			<string>Random</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>TXT_KEY_LEADER_ALEXANDER</string>
+			<key>Description</key>
+			<string>TXT_KEY_LEADER_ALEXANDER_HINT</string>
+			<key>Key</key>
+			<string>LEADER_ALEXANDER</string>
+			<key>Image</key>
+			<string>Alexander</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>TXT_KEY_LEADER_AUGUSTUS</string>
+			<key>Description</key>
+			<string>TXT_KEY_LEADER_AUGUSTUS_HINT</string>
+			<key>Key</key>
+			<string>LEADER_AUGUSTUS</string>
+			<key>Image</key>
+			<string>Augustus</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>TXT_KEY_LEADER_BISMARCK</string>
+			<key>Description</key>
+			<string>TXT_KEY_LEADER_BISMARCK_HINT</string>
+			<key>Key</key>
+			<string>LEADER_BISMARCK</string>
+			<key>Image</key>
+			<string>Bismarck</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>TXT_KEY_LEADER_DARIUS</string>
+			<key>Description</key>
+			<string>TXT_KEY_LEADER_DARIUS_HINT</string>
+			<key>Key</key>
+			<string>LEADER_DARIUS</string>
+			<key>Image</key>
+			<string>Darius</string>
+		</dict>
+	</array>
+</dict>
+</plist>

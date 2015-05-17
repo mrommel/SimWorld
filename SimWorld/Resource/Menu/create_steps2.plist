@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Title</key>
+	<string>TXT_KEY_MAP_OPTION_WORLD_AGE</string>
+	<key>Hint</key>
+	<string>TXT_KEY_MAP_OPTION_WORLD_AGE_HINT</string>
+	<key>Steps</key>
+	<array>
+		<dict>
+			<key>Name</key>
+			<string>TXT_KEY_MAP_OPTION_THREE_BILLION_YEARS</string>
+			<key>Description</key>
+			<string>Young</string>
+			<key>Key</key>
+			<string>TXT_KEY_MAP_OPTION_THREE_BILLION_YEARS</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>TXT_KEY_MAP_OPTION_FOUR_BILLION_YEARS</string>
+			<key>Description</key>
+			<string>Middle</string>
+			<key>Map</key>
+			<string>TXT_KEY_MAP_OPTION_FOUR_BILLION_YEARS</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>TXT_KEY_MAP_OPTION_FIVE_BILLION_YEARS</string>
+			<key>Description</key>
+			<string>Old</string>
+			<key>Map</key>
+			<string>TXT_KEY_MAP_OPTION_FIVE_BILLION_YEARS</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>TXT_KEY_MAP_OPTION_RANDOM</string>
+			<key>Description</key>
+			<string>Random</string>
+			<key>Map</key>
+			<string>TXT_KEY_MAP_OPTION_RANDOM</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Maps</key>
+	<array>
+		<dict>
+			<key>Map</key>
+			<string>BigWorldMap</string>
+		</dict>
+		<dict>
+			<key>Map</key>
+			<string>EuropeBNWv3b</string>
+		</dict>
+		<dict>
+			<key>Map</key>
+			<string>us_world_b3</string>
+		</dict>
+		<dict>
+			<key>Map</key>
+			<string>nap1796fixed</string>
+		</dict>
+		<dict>
+			<key>Map</key>
+			<string>World_War_II_1941</string>
+		</dict>
+		<dict>
+			<key>Map</key>
+			<string>Stalingrad</string>
+		</dict>
+	</array>
+</dict>
+</plist>

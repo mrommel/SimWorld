@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Atlas>
+    <Rows>4</Rows>
+    <Cols>8</Cols>
+    <Texture>LeaderTiles.png</Texture>
+    <Items>
+        <Item>
+            <Index>0</Index>
+            <Name>Washington</Name>
+        </Item>
+        <Item>
+            <Index>1</Index>
+            <Name>HanunAlRashid</Name>
+        </Item>
+        <Item>
+            <Index>2</Index>
+            <Name>Montezuma</Name>
+        </Item>
+        <Item>
+            <Index>3</Index>
+            <Name>WuZetian</Name>
+        </Item>
+
+        <Item>
+            <Index>5</Index>
+            <Name>Ramesses</Name>
+        </Item>
+        <Item>
+            <Index>6</Index>
+            <Name>Elizabeth</Name>
+        </Item>
+        <Item>
+            <Index>7</Index>
+            <Name>Napoleon</Name>
+        </Item>
+        <!-- next line -->
+        <Item>
+            <Index>8</Index>
+            <Name>Bismarck</Name>
+        </Item>
+        <Item>
+            <Index>9</Index>
+            <Name>Alexander</Name>
+        </Item>
+
+        <Item>
+            <Index>11</Index>
+            <Name>Gandhi</Name>
+        </Item>
+        <!-- next line -->
+        <Item>
+            <Index>16</Index>
+            <Name>Darius</Name>
+        </Item>
+        <Item>
+            <Index>17</Index>
+            <Name>Augustus</Name>
+        </Item>
+        <Item>
+            <Index>18</Index>
+            <Name>Catherine</Name>
+        </Item>
+        <Item>
+            <Index>20</Index>
+            <Name>Askia</Name>
+        </Item>
+        <Item>
+            <Index>22</Index>
+            <Name>Random</Name>
+        </Item>
+    </Items>
+</Atlas>
