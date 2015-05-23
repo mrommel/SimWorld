@@ -107,7 +107,7 @@
     for (NSString *group in wavefrontMeshA_.groups) {
         NSLog(@"Render group %@", group);
         REWavefrontElementSet *elementSet = [wavefrontMeshA_ elementsForGroup:group];
-        NSLog(@"Render group %@", elementSet.material);
+        //NSLog(@"Render group %@", elementSet.material);
     }
 
     // Bind texture and environment map

@@ -10,6 +10,7 @@
 
 #import "TeapotNode.h"
 #import "HouseNode.h"
+#import "MainViewController.h"
 #import "HexagonMapNode.h"
 
 #import "UIBlockButton.h"
@@ -52,6 +53,26 @@
     [self.houseNode setSizeX:1];
     [self.houseNode setRotation:CC3VectorMake(180, 0, 0)];
     [self.world addChild:self.houseNode];
+    
+    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"Back"
+                                                                      style:UIBarButtonItemStyleBordered
+                                                                     target:self
+                                                                     action:@selector(backButtonPressed:)];
+    self.navigationItem.leftBarButtonItem = newBackButton;
+}
+
+-(void)backButtonPressed:(UIBarButtonItem *)sender {
+    
+    MainViewController *mainMenu = nil;
+    for(NSObject *obj in self.navigationController.viewControllers) {
+        NSLog(@"Stack: %@", obj);
+        if ([obj class] == [MainViewController class]) {
+            mainMenu = (MainViewController *)obj;
+        }
+    }
+    
+    //[self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popToViewController:mainMenu animated:YES];
 }
 
 - (void)addZoomButtons
