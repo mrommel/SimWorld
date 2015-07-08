@@ -49,6 +49,7 @@
     [[UIBarButtonItem appearance] setTitlePositionAdjustment:UIOffsetMake(0, 0) forBarMetrics:UIBarMetricsDefault];
     
     [UIBarButtonItem appearance].tintColor = [UIColor colorWithWhite:1.0f alpha:1.0f];
+    [[UIView appearance] setTintColor:[UIColor whiteColor]];
     
     EAGLContext *context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     [EAGLContext setCurrentContext:context];

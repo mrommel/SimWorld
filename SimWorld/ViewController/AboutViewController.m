@@ -19,9 +19,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
-    self.navigationItem.leftBarButtonItem = backButton;
-    
     self.view.backgroundColor = [UIColor lightGrayColor];
     
     self.title = SWLocalizedString(@"TXT_KEY_MAIN_ABOUT");

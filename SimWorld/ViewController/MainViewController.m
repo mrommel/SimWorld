@@ -34,6 +34,11 @@
     [imageView setContentMode:UIViewContentModeScaleAspectFit];
     [self.view addSubview:imageView];
     
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"SimWorld"
+                                      style:UIBarButtonItemStyleBordered
+                                     target:nil
+                                     action:nil];
+    
     __weak typeof(self) weakSelf = self;
     [self addButton:SWLocalizedString(@"TXT_KEY_MAIN_SETUP") atY:300 withBlock:^{
         [weakSelf navigateToSetup];
