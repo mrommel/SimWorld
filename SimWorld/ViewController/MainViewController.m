@@ -42,7 +42,7 @@
         [weakSelf navigateToLoading];
     }];
     
-    [self addButton:SWLocalizedString(@"TXT_KEY_MAIN_ABOUT") atY:610 withBlock:^{
+    [self addButton:SWLocalizedString(@"TXT_KEY_MAIN_ABOUT") atY:510 withBlock:^{
         [weakSelf navigateToAbout];
     }];
 }

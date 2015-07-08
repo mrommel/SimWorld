@@ -173,6 +173,10 @@
 		1A55AEA21A1BA8CC00BF9648 /* rivers.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1A55AEA01A1BA8CC00BF9648 /* rivers.xml */; };
 		1A55AEA31A1BA8CC00BF9648 /* terrains.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1A55AEA11A1BA8CC00BF9648 /* terrains.xml */; };
 		1A55AEA51A1BA97700BF9648 /* rivers.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A55AEA41A1BA97700BF9648 /* rivers.png */; };
+		1A7A45DA1B4CE3A000C03FD6 /* button_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A7A45D61B4CE3A000C03FD6 /* button_back.png */; };
+		1A7A45DB1B4CE3A000C03FD6 /* button_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A7A45D71B4CE3A000C03FD6 /* button_normal.png */; };
+		1A7A45DC1B4CE3A000C03FD6 /* navbar_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A7A45D81B4CE3A000C03FD6 /* navbar_bg.png */; };
+		1A7A45DD1B4CE3A000C03FD6 /* navbar_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A7A45D91B4CE3A000C03FD6 /* navbar_bg@2x.png */; };
 		1A9B5B5C1A5C4A8300E887B6 /* GenerateMapTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B5B5B1A5C4A8300E887B6 /* GenerateMapTask.m */; };
 		1AA98E791A1CEE0600873A2B /* HexPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA98E781A1CEE0600873A2B /* HexPoint.m */; };
 		1AF0539719F54C39003D54D2 /* TextureAtlas.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF0539619F54C39003D54D2 /* TextureAtlas.m */; };
@@ -439,6 +443,10 @@
 		1A55AEA01A1BA8CC00BF9648 /* rivers.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = rivers.xml; path = Resource/TileSets/rivers.xml; sourceTree = "<group>"; };
 		1A55AEA11A1BA8CC00BF9648 /* terrains.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = terrains.xml; path = Resource/TileSets/terrains.xml; sourceTree = "<group>"; };
 		1A55AEA41A1BA97700BF9648 /* rivers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rivers.png; path = Resource/TileSets/rivers.png; sourceTree = "<group>"; };
+		1A7A45D61B4CE3A000C03FD6 /* button_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button_back.png; path = Resource/button_back.png; sourceTree = "<group>"; };
+		1A7A45D71B4CE3A000C03FD6 /* button_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button_normal.png; path = Resource/button_normal.png; sourceTree = "<group>"; };
+		1A7A45D81B4CE3A000C03FD6 /* navbar_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = navbar_bg.png; path = Resource/navbar_bg.png; sourceTree = "<group>"; };
+		1A7A45D91B4CE3A000C03FD6 /* navbar_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navbar_bg@2x.png"; path = "Resource/navbar_bg@2x.png"; sourceTree = "<group>"; };
 		1A9857F31A2EF8B30090E35D /* MathHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathHelper.h; sourceTree = "<group>"; };
 		1A9B5B5A1A5C4A8300E887B6 /* GenerateMapTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenerateMapTask.h; path = MapGenerators/GenerateMapTask.h; sourceTree = "<group>"; };
 		1A9B5B5B1A5C4A8300E887B6 /* GenerateMapTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GenerateMapTask.m; path = MapGenerators/GenerateMapTask.m; sourceTree = "<group>"; };
@@ -644,6 +652,10 @@
 		1A0F5AB519E5276F00B8BB5D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				1A7A45D61B4CE3A000C03FD6 /* button_back.png */,
+				1A7A45D71B4CE3A000C03FD6 /* button_normal.png */,
+				1A7A45D81B4CE3A000C03FD6 /* navbar_bg.png */,
+				1A7A45D91B4CE3A000C03FD6 /* navbar_bg@2x.png */,
 				1A5289F31A485B1800C2F439 /* CivilizationV_byWar36.png */,
 				1A5289BA1A41D45000C2F439 /* Leader */,
 				1A5289A91A41D33600C2F439 /* Handicap */,
@@ -1087,6 +1099,7 @@
 				1A242F301A6E49300012F60D /* teapot.obj in Resources */,
 				1A5289EB1A4856F400C2F439 /* Chieftain.png in Resources */,
 				1A55AEA51A1BA97700BF9648 /* rivers.png in Resources */,
+				1A7A45DB1B4CE3A000C03FD6 /* button_normal.png in Resources */,
 				1A22F5D81A758574005FC62D /* RuralStallRoof_Normal.jpg in Resources */,
 				1A5289F11A4856F400C2F439 /* Settler.png in Resources */,
 				1AF8DBDE1A03929E00338D62 /* terrains.png in Resources */,
@@ -1099,6 +1112,7 @@
 				1A533C2F1A65691D00ABF5DE /* uvcube2.obj in Resources */,
 				1A528A511A485D1E00C2F439 /* Stalingrad.Civ5Map in Resources */,
 				1A5289EE1A4856F400C2F439 /* Immortal.png in Resources */,
+				1A7A45DA1B4CE3A000C03FD6 /* button_back.png in Resources */,
 				1A242F2F1A6E49300012F60D /* teapot.mtl in Resources */,
 				1A528A011A485B6900C2F439 /* Large.png in Resources */,
 				1A5289F41A485B1800C2F439 /* CivilizationV_byWar36.png in Resources */,
@@ -1134,6 +1148,7 @@
 				1A533C261A65691D00ABF5DE /* cylinder2.mtl in Resources */,
 				1A242F2B1A6E457F0012F60D /* sVertexLighting.vsh in Resources */,
 				1A242F221A6E41880012F60D /* needle01.mtl in Resources */,
+				1A7A45DD1B4CE3A000C03FD6 /* navbar_bg@2x.png in Resources */,
 				1A22F5D41A758574005FC62D /* RuralStallBaseExc_Normal.jpg in Resources */,
 				1A533C2B1A65691D00ABF5DE /* plane3.obj in Resources */,
 				1AF8DBE01A0395B600338D62 /* tile_floor.png in Resources */,
@@ -1141,6 +1156,7 @@
 				1A52898A1A40C83100C2F439 /* setup_steps4.plist in Resources */,
 				1A5289EC1A4856F400C2F439 /* Deity.png in Resources */,
 				1A528A551A485D1E00C2F439 /* Earth.xml in Resources */,
+				1A7A45DC1B4CE3A000C03FD6 /* navbar_bg.png in Resources */,
 				1A528A041A485B6900C2F439 /* Tiny.png in Resources */,
 				1A5289EF1A4856F400C2F439 /* King.png in Resources */,
 				1A55AEA31A1BA8CC00BF9648 /* terrains.xml in Resources */,
