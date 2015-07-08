@@ -15,7 +15,6 @@
 #import "UIConstants.h"
 
 #import "LoadingViewController.h"
-#import "CreateStep1ViewController.h"
 #import "SetupGameStep1ViewController.h"
 #import "AboutViewController.h"
 

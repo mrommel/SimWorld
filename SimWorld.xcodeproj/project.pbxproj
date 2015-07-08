@@ -14,7 +14,6 @@
 		1A0F5A7419E06C6F00B8BB5D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A0F5A7319E06C6F00B8BB5D /* OpenGLES.framework */; };
 		1A0F5A7619E06C8100B8BB5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A0F5A7519E06C8100B8BB5D /* QuartzCore.framework */; };
 		1A0F5A7E19E06E5F00B8BB5D /* OpenGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A0F5A7D19E06E5F00B8BB5D /* OpenGLView.m */; };
-		1A0F5A8219E073DE00B8BB5D /* _OpenGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A0F5A8119E073DE00B8BB5D /* _OpenGLViewController.m */; };
 		1A0F5A8619E1C10700B8BB5D /* SimpleVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 1A0F5A8419E1C10700B8BB5D /* SimpleVertex.glsl */; };
 		1A0F5A8719E1C10700B8BB5D /* TemplateIcon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A0F5A8519E1C10700B8BB5D /* TemplateIcon2x.png */; };
 		1A0F5A8919E1C18E00B8BB5D /* SimpleFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 1A0F5A8819E1C18E00B8BB5D /* SimpleFragment.glsl */; };
@@ -29,7 +28,6 @@
 		1A0F5AAE19E4786200B8BB5D /* blueButtonHighlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A0F5AA619E4786200B8BB5D /* blueButtonHighlight@2x.png */; };
 		1A0F5AB319E520EB00B8BB5D /* OpenGLUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A0F5AB219E520EB00B8BB5D /* OpenGLUtil.m */; };
 		1A0F5AB419E520EB00B8BB5D /* OpenGLUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A0F5AB219E520EB00B8BB5D /* OpenGLUtil.m */; };
-		1A1D872F19EDA9D500BC288C /* MeshGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1D872E19EDA9D500BC288C /* MeshGenerator.m */; };
 		1A1D873219EDAA6900BC288C /* Mesh.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1D873119EDAA6900BC288C /* Mesh.m */; };
 		1A1D873619EEC67900BC288C /* HexagonMesh.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1D873519EEC67800BC288C /* HexagonMesh.m */; };
 		1A1D873919EEC9B300BC288C /* CubeMesh.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1D873819EEC9B300BC288C /* CubeMesh.m */; };
@@ -210,8 +208,6 @@
 		1A0F5A7519E06C8100B8BB5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1A0F5A7C19E06E5F00B8BB5D /* OpenGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGLView.h; path = OpenGL/OpenGLView.h; sourceTree = "<group>"; };
 		1A0F5A7D19E06E5F00B8BB5D /* OpenGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenGLView.m; path = OpenGL/OpenGLView.m; sourceTree = "<group>"; };
-		1A0F5A8019E073DE00B8BB5D /* _OpenGLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _OpenGLViewController.h; path = OpenGL/_OpenGLViewController.h; sourceTree = "<group>"; };
-		1A0F5A8119E073DE00B8BB5D /* _OpenGLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _OpenGLViewController.m; path = OpenGL/_OpenGLViewController.m; sourceTree = "<group>"; };
 		1A0F5A8419E1C10700B8BB5D /* SimpleVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SimpleVertex.glsl; path = Resource/SimpleVertex.glsl; sourceTree = "<group>"; };
 		1A0F5A8519E1C10700B8BB5D /* TemplateIcon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TemplateIcon2x.png; path = Resource/TemplateIcon2x.png; sourceTree = "<group>"; };
 		1A0F5A8819E1C18E00B8BB5D /* SimpleFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SimpleFragment.glsl; path = Resource/SimpleFragment.glsl; sourceTree = "<group>"; };
@@ -223,8 +219,6 @@
 		1A0F5AB019E47A3500B8BB5D /* UIConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIConstants.h; sourceTree = "<group>"; };
 		1A0F5AB119E520EB00B8BB5D /* OpenGLUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGLUtil.h; path = OpenGL/OpenGLUtil.h; sourceTree = "<group>"; };
 		1A0F5AB219E520EB00B8BB5D /* OpenGLUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenGLUtil.m; path = OpenGL/OpenGLUtil.m; sourceTree = "<group>"; };
-		1A1D872D19EDA9D500BC288C /* MeshGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MeshGenerator.h; path = OpenGL/MeshGenerator.h; sourceTree = "<group>"; };
-		1A1D872E19EDA9D500BC288C /* MeshGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MeshGenerator.m; path = OpenGL/MeshGenerator.m; sourceTree = "<group>"; };
 		1A1D873019EDAA6900BC288C /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mesh.h; path = OpenGL/Mesh.h; sourceTree = "<group>"; };
 		1A1D873119EDAA6900BC288C /* Mesh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Mesh.m; path = OpenGL/Mesh.m; sourceTree = "<group>"; };
 		1A1D873419EEC67800BC288C /* HexagonMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexagonMesh.h; path = OpenGL/HexagonMesh.h; sourceTree = "<group>"; };
@@ -561,8 +555,6 @@
 				1A0F5A7D19E06E5F00B8BB5D /* OpenGLView.m */,
 				1A0F5AB119E520EB00B8BB5D /* OpenGLUtil.h */,
 				1A0F5AB219E520EB00B8BB5D /* OpenGLUtil.m */,
-				1A1D872D19EDA9D500BC288C /* MeshGenerator.h */,
-				1A1D872E19EDA9D500BC288C /* MeshGenerator.m */,
 				1A0EE62C19F05B5100D612DA /* Transformations.h */,
 				1A0EE62D19F05B5100D612DA /* Transformations.m */,
 			);
@@ -776,8 +768,6 @@
 				1A528A331A485C2400C2F439 /* LoadingViewController.m */,
 				1A528A351A485C2400C2F439 /* MainViewController.h */,
 				1A528A321A485C2400C2F439 /* MainViewController.m */,
-				1A0F5A8019E073DE00B8BB5D /* _OpenGLViewController.h */,
-				1A0F5A8119E073DE00B8BB5D /* _OpenGLViewController.m */,
 				1A5289D21A4344B100C2F439 /* LauncherViewController.h */,
 				1A5289D31A4344B100C2F439 /* LauncherViewController.m */,
 				1A528A571A48754D00C2F439 /* AboutViewController.h */,
@@ -818,12 +808,12 @@
 				1A528A5A1A48A6C800C2F439 /* Generators */,
 				1A528A381A485C3100C2F439 /* SetupGameStepContent.m */,
 				1A528A391A485C3100C2F439 /* SetupGameStepContent.h */,
-				1A528A3A1A485C3100C2F439 /* SetupGameStep3ViewController.m */,
-				1A528A3B1A485C3100C2F439 /* SetupGameStep3ViewController.h */,
 				1A5289771A3F799C00C2F439 /* SetupGameStep1ViewController.h */,
 				1A5289781A3F799C00C2F439 /* SetupGameStep1ViewController.m */,
 				1A52897C1A40C4B100C2F439 /* SetupGameStep2ViewController.h */,
 				1A52897D1A40C4B100C2F439 /* SetupGameStep2ViewController.m */,
+				1A528A3B1A485C3100C2F439 /* SetupGameStep3ViewController.h */,
+				1A528A3A1A485C3100C2F439 /* SetupGameStep3ViewController.m */,
 				1A5289821A40C78700C2F439 /* SetupGameStep4ViewController.h */,
 				1A5289831A40C78700C2F439 /* SetupGameStep4ViewController.m */,
 				1A5289DA1A47701E00C2F439 /* SetupGameGenerateViewController.h */,
@@ -1217,11 +1207,9 @@
 				1A1D873219EDAA6900BC288C /* Mesh.m in Sources */,
 				1A242F0F1A6C5A5C0012F60D /* CC3Math.m in Sources */,
 				1A52897E1A40C4B100C2F439 /* SetupGameStep2ViewController.m in Sources */,
-				1A0F5A8219E073DE00B8BB5D /* _OpenGLViewController.m in Sources */,
 				1A40CFD61A19FB0D0029C877 /* HexagonMap.m in Sources */,
 				1A37D73F1A6C57C2006B5B88 /* RECamera.m in Sources */,
 				1A20910A1A6FB997003F8880 /* HexagonMapNode.m in Sources */,
-				1A1D872F19EDA9D500BC288C /* MeshGenerator.m in Sources */,
 				1A37D7461A6C57C2006B5B88 /* REMaterial.m in Sources */,
 				1A528A591A48754D00C2F439 /* AboutViewController.m in Sources */,
 				1A242F1A1A6D70920012F60D /* TeapotNode.m in Sources */,

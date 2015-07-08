@@ -80,7 +80,8 @@
 
 @implementation LauncherViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     _progressView = [[CircularProgressView alloc] initWithFrame:CGRectMake(20, 100, DEVICE_WIDTH - 40, DEVICE_WIDTH - 40)];

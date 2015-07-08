@@ -15,14 +15,14 @@
 @interface CreateStep1ViewController ()
 
 @property (nonatomic,retain) NSArray *content;
-@property (nonatomic,retain) NSString *title;
 @property (nonatomic,retain) NSString *hint;
 
 @end
 
 @implementation CreateStep1ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     // Uncomment the following line to preserve selection between presentations.
@@ -54,7 +54,8 @@
     return [self.content count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     /**
      *   This is an important bit, it asks the table view if it has any available cells
      *   already created which it is not using (if they are offscreen), so that it can
