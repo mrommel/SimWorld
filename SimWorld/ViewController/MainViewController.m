@@ -17,6 +17,7 @@
 #import "LoadingViewController.h"
 #import "SetupGameStep1ViewController.h"
 #import "AboutViewController.h"
+#import "TestViewController.h"
 
 @implementation MainViewController
 
@@ -39,11 +40,15 @@
                                      action:nil];
     
     __weak typeof(self) weakSelf = self;
-    [self addButton:SWLocalizedString(@"TXT_KEY_MAIN_SETUP") atY:300 withBlock:^{
+    [self addButton:SWLocalizedString(@"TXT_KEY_MAIN_SETUP") atY:250 withBlock:^{
         [weakSelf navigateToSetup];
     }];
-    [self addButton:SWLocalizedString(@"TXT_KEY_MAIN_LOAD_MAP") atY:370 withBlock:^{
+    [self addButton:SWLocalizedString(@"TXT_KEY_MAIN_LOAD_MAP") atY:320 withBlock:^{
         [weakSelf navigateToLoading];
+    }];
+    
+    [self addButton:SWLocalizedString(@"TXT_KEY_MAIN_TEST") atY:390 withBlock:^{
+        [weakSelf navigateToTest];
     }];
     
     [self addButton:SWLocalizedString(@"TXT_KEY_MAIN_ABOUT") atY:510 withBlock:^{
@@ -60,6 +65,12 @@
 - (void)navigateToLoading
 {
     LoadingViewController *viewController = [[LoadingViewController alloc] init];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (void)navigateToTest
+{
+    TestViewController *viewController = [[TestViewController alloc] init];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
