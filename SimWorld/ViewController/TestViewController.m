@@ -8,6 +8,8 @@
 
 #import "TestViewController.h"
 
+#import "TreeNode.h"
+
 @interface TestViewController() {
     
 }

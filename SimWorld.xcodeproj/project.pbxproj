@@ -178,6 +178,8 @@
 		1A7A45E01B4D999E00C03FD6 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A7A45DF1B4D999E00C03FD6 /* TestViewController.m */; };
 		1A7A45E31B4D9B3000C03FD6 /* TreeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A7A45E21B4D9B3000C03FD6 /* TreeNode.m */; };
 		1A7A45E71B4E51DB00C03FD6 /* TreeMesh.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A7A45E61B4E51DB00C03FD6 /* TreeMesh.m */; };
+		1A7A45EA1B505CE100C03FD6 /* TreeSkeleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A7A45E91B505CE100C03FD6 /* TreeSkeleton.m */; };
+		1A7A45ED1B52FBA900C03FD6 /* TreeBranch.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A7A45EC1B52FBA900C03FD6 /* TreeBranch.m */; };
 		1A9B5B5C1A5C4A8300E887B6 /* GenerateMapTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B5B5B1A5C4A8300E887B6 /* GenerateMapTask.m */; };
 		1AA98E791A1CEE0600873A2B /* HexPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA98E781A1CEE0600873A2B /* HexPoint.m */; };
 		1AF0539719F54C39003D54D2 /* TextureAtlas.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF0539619F54C39003D54D2 /* TextureAtlas.m */; };
@@ -450,6 +452,10 @@
 		1A7A45E21B4D9B3000C03FD6 /* TreeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreeNode.m; path = ViewController/TreeNode.m; sourceTree = "<group>"; };
 		1A7A45E51B4E51DB00C03FD6 /* TreeMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreeMesh.h; path = OpenGL/LTree/TreeMesh.h; sourceTree = "<group>"; };
 		1A7A45E61B4E51DB00C03FD6 /* TreeMesh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreeMesh.m; path = OpenGL/LTree/TreeMesh.m; sourceTree = "<group>"; };
+		1A7A45E81B505CE100C03FD6 /* TreeSkeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreeSkeleton.h; path = OpenGL/LTree/TreeSkeleton.h; sourceTree = "<group>"; };
+		1A7A45E91B505CE100C03FD6 /* TreeSkeleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreeSkeleton.m; path = OpenGL/LTree/TreeSkeleton.m; sourceTree = "<group>"; };
+		1A7A45EB1B52FBA900C03FD6 /* TreeBranch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreeBranch.h; path = OpenGL/LTree/TreeBranch.h; sourceTree = "<group>"; };
+		1A7A45EC1B52FBA900C03FD6 /* TreeBranch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreeBranch.m; path = OpenGL/LTree/TreeBranch.m; sourceTree = "<group>"; };
 		1A9857F31A2EF8B30090E35D /* MathHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathHelper.h; sourceTree = "<group>"; };
 		1A9B5B5A1A5C4A8300E887B6 /* GenerateMapTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenerateMapTask.h; path = MapGenerators/GenerateMapTask.h; sourceTree = "<group>"; };
 		1A9B5B5B1A5C4A8300E887B6 /* GenerateMapTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GenerateMapTask.m; path = MapGenerators/GenerateMapTask.m; sourceTree = "<group>"; };
@@ -985,6 +991,10 @@
 			children = (
 				1A7A45E51B4E51DB00C03FD6 /* TreeMesh.h */,
 				1A7A45E61B4E51DB00C03FD6 /* TreeMesh.m */,
+				1A7A45E81B505CE100C03FD6 /* TreeSkeleton.h */,
+				1A7A45E91B505CE100C03FD6 /* TreeSkeleton.m */,
+				1A7A45EB1B52FBA900C03FD6 /* TreeBranch.h */,
+				1A7A45EC1B52FBA900C03FD6 /* TreeBranch.m */,
 			);
 			name = LTree;
 			sourceTree = "<group>";
@@ -1268,6 +1278,7 @@
 				1A37D7481A6C57C2006B5B88 /* RENSArrayAdditions.m in Sources */,
 				1A528A5D1A48A6FA00C2F439 /* HeightMap.m in Sources */,
 				1AF0539719F54C39003D54D2 /* TextureAtlas.m in Sources */,
+				1A7A45ED1B52FBA900C03FD6 /* TreeBranch.m in Sources */,
 				1A37D7411A6C57C2006B5B88 /* REGLStateManager.m in Sources */,
 				1A0EE62E19F05B5100D612DA /* Transformations.m in Sources */,
 				1A37D74B1A6C57C2006B5B88 /* RERotator.m in Sources */,
@@ -1285,6 +1296,7 @@
 				1A37D73E1A6C57C2006B5B88 /* RECache.m in Sources */,
 				1A37D7471A6C57C2006B5B88 /* RENode.m in Sources */,
 				1A37D7551A6C57C2006B5B88 /* REWavefrontMeshGroupNode.m in Sources */,
+				1A7A45EA1B505CE100C03FD6 /* TreeSkeleton.m in Sources */,
 				1A528A2B1A485C0500C2F439 /* AsyncTask.m in Sources */,
 				1A37D7401A6C57C2006B5B88 /* REDirector.m in Sources */,
 				1A5289DC1A47701E00C2F439 /* SetupGameGenerateViewController.m in Sources */,

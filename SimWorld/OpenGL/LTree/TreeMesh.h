@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+@class TreeSkeleton;
+
 @interface TreeMesh : NSObject
+
+- (id)initWithTreeSkeleton:(TreeSkeleton *)skeleton;
+- (id)initWithTreeSkeleton:(TreeSkeleton *)skeleton andNumberOfRadialSegments:(int)numberOfRadialSegments;
 
 @end
