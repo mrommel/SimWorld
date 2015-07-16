@@ -12,38 +12,41 @@
 
 @implementation Mesh
 
-- (id)initWithNumberOfVertices:(int)numberOfVertices
-            andNumberOfIndices:(int)numberOfIndices
+- (id)initWithNumberOfVertices:(NSUInteger)numberOfVertices
+            andNumberOfIndices:(NSUInteger)numberOfIndices
                     andTexture:(GLuint)texture
 {
     self = [super init];
     
     if (self) {
-        self.vertices = malloc(numberOfVertices * sizeof(Vertex));
-        self.numberOfVertices = numberOfVertices;
-        self.indices = malloc(numberOfIndices * sizeof(Index));
-        self.numberOfIndices = numberOfIndices;
+        [self populateWithNumberOfVertices:numberOfVertices andNumberOfIndices:numberOfIndices];
         self.texture = texture;
     }
     
     return self;
 }
 
-- (id)initWithNumberOfVertices:(int)numberOfVertices
-            andNumberOfIndices:(int)numberOfIndices
+- (id)initWithNumberOfVertices:(NSUInteger)numberOfVertices
+            andNumberOfIndices:(NSUInteger)numberOfIndices
                 andTextureFile:(NSString *)textureFile
 {
     self = [super init];
     
     if (self) {
-        self.vertices = malloc(numberOfVertices * sizeof(Vertex));
-        self.numberOfVertices = numberOfVertices;
-        self.indices = malloc(numberOfIndices * sizeof(Index));
-        self.numberOfIndices = numberOfIndices;
+        
         self.texture = [[OpenGLUtil sharedInstance] setupTexture:textureFile];
     }
     
     return self;
+}
+
+- (void)populateWithNumberOfVertices:(NSUInteger)numberOfVertices
+                  andNumberOfIndices:(NSUInteger)numberOfIndices
+{
+    self.vertices = malloc(numberOfVertices * sizeof(Vertex));
+    self.numberOfVertices = numberOfVertices;
+    self.indices = malloc(numberOfIndices * sizeof(Index));
+    self.numberOfIndices = numberOfIndices;
 }
 
 - (void)setVertexAt:(int)index
@@ -87,6 +90,12 @@
     self.indices[index*3] = i1;
     self.indices[index*3+1] = i2;
     self.indices[index*3+2] = i3;
+}
+
+- (void)setIndexAt:(int)index
+           toIndex:(int)indexValue
+{
+    self.indices[index] = indexValue;
 }
 
 - (void)moveWithX:(float)dx andY:(float)dy andZ:(float)dz

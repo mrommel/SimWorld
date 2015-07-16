@@ -8,11 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
+#import "Mesh.h"
+
 @class TreeSkeleton;
 
-@interface TreeMesh : NSObject
+@interface TreeMesh : Mesh
 
 - (id)initWithTreeSkeleton:(TreeSkeleton *)skeleton;
 - (id)initWithTreeSkeleton:(TreeSkeleton *)skeleton andNumberOfRadialSegments:(int)numberOfRadialSegments;
+
+- (void)addCircleVerticesWithTransform:(CC3GLMatrix*)transform
+                             andRadius:(float)radius andSegments:(int)segments
+                           andTextureY:(float)textureY
+                      andTextureStartX:(float)textureStartX
+                       andTextureSpanX:(float)textureSpanX
+                           andVertices:(NSMutableArray*)vertices
+                              andBone1:(int)bone1
+                              andBone2:(int)bone2;
 
 @end

@@ -88,4 +88,9 @@
     return [self.branches objectAtIndex:branchIndex];
 }
 
+- (float)trunkRadius
+{
+    return [self branchAtIndex:0].startRadius;
+}
+
 @end

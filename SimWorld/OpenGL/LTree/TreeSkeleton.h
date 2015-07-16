@@ -22,4 +22,6 @@
 
 - (TreeBranch *)branchAtIndex:(int)branchIndex;
 
+- (float)trunkRadius;
+
 @end

@@ -22,18 +22,25 @@ typedef unsigned int Index;
 @interface Mesh : NSObject
 
 @property (nonatomic, assign) Vertex* vertices;
-@property (nonatomic, assign) int numberOfVertices;
+@property (nonatomic, assign) NSUInteger numberOfVertices;
 @property (nonatomic, assign) Index* indices;
-@property (nonatomic, assign) int numberOfIndices;
+@property (nonatomic, assign) NSUInteger numberOfIndices;
 @property (nonatomic, assign) GLuint texture;
 
-- (id)initWithNumberOfVertices:(int)numberOfVertices
-            andNumberOfIndices:(int)numberOfIndices
+/** @name init functions */
+
+- (id)initWithNumberOfVertices:(NSUInteger)numberOfVertices
+            andNumberOfIndices:(NSUInteger)numberOfIndices
                     andTexture:(GLuint)texture;
 
-- (id)initWithNumberOfVertices:(int)numberOfVertices
-            andNumberOfIndices:(int)numberOfIndices
+- (id)initWithNumberOfVertices:(NSUInteger)numberOfVertices
+            andNumberOfIndices:(NSUInteger)numberOfIndices
                 andTextureFile:(NSString *)textureFile;
+
+- (void)populateWithNumberOfVertices:(NSUInteger)numberOfVertices
+                  andNumberOfIndices:(NSUInteger)numberOfIndices;
+
+/** @name vertex functions */
 
 - (void)setVertexAt:(int)index
                andX:(float)x andY:(float)y andZ:(float)z
@@ -43,7 +50,14 @@ typedef unsigned int Index;
                andX:(float)x andY:(float)y andZ:(float)z
         andTextureX:(float)tx andTextureY:(float)ty
        andTextureX2:(float)tx2 andTextureY2:(float)ty2;
+
+
+/** @name index functions */
+
 - (void)setTriangleAt:(int)index withIndex1:(int)i1 andIndex2:(int)i2 andIndex3:(int)i3;
+
+- (void)setIndexAt:(int)index
+           toIndex:(int)indexValue;
 
 - (void)moveWithX:(float)dx andY:(float)dy andZ:(float)dz;
 
