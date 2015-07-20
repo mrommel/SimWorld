@@ -61,8 +61,8 @@
     NSAssert(_maxRadialSegments > 2, @"Tree must have at least 3 radial segments");
     
     // min and max keep track of the mesh's bounding box.
-    GLKVector3 min = GLKVector3Make(10000, 10000, 10000);
-    GLKVector3 max = GLKVector3Make(-10000, -10000, -10000);
+    CC3Vector min = CC3VectorMake(10000, 10000, 10000);
+    CC3Vector max = CC3VectorMake(-10000, -10000, -10000);
     
     // Create lists for vertices and indices
     NSMutableArray *vertices = [[NSMutableArray alloc] init]; // TreeVertex
@@ -85,7 +85,7 @@
         
         // Add bottom vertices
         int parentIndex = [skeleton branchAtIndex:i].parentIndex;
-        int bottomIndex = vertices.count;
+        NSUInteger bottomIndex = vertices.count;
         CC3GLMatrix *bottomTransform = [transforms objectAtIndex:i];
         CC3GLMatrix *parentTransform = [transforms objectAtIndex:parentIndex];
         if (parentIndex != -1 && [skeleton branchAtIndex:i].parentPosition > 0.99f && CC3VectorDot([bottomTransform extractUpDirection], [parentTransform extractUpDirection]) > 0.7f)
@@ -131,7 +131,7 @@
         [self addCircleVerticesWithTransform:bottomTransform andRadius:[skeleton branchAtIndex:i].startRadius andSegments:bottomRadials andTextureY:ty andTextureStartX:0.0f andTextureSpanX:txspan andVertices:vertices andBone1:parentBoneIndex andBone2:parentBoneIndex];
         
         // Add top vertices
-        int topRadials = [self radialSegmentsTopFromIndex:i andSkeleton:skeleton];
+        NSUInteger topRadials = [self radialSegmentsTopFromIndex:i andSkeleton:skeleton];
         NSUInteger topIndex = vertices.count;
         CC3GLMatrix *topTransform = [transforms objectAtIndex:i];
         [topTransform translateBy:CC3VectorScaleUniform([topTransform extractUpDirection], [skeleton branchAtIndex:i].length)];
@@ -145,10 +145,10 @@
         [self addCylinderIndicesWithBottomIndex:bottomIndex andBottomVertices:bottomRadials andTopIndex:topIndex andTopVertices:topRadials andIndices:indices];
         
         // Updates bounds
-        SetMin(&min, [bottomTransform extractTranslation]);
-        SetMin(&min, [topTransform extractTranslation]);
-        SetMax(&max, [bottomTransform extractTranslation]);
-        SetMax(&max, [topTransform extractTranslation]);
+        min = CC3VectorMinimize(min, [bottomTransform extractTranslation]);
+        min = CC3VectorMinimize(min, [topTransform extractTranslation]);
+        max = CC3VectorMaximize(max, [bottomTransform extractTranslation]);
+        max = CC3VectorMaximize(max, [topTransform extractTranslation]);
     }
     
     [self populateWithNumberOfVertices:vertices.count andNumberOfIndices:indices.count];
@@ -164,21 +164,20 @@
         [self setIndexAt:i toIndex:[[indices objectAtIndex:i] intValue]];
     }
     
-    // @TODO: Set the bounding sphere
-    // boundingSphere.Center = (min + max) / 2.0f;
-    // boundingSphere.Radius = (max - min).Length() / 2.0f;
+    // Set the bounding sphere
+    self.boundingBox = CC3BoundingBoxFromMinMax(min, max);
 }
 
 - (int)radialSegmentsBottomFromIndex:(int)index andSkeleton:(TreeSkeleton *)skeleton
 {
-    float ratio = [skeleton.branches objectAtIndex:index].startRadius / [skeleton.branches objectAtIndex:0].startRadius;
-    return 3 + (int)(ratio * (maxRadialSegments - 3) + 0.50f);
+    float ratio = [skeleton branchAtIndex:index].startRadius / [skeleton branchAtIndex:0].startRadius;
+    return 3 + (int)(ratio * (_maxRadialSegments - 3) + 0.50f);
 }
 
 - (int)radialSegmentsTopFromIndex:(int)index andSkeleton:(TreeSkeleton *)skeleton
 {
-    float ratio = [skeleton.branches objectAtIndex:index] / [skeleton.branches objectAtIndex:0].StartRadius;
-    return 3 + (int)(ratio * (maxRadialSegments - 3) + 0.50f);
+    float ratio = [skeleton branchAtIndex:index].startRadius / [skeleton branchAtIndex:0].startRadius;
+    return 3 + (int)(ratio * (_maxRadialSegments - 3) + 0.50f);
 }
 
 - (void)addCircleVerticesWithTransform:(CC3GLMatrix*)transform
@@ -207,8 +206,8 @@
 
 - (void)addCylinderIndicesWithBottomIndex:(int)bottomIndex
                            andBottomVertices:(int)numBottomVertices
-                                 andTopIndex:(int)topIndex
-                              andTopVertices:(int)numTopVertices
+                                 andTopIndex:(NSUInteger)topIndex
+                              andTopVertices:(NSUInteger)numTopVertices
                                   andIndices:(NSMutableArray *)indices
 {
     int bi = 0; // Bottom index

@@ -10,6 +10,8 @@
 
 #import <GLKit/GLKit.h>
 #import "TreeBranch.h"
+#import "TreeLeaf.h"
+#import "TreeBone.h"
 
 @implementation TreeSkeleton
 
@@ -86,6 +88,16 @@
 - (TreeBranch *)branchAtIndex:(int)branchIndex
 {
     return [self.branches objectAtIndex:branchIndex];
+}
+
+- (TreeLeaf *)leaveAtIndex:(int)leaveIndex
+{
+    return [self.leaves objectAtIndex:leaveIndex];
+}
+
+- (TreeBone *)boneAtIndex:(int)boneIndex
+{
+    return [self.bones objectAtIndex:boneIndex];
 }
 
 - (float)trunkRadius

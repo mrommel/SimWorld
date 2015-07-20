@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @class TreeBranch;
+@class TreeLeaf;
+@class TreeBone;
 
 @interface TreeSkeleton : NSObject
 
@@ -16,11 +18,14 @@
 @property (retain) NSMutableArray *leaves; // TreeLeaf
 @property (retain) NSMutableArray *bones; // TreeBone
 @property (atomic) float textureHeight;
+@property (atomic) CC3Vector *leafAxis;
 
 - (void)copyAbsoluteBranchTransformsTo:(NSMutableArray *)destinationMatrices;
 - (float)longestBranching:(NSMutableArray *)destinationArray;
 
 - (TreeBranch *)branchAtIndex:(int)branchIndex;
+- (TreeLeaf *)leaveAtIndex:(int)leaveIndex;
+- (TreeBone *)boneAtIndex:(int)boneIndex;
 
 - (float)trunkRadius;
 

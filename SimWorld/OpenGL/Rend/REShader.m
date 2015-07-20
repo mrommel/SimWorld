@@ -78,8 +78,6 @@
     
     glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
     
-    
-
     // LOG     // TODO: Parse and log line from error?
     {
         GLint logLength;

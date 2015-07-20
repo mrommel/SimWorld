@@ -8,12 +8,18 @@
 
 #import "TreeNode.h"
 
+#import "TextureAtlas.h"
+#import "TreeProfile.h"
+#import "WindStrengthSin.h"
+#import "TreeWindAnimator.h"
+
+#define PROFILES @[@"Birch", @"Pine", @"Gardenwood", @"Graywood", @"Rug", @"Willow"]
+
 @interface TreeNode() {
     
     GLuint _colorRenderBuffer;
     GLuint _positionSlot;
     GLuint _colorSlot;
-    NSTimer *_timer;
     GLuint _projectionUniform;
     GLuint _modelViewUniform;
     GLuint _depthRenderBuffer;
@@ -27,6 +33,9 @@
 }
 
 @property (atomic) TreeType type;
+@property (nonatomic, retain) NSMutableArray *profiles;
+@property (nonatomic, retain) WindStrengthSin *wind;
+@property (nonatomic, retain) TreeWindAnimator *animator;
 
 @end
 
@@ -39,6 +48,10 @@
     if (self) {
         self.type = type;
         
+        self.wind = [[WindStrengthSin alloc] init];
+        self.animator = [[TreeWindAnimator alloc] initWithWind:self.wind];
+        
+        [self loadTreeGenerators];
         [self setupRenderBuffer];
         [self setupDepthBuffer];
         [self setupFrameBuffer];
@@ -47,6 +60,14 @@
     }
     
     return self;
+}
+
+- (void)loadTreeGenerators
+{
+    self.profiles = [[NSMutableArray alloc] init];
+    for (NSString *profileName in PROFILES) {
+        [self.profiles addObject:[[TreeProfile alloc] initWithProfileName:profileName]];
+    }
 }
 
 - (void)setupRenderBuffer
@@ -73,7 +94,7 @@
 
 - (void)setupVBOs
 {
-    TextureAtlas *textureAtlas = [[TextureAtlas alloc] initWithAtlasFileName:@"terrains"];
+    /*TextureAtlas *textureAtlas = [[TextureAtlas alloc] initWithAtlasFileName:@"terrains"];
     TextureAtlas *riverAtlas = [[TextureAtlas alloc] initWithAtlasFileName:@"rivers"];
     _terrainMesh = [[HexagonMapMesh alloc] initWithMap:self.map andTerrainAtlas:textureAtlas andRiverAtlas:riverAtlas];
     
@@ -83,7 +104,7 @@
     
     glGenBuffers(1, &_indexBufferTerrains);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBufferTerrains);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, _terrainMesh.numberOfIndices * sizeof(Index), _terrainMesh.indices, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, _terrainMesh.numberOfIndices * sizeof(Index), _terrainMesh.indices, GL_STATIC_DRAW);*/
 }
 
 - (void)compileShaders
@@ -131,16 +152,13 @@
     // ---------------------------------
     
     // Bind the base map
+    /*
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, _terrainMesh.texture);
     
-    // Bind the river map
-    glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, _terrainMesh.riverTexture);
-    
-    // we've bound our textures in textures 0 and 1.
-    const GLint samplers[2] = {0, 1};
-    glUniform1iv(_samplerArrayLoc, 2, samplers);
+    // we've bound our textures in textures 0.
+    const GLint samplers[1] = {0};
+    glUniform1iv(_samplerArrayLoc, 1, samplers);
     
     glBindBuffer(GL_ARRAY_BUFFER, _vertexBufferTerrains);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBufferTerrains);
@@ -160,7 +178,7 @@
     glDrawElements(GL_TRIANGLES, _terrainMesh.numberOfIndices, GL_UNSIGNED_INT, 0);
     
     // unbind textures
-    [RETexture unbind];
+    [RETexture unbind];*/
 }
 
 @end

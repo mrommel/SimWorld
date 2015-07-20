@@ -8,6 +8,14 @@
 
 #import "TreeVertex.h"
 
+BoneIndex BoneIndexMake(NSUInteger bone1, NSUInteger bone2)
+{
+    BoneIndex bi;
+    bi.bone1 = bone1;
+    bi.bone2 = bone2;
+    return bi;
+}
+
 @implementation TreeVertex
 
 - (id)initWithTranslation:(CC3Vector)translation andDirection:(CC3Vector)direction andTextureCoords:(CC2Vector)textureCoord andBone1:(NSUInteger)bone1 andBone2:(NSUInteger)bone2

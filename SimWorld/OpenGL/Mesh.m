@@ -67,6 +67,30 @@
 }
 
 - (void)setVertexAt:(int)index
+               andX:(float)x
+               andY:(float)y
+               andZ:(float)z
+        andTextureX:(float)tx
+        andTextureY:(float)ty
+          andColorA:(float)colorA
+          andColorR:(float)colorR
+          andColorG:(float)colorG
+          andColorB:(float)colorB
+{
+    self.vertices[index].Color[0] = colorA;
+    self.vertices[index].Color[1] = colorR;
+    self.vertices[index].Color[2] = colorG;
+    self.vertices[index].Color[3] = colorB;
+    self.vertices[index].Position[0] = x;
+    self.vertices[index].Position[1] = y;
+    self.vertices[index].Position[2] = z;
+    self.vertices[index].TexCoord[0] = tx;
+    self.vertices[index].TexCoord[1] = ty;
+    self.vertices[index].TexCoord2[0] = 0;
+    self.vertices[index].TexCoord2[1] = 0;
+}
+
+- (void)setVertexAt:(int)index
                andX:(float)x andY:(float)y andZ:(float)z
         andTextureX:(float)tx andTextureY:(float)ty
        andTextureX2:(float)tx2 andTextureY2:(float)ty2

@@ -185,6 +185,31 @@
 		1AA98E791A1CEE0600873A2B /* HexPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA98E781A1CEE0600873A2B /* HexPoint.m */; };
 		1AD54C211B5678D700A602CB /* CC3GLMatrix+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD54C201B5678D700A602CB /* CC3GLMatrix+Extension.m */; };
 		1AD54C241B577B1300A602CB /* TreeVertex.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD54C231B577B1300A602CB /* TreeVertex.m */; };
+		1AD54C271B57BC9100A602CB /* TreeProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD54C261B57BC9100A602CB /* TreeProfile.m */; };
+		1AD54C2A1B57D14500A602CB /* TreeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD54C291B57D14500A602CB /* TreeGenerator.m */; };
+		1AD54C2D1B57D1D300A602CB /* SimpleTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD54C2C1B57D1D300A602CB /* SimpleTree.m */; };
+		1AD54C301B57D59000A602CB /* TreeLeafCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD54C2F1B57D59000A602CB /* TreeLeafCloud.m */; };
+		1AD54C331B57D5A500A602CB /* TreeAnimationState.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD54C321B57D5A500A602CB /* TreeAnimationState.m */; };
+		1AD54C361B57DC2800A602CB /* TreeLeaf.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD54C351B57DC2800A602CB /* TreeLeaf.m */; };
+		1AD54C391B57E48700A602CB /* TreeBone.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD54C381B57E48700A602CB /* TreeBone.m */; };
+		1AD54C401B5CCB9D00A602CB /* WindStrengthSin.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD54C3F1B5CCB9D00A602CB /* WindStrengthSin.m */; };
+		1AD54C431B5CCBB400A602CB /* TreeWindAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD54C421B5CCBB400A602CB /* TreeWindAnimator.m */; };
+		1AD54C461B5CCC4D00A602CB /* WindSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD54C451B5CCC4D00A602CB /* WindSource.m */; };
+		1AD54C501B5CD87B00A602CB /* Birch.ltree in Resources */ = {isa = PBXBuildFile; fileRef = 1AD54C4A1B5CD87B00A602CB /* Birch.ltree */; };
+		1AD54C511B5CD87B00A602CB /* Gardenwood.ltree in Resources */ = {isa = PBXBuildFile; fileRef = 1AD54C4B1B5CD87B00A602CB /* Gardenwood.ltree */; };
+		1AD54C521B5CD87B00A602CB /* Graywood.ltree in Resources */ = {isa = PBXBuildFile; fileRef = 1AD54C4C1B5CD87B00A602CB /* Graywood.ltree */; };
+		1AD54C531B5CD87B00A602CB /* Pine.ltree in Resources */ = {isa = PBXBuildFile; fileRef = 1AD54C4D1B5CD87B00A602CB /* Pine.ltree */; };
+		1AD54C541B5CD87B00A602CB /* Rug.ltree in Resources */ = {isa = PBXBuildFile; fileRef = 1AD54C4E1B5CD87B00A602CB /* Rug.ltree */; };
+		1AD54C551B5CD87B00A602CB /* Willow.ltree in Resources */ = {isa = PBXBuildFile; fileRef = 1AD54C4F1B5CD87B00A602CB /* Willow.ltree */; };
+		1AD54C5F1B5CD88400A602CB /* BirchBark.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AD54C561B5CD88300A602CB /* BirchBark.png */; };
+		1AD54C601B5CD88400A602CB /* BirchLeaf.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AD54C571B5CD88300A602CB /* BirchLeaf.png */; };
+		1AD54C611B5CD88400A602CB /* Grass.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1AD54C581B5CD88300A602CB /* Grass.jpg */; };
+		1AD54C621B5CD88400A602CB /* GrayBark.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 1AD54C591B5CD88300A602CB /* GrayBark.JPG */; };
+		1AD54C631B5CD88400A602CB /* GraywoodLeaf.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AD54C5A1B5CD88300A602CB /* GraywoodLeaf.png */; };
+		1AD54C641B5CD88400A602CB /* OakLeaf.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AD54C5B1B5CD88400A602CB /* OakLeaf.png */; };
+		1AD54C651B5CD88400A602CB /* PineBark.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AD54C5C1B5CD88400A602CB /* PineBark.png */; };
+		1AD54C661B5CD88400A602CB /* PineLeaf.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AD54C5D1B5CD88400A602CB /* PineLeaf.png */; };
+		1AD54C671B5CD88400A602CB /* WillowLeaf.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AD54C5E1B5CD88400A602CB /* WillowLeaf.png */; };
 		1AF0539719F54C39003D54D2 /* TextureAtlas.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF0539619F54C39003D54D2 /* TextureAtlas.m */; };
 		1AF8DBDE1A03929E00338D62 /* terrains.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AF8DBDD1A03929E00338D62 /* terrains.png */; };
 		1AF8DBE01A0395B600338D62 /* tile_floor.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AF8DBDF1A0395B600338D62 /* tile_floor.png */; };
@@ -470,6 +495,41 @@
 		1AD54C201B5678D700A602CB /* CC3GLMatrix+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CC3GLMatrix+Extension.m"; path = "OpenGL/LTree/CC3GLMatrix+Extension.m"; sourceTree = "<group>"; };
 		1AD54C221B577B1300A602CB /* TreeVertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreeVertex.h; path = OpenGL/LTree/TreeVertex.h; sourceTree = "<group>"; };
 		1AD54C231B577B1300A602CB /* TreeVertex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreeVertex.m; path = OpenGL/LTree/TreeVertex.m; sourceTree = "<group>"; };
+		1AD54C251B57BC9100A602CB /* TreeProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreeProfile.h; path = OpenGL/LTree/TreeProfile.h; sourceTree = "<group>"; };
+		1AD54C261B57BC9100A602CB /* TreeProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreeProfile.m; path = OpenGL/LTree/TreeProfile.m; sourceTree = "<group>"; };
+		1AD54C281B57D14500A602CB /* TreeGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreeGenerator.h; path = OpenGL/LTree/TreeGenerator.h; sourceTree = "<group>"; };
+		1AD54C291B57D14500A602CB /* TreeGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreeGenerator.m; path = OpenGL/LTree/TreeGenerator.m; sourceTree = "<group>"; };
+		1AD54C2B1B57D1D300A602CB /* SimpleTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleTree.h; path = OpenGL/LTree/SimpleTree.h; sourceTree = "<group>"; };
+		1AD54C2C1B57D1D300A602CB /* SimpleTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimpleTree.m; path = OpenGL/LTree/SimpleTree.m; sourceTree = "<group>"; };
+		1AD54C2E1B57D59000A602CB /* TreeLeafCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreeLeafCloud.h; path = OpenGL/LTree/TreeLeafCloud.h; sourceTree = "<group>"; };
+		1AD54C2F1B57D59000A602CB /* TreeLeafCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreeLeafCloud.m; path = OpenGL/LTree/TreeLeafCloud.m; sourceTree = "<group>"; };
+		1AD54C311B57D5A500A602CB /* TreeAnimationState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreeAnimationState.h; path = OpenGL/LTree/TreeAnimationState.h; sourceTree = "<group>"; };
+		1AD54C321B57D5A500A602CB /* TreeAnimationState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreeAnimationState.m; path = OpenGL/LTree/TreeAnimationState.m; sourceTree = "<group>"; };
+		1AD54C341B57DC2800A602CB /* TreeLeaf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreeLeaf.h; path = OpenGL/LTree/TreeLeaf.h; sourceTree = "<group>"; };
+		1AD54C351B57DC2800A602CB /* TreeLeaf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreeLeaf.m; path = OpenGL/LTree/TreeLeaf.m; sourceTree = "<group>"; };
+		1AD54C371B57E48700A602CB /* TreeBone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreeBone.h; path = OpenGL/LTree/TreeBone.h; sourceTree = "<group>"; };
+		1AD54C381B57E48700A602CB /* TreeBone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreeBone.m; path = OpenGL/LTree/TreeBone.m; sourceTree = "<group>"; };
+		1AD54C3E1B5CCB9D00A602CB /* WindStrengthSin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WindStrengthSin.h; path = OpenGL/LTree/WindStrengthSin.h; sourceTree = "<group>"; };
+		1AD54C3F1B5CCB9D00A602CB /* WindStrengthSin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WindStrengthSin.m; path = OpenGL/LTree/WindStrengthSin.m; sourceTree = "<group>"; };
+		1AD54C411B5CCBB400A602CB /* TreeWindAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreeWindAnimator.h; path = OpenGL/LTree/TreeWindAnimator.h; sourceTree = "<group>"; };
+		1AD54C421B5CCBB400A602CB /* TreeWindAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreeWindAnimator.m; path = OpenGL/LTree/TreeWindAnimator.m; sourceTree = "<group>"; };
+		1AD54C441B5CCC4D00A602CB /* WindSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WindSource.h; path = OpenGL/LTree/WindSource.h; sourceTree = "<group>"; };
+		1AD54C451B5CCC4D00A602CB /* WindSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WindSource.m; path = OpenGL/LTree/WindSource.m; sourceTree = "<group>"; };
+		1AD54C4A1B5CD87B00A602CB /* Birch.ltree */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Birch.ltree; path = Resource/Trees/Profiles/Birch.ltree; sourceTree = "<group>"; };
+		1AD54C4B1B5CD87B00A602CB /* Gardenwood.ltree */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Gardenwood.ltree; path = Resource/Trees/Profiles/Gardenwood.ltree; sourceTree = "<group>"; };
+		1AD54C4C1B5CD87B00A602CB /* Graywood.ltree */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Graywood.ltree; path = Resource/Trees/Profiles/Graywood.ltree; sourceTree = "<group>"; };
+		1AD54C4D1B5CD87B00A602CB /* Pine.ltree */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Pine.ltree; path = Resource/Trees/Profiles/Pine.ltree; sourceTree = "<group>"; };
+		1AD54C4E1B5CD87B00A602CB /* Rug.ltree */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Rug.ltree; path = Resource/Trees/Profiles/Rug.ltree; sourceTree = "<group>"; };
+		1AD54C4F1B5CD87B00A602CB /* Willow.ltree */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Willow.ltree; path = Resource/Trees/Profiles/Willow.ltree; sourceTree = "<group>"; };
+		1AD54C561B5CD88300A602CB /* BirchBark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BirchBark.png; path = Resource/Trees/Textures/BirchBark.png; sourceTree = "<group>"; };
+		1AD54C571B5CD88300A602CB /* BirchLeaf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BirchLeaf.png; path = Resource/Trees/Textures/BirchLeaf.png; sourceTree = "<group>"; };
+		1AD54C581B5CD88300A602CB /* Grass.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Grass.jpg; path = Resource/Trees/Textures/Grass.jpg; sourceTree = "<group>"; };
+		1AD54C591B5CD88300A602CB /* GrayBark.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = GrayBark.JPG; path = Resource/Trees/Textures/GrayBark.JPG; sourceTree = "<group>"; };
+		1AD54C5A1B5CD88300A602CB /* GraywoodLeaf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GraywoodLeaf.png; path = Resource/Trees/Textures/GraywoodLeaf.png; sourceTree = "<group>"; };
+		1AD54C5B1B5CD88400A602CB /* OakLeaf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OakLeaf.png; path = Resource/Trees/Textures/OakLeaf.png; sourceTree = "<group>"; };
+		1AD54C5C1B5CD88400A602CB /* PineBark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PineBark.png; path = Resource/Trees/Textures/PineBark.png; sourceTree = "<group>"; };
+		1AD54C5D1B5CD88400A602CB /* PineLeaf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PineLeaf.png; path = Resource/Trees/Textures/PineLeaf.png; sourceTree = "<group>"; };
+		1AD54C5E1B5CD88400A602CB /* WillowLeaf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = WillowLeaf.png; path = Resource/Trees/Textures/WillowLeaf.png; sourceTree = "<group>"; };
 		1AF0539519F54C39003D54D2 /* TextureAtlas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextureAtlas.h; path = OpenGL/TextureAtlas.h; sourceTree = "<group>"; };
 		1AF0539619F54C39003D54D2 /* TextureAtlas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TextureAtlas.m; path = OpenGL/TextureAtlas.m; sourceTree = "<group>"; };
 		1AF8DBDD1A03929E00338D62 /* terrains.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = terrains.png; path = Resource/TileSets/terrains.png; sourceTree = "<group>"; };
@@ -538,6 +598,7 @@
 		1A0F5A4A19E06B1A00B8BB5D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1AD54C471B5CD80700A602CB /* Trees */,
 				1A533C171A6568D300ABF5DE /* Models */,
 				1A52896D1A3E31CA00C2F439 /* Menu */,
 				1A40CFCB1A193F460029C877 /* Maps */,
@@ -1010,8 +1071,66 @@
 				1AD54C201B5678D700A602CB /* CC3GLMatrix+Extension.m */,
 				1AD54C221B577B1300A602CB /* TreeVertex.h */,
 				1AD54C231B577B1300A602CB /* TreeVertex.m */,
+				1AD54C251B57BC9100A602CB /* TreeProfile.h */,
+				1AD54C261B57BC9100A602CB /* TreeProfile.m */,
+				1AD54C281B57D14500A602CB /* TreeGenerator.h */,
+				1AD54C291B57D14500A602CB /* TreeGenerator.m */,
+				1AD54C2B1B57D1D300A602CB /* SimpleTree.h */,
+				1AD54C2C1B57D1D300A602CB /* SimpleTree.m */,
+				1AD54C2E1B57D59000A602CB /* TreeLeafCloud.h */,
+				1AD54C2F1B57D59000A602CB /* TreeLeafCloud.m */,
+				1AD54C311B57D5A500A602CB /* TreeAnimationState.h */,
+				1AD54C321B57D5A500A602CB /* TreeAnimationState.m */,
+				1AD54C341B57DC2800A602CB /* TreeLeaf.h */,
+				1AD54C351B57DC2800A602CB /* TreeLeaf.m */,
+				1AD54C371B57E48700A602CB /* TreeBone.h */,
+				1AD54C381B57E48700A602CB /* TreeBone.m */,
+				1AD54C3E1B5CCB9D00A602CB /* WindStrengthSin.h */,
+				1AD54C3F1B5CCB9D00A602CB /* WindStrengthSin.m */,
+				1AD54C411B5CCBB400A602CB /* TreeWindAnimator.h */,
+				1AD54C421B5CCBB400A602CB /* TreeWindAnimator.m */,
+				1AD54C441B5CCC4D00A602CB /* WindSource.h */,
+				1AD54C451B5CCC4D00A602CB /* WindSource.m */,
 			);
 			name = LTree;
+			sourceTree = "<group>";
+		};
+		1AD54C471B5CD80700A602CB /* Trees */ = {
+			isa = PBXGroup;
+			children = (
+				1AD54C491B5CD85D00A602CB /* Profiles */,
+				1AD54C481B5CD84B00A602CB /* Textures */,
+			);
+			name = Trees;
+			sourceTree = "<group>";
+		};
+		1AD54C481B5CD84B00A602CB /* Textures */ = {
+			isa = PBXGroup;
+			children = (
+				1AD54C561B5CD88300A602CB /* BirchBark.png */,
+				1AD54C571B5CD88300A602CB /* BirchLeaf.png */,
+				1AD54C581B5CD88300A602CB /* Grass.jpg */,
+				1AD54C591B5CD88300A602CB /* GrayBark.JPG */,
+				1AD54C5A1B5CD88300A602CB /* GraywoodLeaf.png */,
+				1AD54C5B1B5CD88400A602CB /* OakLeaf.png */,
+				1AD54C5C1B5CD88400A602CB /* PineBark.png */,
+				1AD54C5D1B5CD88400A602CB /* PineLeaf.png */,
+				1AD54C5E1B5CD88400A602CB /* WillowLeaf.png */,
+			);
+			name = Textures;
+			sourceTree = "<group>";
+		};
+		1AD54C491B5CD85D00A602CB /* Profiles */ = {
+			isa = PBXGroup;
+			children = (
+				1AD54C4A1B5CD87B00A602CB /* Birch.ltree */,
+				1AD54C4B1B5CD87B00A602CB /* Gardenwood.ltree */,
+				1AD54C4C1B5CD87B00A602CB /* Graywood.ltree */,
+				1AD54C4D1B5CD87B00A602CB /* Pine.ltree */,
+				1AD54C4E1B5CD87B00A602CB /* Rug.ltree */,
+				1AD54C4F1B5CD87B00A602CB /* Willow.ltree */,
+			);
+			name = Profiles;
 			sourceTree = "<group>";
 		};
 		1AF8DBDC1A03908300338D62 /* TileSets */ = {
@@ -1128,18 +1247,23 @@
 				1A528A0C1A485B7700C2F439 /* Earth.png in Resources */,
 				1A242F2A1A6E457F0012F60D /* sVertexLighting.fsh in Resources */,
 				1A0F5AA719E4786200B8BB5D /* blueButton.png in Resources */,
+				1AD54C651B5CD88400A602CB /* PineBark.png in Resources */,
 				1A5289881A40C83100C2F439 /* setup_steps2.plist in Resources */,
 				1A0F5A8719E1C10700B8BB5D /* TemplateIcon2x.png in Resources */,
 				1A528A021A485B6900C2F439 /* Small.png in Resources */,
 				1A0F5AA919E4786200B8BB5D /* blueButton@2x.png in Resources */,
 				1A22F5D71A758574005FC62D /* RuralStallRoof_Diffuce.jpg in Resources */,
+				1AD54C5F1B5CD88400A602CB /* BirchBark.png in Resources */,
 				1A5289F81A485B2A00C2F439 /* LeaderTiles.png in Resources */,
 				1A242F301A6E49300012F60D /* teapot.obj in Resources */,
 				1A5289EB1A4856F400C2F439 /* Chieftain.png in Resources */,
 				1A55AEA51A1BA97700BF9648 /* rivers.png in Resources */,
+				1AD54C551B5CD87B00A602CB /* Willow.ltree in Resources */,
+				1AD54C621B5CD88400A602CB /* GrayBark.JPG in Resources */,
 				1A7A45DB1B4CE3A000C03FD6 /* button_normal.png in Resources */,
 				1A22F5D81A758574005FC62D /* RuralStallRoof_Normal.jpg in Resources */,
 				1A5289F11A4856F400C2F439 /* Settler.png in Resources */,
+				1AD54C541B5CD87B00A602CB /* Rug.ltree in Resources */,
 				1AF8DBDE1A03929E00338D62 /* terrains.png in Resources */,
 				1A0F5AAD19E4786200B8BB5D /* blueButtonHighlight@2x.png in Resources */,
 				1A533C251A65691D00ABF5DE /* cube_template_Cube.tga in Resources */,
@@ -1149,16 +1273,19 @@
 				1A52897B1A3F7D0A00C2F439 /* setup_steps1.plist in Resources */,
 				1A533C2F1A65691D00ABF5DE /* uvcube2.obj in Resources */,
 				1A528A511A485D1E00C2F439 /* Stalingrad.Civ5Map in Resources */,
+				1AD54C631B5CD88400A602CB /* GraywoodLeaf.png in Resources */,
 				1A5289EE1A4856F400C2F439 /* Immortal.png in Resources */,
 				1A7A45DA1B4CE3A000C03FD6 /* button_back.png in Resources */,
 				1A242F2F1A6E49300012F60D /* teapot.mtl in Resources */,
 				1A528A011A485B6900C2F439 /* Large.png in Resources */,
+				1AD54C641B5CD88400A602CB /* OakLeaf.png in Resources */,
 				1A5289F41A485B1800C2F439 /* CivilizationV_byWar36.png in Resources */,
 				1A528A4F1A485D1E00C2F439 /* maps.plist in Resources */,
 				1A5289F71A485B2A00C2F439 /* LeaderAtlas.xml in Resources */,
 				1A22F5D31A758574005FC62D /* RuralStallBaseExc_Diffuce.jpg in Resources */,
 				1A533C281A65691D00ABF5DE /* earth.mtl in Resources */,
 				1A242F281A6E457F0012F60D /* sFragmentLighting.fsh in Resources */,
+				1AD54C521B5CD87B00A602CB /* Graywood.ltree in Resources */,
 				1A5289F21A4856F400C2F439 /* Warlord.png in Resources */,
 				1A533C2A1A65691D00ABF5DE /* plane3.mtl in Resources */,
 				1A5289891A40C83100C2F439 /* setup_steps3.plist in Resources */,
@@ -1166,6 +1293,7 @@
 				1A242F291A6E457F0012F60D /* sFragmentLighting.vsh in Resources */,
 				1A22F5D21A758574005FC62D /* RuralStall.obj in Resources */,
 				1A242F211A6E41880012F60D /* ned-col.jpg in Resources */,
+				1AD54C501B5CD87B00A602CB /* Birch.ltree in Resources */,
 				1A5289711A3F6CC700C2F439 /* create_steps2.plist in Resources */,
 				1A528A531A485D1E00C2F439 /* us_world_b3.Civ5Map in Resources */,
 				1A533C2D1A65691D00ABF5DE /* texture1-128.pvr4 in Resources */,
@@ -1179,6 +1307,7 @@
 				1A0F5A8619E1C10700B8BB5D /* SimpleVertex.glsl in Resources */,
 				1A533C271A65691D00ABF5DE /* cylinder2.obj in Resources */,
 				1A52896F1A3EC4E100C2F439 /* create_steps1.plist in Resources */,
+				1AD54C661B5CD88400A602CB /* PineLeaf.png in Resources */,
 				1A528A561A485D1E00C2F439 /* EuropeBNWv3b.Civ5Map in Resources */,
 				1A528A541A485D1E00C2F439 /* nap1796fixed.Civ5Map in Resources */,
 				1A5289FF1A485B6900C2F439 /* Duel.png in Resources */,
@@ -1192,6 +1321,7 @@
 				1AF8DBE01A0395B600338D62 /* tile_floor.png in Resources */,
 				1A22F5D51A758574005FC62D /* RuralStallBaseExc_Spec.jpg in Resources */,
 				1A52898A1A40C83100C2F439 /* setup_steps4.plist in Resources */,
+				1AD54C511B5CD87B00A602CB /* Gardenwood.ltree in Resources */,
 				1A5289EC1A4856F400C2F439 /* Deity.png in Resources */,
 				1A528A551A485D1E00C2F439 /* Earth.xml in Resources */,
 				1A7A45DC1B4CE3A000C03FD6 /* navbar_bg.png in Resources */,
@@ -1200,10 +1330,13 @@
 				1A55AEA31A1BA8CC00BF9648 /* terrains.xml in Resources */,
 				1A22F5D61A758574005FC62D /* RuralStallExcNrm_Normal_Bump.tga in Resources */,
 				1A528A0E1A485B7700C2F439 /* Random.png in Resources */,
+				1AD54C531B5CD87B00A602CB /* Pine.ltree in Resources */,
 				1A528A0A1A485B7700C2F439 /* Archipelago.png in Resources */,
 				1A0F5AAB19E4786200B8BB5D /* blueButtonHighlight.png in Resources */,
+				1AD54C611B5CD88400A602CB /* Grass.jpg in Resources */,
 				1A5289ED1A4856F400C2F439 /* Emperor.png in Resources */,
 				1A0F5A8919E1C18E00B8BB5D /* SimpleFragment.glsl in Resources */,
+				1AD54C601B5CD88400A602CB /* BirchLeaf.png in Resources */,
 				1A22F5DA1A758574005FC62D /* RuralStallRoofNrm_Normal_Bump.tga in Resources */,
 				1A528A0B1A485B7700C2F439 /* Continents.png in Resources */,
 				1A5289A51A4170C400C2F439 /* Localizable.strings in Resources */,
@@ -1211,6 +1344,7 @@
 				1A528A0D1A485B7700C2F439 /* Pangaea.png in Resources */,
 				1A528A521A485D1E00C2F439 /* BigWorldMap.Civ5Map in Resources */,
 				1A55AEA21A1BA8CC00BF9648 /* rivers.xml in Resources */,
+				1AD54C671B5CD88400A602CB /* WillowLeaf.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1237,6 +1371,7 @@
 				1A7A45E71B4E51DB00C03FD6 /* TreeMesh.m in Sources */,
 				1A0F5AB319E520EB00B8BB5D /* OpenGLUtil.m in Sources */,
 				1A5289601A3B894E00C2F439 /* GLRay.m in Sources */,
+				1AD54C301B57D59000A602CB /* TreeLeafCloud.m in Sources */,
 				1A5289841A40C78700C2F439 /* SetupGameStep4ViewController.m in Sources */,
 				1A37D74F1A6C57C2006B5B88 /* RESprite.m in Sources */,
 				1A7A45F01B54D97400C03FD6 /* NSArray+Extensions.m in Sources */,
@@ -1255,6 +1390,7 @@
 				1A1D874019EFCB0900BC288C /* HexagonMapItem.m in Sources */,
 				1A242F101A6C5A5C0012F60D /* NSValue+CC3Types.m in Sources */,
 				1A528A3C1A485C3100C2F439 /* SetupGameStepContent.m in Sources */,
+				1AD54C361B57DC2800A602CB /* TreeLeaf.m in Sources */,
 				1A528A461A485CFE00C2F439 /* HexRiver.m in Sources */,
 				1A1D873219EDAA6900BC288C /* Mesh.m in Sources */,
 				1A242F0F1A6C5A5C0012F60D /* CC3Math.m in Sources */,
@@ -1272,6 +1408,7 @@
 				1A37D7441A6C57C2006B5B88 /* REKeyframedMeshNode.m in Sources */,
 				1A9B5B5C1A5C4A8300E887B6 /* GenerateMapTask.m in Sources */,
 				1AD54C241B577B1300A602CB /* TreeVertex.m in Sources */,
+				1AD54C431B5CCBB400A602CB /* TreeWindAnimator.m in Sources */,
 				1A37D7501A6C57C2006B5B88 /* RESpriteBatchNode.m in Sources */,
 				1A52896C1A3E29E800C2F439 /* CreateStep1ViewController.m in Sources */,
 				1A37D7571A6C57C2006B5B88 /* REWorld.m in Sources */,
@@ -1281,6 +1418,7 @@
 				1A37D7541A6C57C2006B5B88 /* REWavefrontMeshElementIndexBatch.m in Sources */,
 				1A528A2F1A485C0500C2F439 /* NSDictionary+Extensions.m in Sources */,
 				1A242F141A6CE0FB0012F60D /* GLViewController.m in Sources */,
+				1AD54C271B57BC9100A602CB /* TreeProfile.m in Sources */,
 				1A528A2D1A485C0500C2F439 /* UIBlockButton.m in Sources */,
 				1A37D7561A6C57C2006B5B88 /* REWavefrontMeshNode.m in Sources */,
 				1A37D7421A6C57C2006B5B88 /* REGLTypes.m in Sources */,
@@ -1290,7 +1428,10 @@
 				1A528A421A485C5300C2F439 /* GLPlane.m in Sources */,
 				1A528A3D1A485C3100C2F439 /* SetupGameStep3ViewController.m in Sources */,
 				1A1D873919EEC9B300BC288C /* CubeMesh.m in Sources */,
+				1AD54C331B57D5A500A602CB /* TreeAnimationState.m in Sources */,
+				1AD54C461B5CCC4D00A602CB /* WindSource.m in Sources */,
 				1A0F5A4D19E06B1A00B8BB5D /* main.m in Sources */,
+				1AD54C2A1B57D14500A602CB /* TreeGenerator.m in Sources */,
 				1A37D74C1A6C57C2006B5B88 /* REScene.m in Sources */,
 				1A5289E21A482F6400C2F439 /* CircularProgressView.m in Sources */,
 				1A37D7481A6C57C2006B5B88 /* RENSArrayAdditions.m in Sources */,
@@ -1300,6 +1441,7 @@
 				1A37D7411A6C57C2006B5B88 /* REGLStateManager.m in Sources */,
 				1A0EE62E19F05B5100D612DA /* Transformations.m in Sources */,
 				1A37D74B1A6C57C2006B5B88 /* RERotator.m in Sources */,
+				1AD54C401B5CCB9D00A602CB /* WindStrengthSin.m in Sources */,
 				1A37D7431A6C57C2006B5B88 /* REGLView.m in Sources */,
 				1AA98E791A1CEE0600873A2B /* HexPoint.m in Sources */,
 				1A528A371A485C2400C2F439 /* LoadingViewController.m in Sources */,
@@ -1310,9 +1452,11 @@
 				1A0F5A7E19E06E5F00B8BB5D /* OpenGLView.m in Sources */,
 				1A242F0C1A6C5A5C0012F60D /* CC3Foundation.m in Sources */,
 				1A242F171A6D701B0012F60D /* GameViewController.m in Sources */,
+				1AD54C391B57E48700A602CB /* TreeBone.m in Sources */,
 				1A37D7451A6C57C2006B5B88 /* RELight.m in Sources */,
 				1A37D73E1A6C57C2006B5B88 /* RECache.m in Sources */,
 				1A37D7471A6C57C2006B5B88 /* RENode.m in Sources */,
+				1AD54C2D1B57D1D300A602CB /* SimpleTree.m in Sources */,
 				1A37D7551A6C57C2006B5B88 /* REWavefrontMeshGroupNode.m in Sources */,
 				1A7A45EA1B505CE100C03FD6 /* TreeSkeleton.m in Sources */,
 				1A528A2B1A485C0500C2F439 /* AsyncTask.m in Sources */,

@@ -12,12 +12,12 @@
 
 typedef struct
 {
-    short bone1;
-    short bone2;
+    NSUInteger bone1;
+    NSUInteger bone2;
 } BoneIndex;
 
 /** Returns a BoneIndex structure constructed from the bone components. */
-BoneIndex BoneIndexMake(short bone1, short bone2);
+BoneIndex BoneIndexMake(NSUInteger bone1, NSUInteger bone2);
 
 @interface TreeVertex : NSObject
 

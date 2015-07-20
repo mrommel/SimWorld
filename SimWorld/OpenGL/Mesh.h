@@ -26,6 +26,7 @@ typedef unsigned int Index;
 @property (nonatomic, assign) Index* indices;
 @property (nonatomic, assign) NSUInteger numberOfIndices;
 @property (nonatomic, assign) GLuint texture;
+@property (nonatomic, assign) CC3BoundingBox boundingBox;
 
 /** @name init functions */
 
@@ -45,6 +46,17 @@ typedef unsigned int Index;
 - (void)setVertexAt:(int)index
                andX:(float)x andY:(float)y andZ:(float)z
         andTextureX:(float)tx andTextureY:(float)ty;
+
+- (void)setVertexAt:(int)index
+               andX:(float)x
+               andY:(float)y
+               andZ:(float)z
+        andTextureX:(float)tx
+        andTextureY:(float)ty
+          andColorA:(float)colorA
+          andColorR:(float)colorR
+          andColorG:(float)colorG
+          andColorB:(float)colorB;
 
 - (void)setVertexAt:(int)index
                andX:(float)x andY:(float)y andZ:(float)z
