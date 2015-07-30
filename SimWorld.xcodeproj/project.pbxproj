@@ -210,6 +210,11 @@
 		1AD54C651B5CD88400A602CB /* PineBark.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AD54C5C1B5CD88400A602CB /* PineBark.png */; };
 		1AD54C661B5CD88400A602CB /* PineLeaf.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AD54C5D1B5CD88400A602CB /* PineLeaf.png */; };
 		1AD54C671B5CD88400A602CB /* WillowLeaf.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AD54C5E1B5CD88400A602CB /* WillowLeaf.png */; };
+		1AD54C6B1B5E60BD00A602CB /* Production.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD54C6A1B5E60BD00A602CB /* Production.m */; };
+		1AD54C6E1B5E72DF00A602CB /* TreeCrayon.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD54C6D1B5E72DF00A602CB /* TreeCrayon.m */; };
+		1AD54C711B5E89B600A602CB /* MiRoStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD54C701B5E89B600A602CB /* MiRoStack.m */; };
+		1AD54C741B5E8B6D00A602CB /* TreeContraints.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD54C731B5E8B6D00A602CB /* TreeContraints.m */; };
+		1AD54C771B5E8C2600A602CB /* TreeCrayonInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD54C761B5E8C2600A602CB /* TreeCrayonInstruction.m */; };
 		1AF0539719F54C39003D54D2 /* TextureAtlas.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF0539619F54C39003D54D2 /* TextureAtlas.m */; };
 		1AF8DBDE1A03929E00338D62 /* terrains.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AF8DBDD1A03929E00338D62 /* terrains.png */; };
 		1AF8DBE01A0395B600338D62 /* tile_floor.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AF8DBDF1A0395B600338D62 /* tile_floor.png */; };
@@ -530,6 +535,16 @@
 		1AD54C5C1B5CD88400A602CB /* PineBark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PineBark.png; path = Resource/Trees/Textures/PineBark.png; sourceTree = "<group>"; };
 		1AD54C5D1B5CD88400A602CB /* PineLeaf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PineLeaf.png; path = Resource/Trees/Textures/PineLeaf.png; sourceTree = "<group>"; };
 		1AD54C5E1B5CD88400A602CB /* WillowLeaf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = WillowLeaf.png; path = Resource/Trees/Textures/WillowLeaf.png; sourceTree = "<group>"; };
+		1AD54C691B5E60BD00A602CB /* Production.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Production.h; path = OpenGL/LTree/Instructions/Production.h; sourceTree = "<group>"; };
+		1AD54C6A1B5E60BD00A602CB /* Production.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Production.m; path = OpenGL/LTree/Instructions/Production.m; sourceTree = "<group>"; };
+		1AD54C6C1B5E72DF00A602CB /* TreeCrayon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreeCrayon.h; path = OpenGL/LTree/TreeCrayon.h; sourceTree = "<group>"; };
+		1AD54C6D1B5E72DF00A602CB /* TreeCrayon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreeCrayon.m; path = OpenGL/LTree/TreeCrayon.m; sourceTree = "<group>"; };
+		1AD54C6F1B5E89B600A602CB /* MiRoStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MiRoStack.h; path = Utils/MiRoStack.h; sourceTree = "<group>"; };
+		1AD54C701B5E89B600A602CB /* MiRoStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MiRoStack.m; path = Utils/MiRoStack.m; sourceTree = "<group>"; };
+		1AD54C721B5E8B6D00A602CB /* TreeContraints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreeContraints.h; path = OpenGL/LTree/TreeContraints.h; sourceTree = "<group>"; };
+		1AD54C731B5E8B6D00A602CB /* TreeContraints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreeContraints.m; path = OpenGL/LTree/TreeContraints.m; sourceTree = "<group>"; };
+		1AD54C751B5E8C2600A602CB /* TreeCrayonInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreeCrayonInstruction.h; path = OpenGL/LTree/TreeCrayonInstruction.h; sourceTree = "<group>"; };
+		1AD54C761B5E8C2600A602CB /* TreeCrayonInstruction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreeCrayonInstruction.m; path = OpenGL/LTree/TreeCrayonInstruction.m; sourceTree = "<group>"; };
 		1AF0539519F54C39003D54D2 /* TextureAtlas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextureAtlas.h; path = OpenGL/TextureAtlas.h; sourceTree = "<group>"; };
 		1AF0539619F54C39003D54D2 /* TextureAtlas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TextureAtlas.m; path = OpenGL/TextureAtlas.m; sourceTree = "<group>"; };
 		1AF8DBDD1A03929E00338D62 /* terrains.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = terrains.png; path = Resource/TileSets/terrains.png; sourceTree = "<group>"; };
@@ -714,17 +729,19 @@
 				1A528A221A485C0500C2F439 /* ByteReader.h */,
 				1A528A231A485C0500C2F439 /* NSString+TSStyle.h */,
 				1A528A241A485C0500C2F439 /* NSString+TSStyle.m */,
+				1A528A2A1A485C0500C2F439 /* NSDictionary+Extensions.h */,
 				1A528A251A485C0500C2F439 /* NSDictionary+Extensions.m */,
 				1A528A261A485C0500C2F439 /* XMLReader.m */,
 				1A528A271A485C0500C2F439 /* XMLReader.h */,
 				1A528A281A485C0500C2F439 /* Array2D.m */,
 				1A528A291A485C0500C2F439 /* Array2D.h */,
-				1A528A2A1A485C0500C2F439 /* NSDictionary+Extensions.h */,
 				1A0F5AB019E47A3500B8BB5D /* UIConstants.h */,
 				1A5289E01A482F6400C2F439 /* CircularProgressView.h */,
 				1A5289E11A482F6400C2F439 /* CircularProgressView.m */,
 				1A7A45EE1B54D97400C03FD6 /* NSArray+Extensions.h */,
 				1A7A45EF1B54D97400C03FD6 /* NSArray+Extensions.m */,
+				1AD54C6F1B5E89B600A602CB /* MiRoStack.h */,
+				1AD54C701B5E89B600A602CB /* MiRoStack.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1061,6 +1078,7 @@
 		1A7A45E41B4E4EC100C03FD6 /* LTree */ = {
 			isa = PBXGroup;
 			children = (
+				1AD54C681B5E608600A602CB /* Instructions */,
 				1A7A45E51B4E51DB00C03FD6 /* TreeMesh.h */,
 				1A7A45E61B4E51DB00C03FD6 /* TreeMesh.m */,
 				1A7A45E81B505CE100C03FD6 /* TreeSkeleton.h */,
@@ -1091,6 +1109,10 @@
 				1AD54C421B5CCBB400A602CB /* TreeWindAnimator.m */,
 				1AD54C441B5CCC4D00A602CB /* WindSource.h */,
 				1AD54C451B5CCC4D00A602CB /* WindSource.m */,
+				1AD54C6C1B5E72DF00A602CB /* TreeCrayon.h */,
+				1AD54C6D1B5E72DF00A602CB /* TreeCrayon.m */,
+				1AD54C721B5E8B6D00A602CB /* TreeContraints.h */,
+				1AD54C731B5E8B6D00A602CB /* TreeContraints.m */,
 			);
 			name = LTree;
 			sourceTree = "<group>";
@@ -1131,6 +1153,17 @@
 				1AD54C4F1B5CD87B00A602CB /* Willow.ltree */,
 			);
 			name = Profiles;
+			sourceTree = "<group>";
+		};
+		1AD54C681B5E608600A602CB /* Instructions */ = {
+			isa = PBXGroup;
+			children = (
+				1AD54C691B5E60BD00A602CB /* Production.h */,
+				1AD54C6A1B5E60BD00A602CB /* Production.m */,
+				1AD54C751B5E8C2600A602CB /* TreeCrayonInstruction.h */,
+				1AD54C761B5E8C2600A602CB /* TreeCrayonInstruction.m */,
+			);
+			name = Instructions;
 			sourceTree = "<group>";
 		};
 		1AF8DBDC1A03908300338D62 /* TileSets */ = {
@@ -1370,10 +1403,12 @@
 				1A22F5C51A758283005FC62D /* HouseNode.m in Sources */,
 				1A7A45E71B4E51DB00C03FD6 /* TreeMesh.m in Sources */,
 				1A0F5AB319E520EB00B8BB5D /* OpenGLUtil.m in Sources */,
+				1AD54C6B1B5E60BD00A602CB /* Production.m in Sources */,
 				1A5289601A3B894E00C2F439 /* GLRay.m in Sources */,
 				1AD54C301B57D59000A602CB /* TreeLeafCloud.m in Sources */,
 				1A5289841A40C78700C2F439 /* SetupGameStep4ViewController.m in Sources */,
 				1A37D74F1A6C57C2006B5B88 /* RESprite.m in Sources */,
+				1AD54C741B5E8B6D00A602CB /* TreeContraints.m in Sources */,
 				1A7A45F01B54D97400C03FD6 /* NSArray+Extensions.m in Sources */,
 				1A528A301A485C0500C2F439 /* XMLReader.m in Sources */,
 				1A37D7521A6C57C2006B5B88 /* REVertexArrayObject.m in Sources */,
@@ -1390,11 +1425,13 @@
 				1A1D874019EFCB0900BC288C /* HexagonMapItem.m in Sources */,
 				1A242F101A6C5A5C0012F60D /* NSValue+CC3Types.m in Sources */,
 				1A528A3C1A485C3100C2F439 /* SetupGameStepContent.m in Sources */,
+				1AD54C6E1B5E72DF00A602CB /* TreeCrayon.m in Sources */,
 				1AD54C361B57DC2800A602CB /* TreeLeaf.m in Sources */,
 				1A528A461A485CFE00C2F439 /* HexRiver.m in Sources */,
 				1A1D873219EDAA6900BC288C /* Mesh.m in Sources */,
 				1A242F0F1A6C5A5C0012F60D /* CC3Math.m in Sources */,
 				1A52897E1A40C4B100C2F439 /* SetupGameStep2ViewController.m in Sources */,
+				1AD54C711B5E89B600A602CB /* MiRoStack.m in Sources */,
 				1A40CFD61A19FB0D0029C877 /* HexagonMap.m in Sources */,
 				1A37D73F1A6C57C2006B5B88 /* RECamera.m in Sources */,
 				1A20910A1A6FB997003F8880 /* HexagonMapNode.m in Sources */,
@@ -1436,6 +1473,7 @@
 				1A5289E21A482F6400C2F439 /* CircularProgressView.m in Sources */,
 				1A37D7481A6C57C2006B5B88 /* RENSArrayAdditions.m in Sources */,
 				1A528A5D1A48A6FA00C2F439 /* HeightMap.m in Sources */,
+				1AD54C771B5E8C2600A602CB /* TreeCrayonInstruction.m in Sources */,
 				1AF0539719F54C39003D54D2 /* TextureAtlas.m in Sources */,
 				1A7A45ED1B52FBA900C03FD6 /* TreeBranch.m in Sources */,
 				1A37D7411A6C57C2006B5B88 /* REGLStateManager.m in Sources */,

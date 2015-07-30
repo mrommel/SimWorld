@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>9D6F632F-9E87-497C-9B19-B1FF6B50C935</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>SimWorld</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>1F526077C2D6FA14F70C15C420883817B4C40334</key>
 		<string>https://github.com/mrommel/SimWorld.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>SimWorld.xcodeproj/project.xcworkspace</string>
+	<string>SimWorld.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>1F526077C2D6FA14F70C15C420883817B4C40334</key>

@@ -60,6 +60,24 @@ CC3BoundingSphere CC3BoundingSphereMakeFromCenter(CC3Vector center, GLfloat radi
 #pragma mark -
 #pragma mark CC3GLMatrix structure and functions
 
+// zero based (4x4)
+// m00 => 0
+// m10 => 1
+// m20 => 2
+// m30 => 3
+// m01 => 4
+// m11 => 5
+// m21 => 6
+//
+// m12 => 9
+//
+
+// one based (3x3)
+// m11 => 0
+// m21 => 1
+// m31 => 2
+// m12 => 3
+
 @implementation CC3GLMatrix (Extension)
 
 - (void)setRightDirection:(CC3Vector)aVector
@@ -138,13 +156,58 @@ CC3BoundingSphere CC3BoundingSphereMakeFromCenter(CC3Vector center, GLfloat radi
     return CC3VectorMake(m[12], m[13], m[14]);
 }
 
+- (CC3Vector)transformNormal:(CC3Vector)normal
+{
+    GLfloat* m = self.glMatrix;
+    CC3Vector vector;
+    vector.x = normal.x * m[0] + normal.y * m[1] + normal.z * m[2];
+    vector.y = normal.x * m[3] + normal.y * m[4] + normal.z * m[5];
+    vector.z = normal.x * m[6] + normal.y * m[7] + normal.z * m[8];
+    return vector;
+}
+
 @end
 
 @implementation NSMutableArray (Matrix)
 
--(CC3GLMatrix *)matrixAtIndex:(NSUInteger)index
+- (CC3GLMatrix *)matrixAtIndex:(NSUInteger)index
 {
     return [self objectAtIndex:index];
+}
+
+- (void)addMatrix:(CC3GLMatrix *)matrix
+{
+    [self addObject:matrix];
+}
+
+- (void)insertMatrix:(CC3GLMatrix *)matrix atIndex:(NSUInteger)index
+{
+    [self insertObject:matrix atIndex:index];
+}
+
+- (void)addVector4:(CC3Vector4)vector
+{
+    NSValue *boxedVector = [NSValue valueWithBytes:&vector objCType:@encode(CC3Vector4)];
+    [self addObject:boxedVector];
+}
+
+- (void)insertVector4:(CC3Vector4)vector atIndex:(NSUInteger)index
+{
+    NSValue *boxedVector = [NSValue valueWithBytes:&vector objCType:@encode(CC3Vector4)];
+    [self insertObject:boxedVector atIndex:index];
+}
+
+- (CC3Vector4)vector4AtIndex:(NSUInteger)index
+{
+    CC3Vector4 vector;
+    
+    NSValue *boxedVector = [self objectAtIndex:index];
+    if (strcmp([boxedVector objCType], @encode(CC3Vector4)) == 0) {
+        [boxedVector getValue:&vector];
+        return vector;
+    }
+    
+    return kCC3Vector4Zero;
 }
 
 @end

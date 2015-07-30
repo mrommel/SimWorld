@@ -57,6 +57,24 @@
     }
 }
 
+- (void)copyAbsoluteBoneTranformsTo:(NSMutableArray *)destinationArray andBoneRotation:(NSMutableArray *)boneRotations
+{
+    NSAssert(destinationArray.count >= bones.count, @"Destination array is too small.");
+    NSAssert(boneRotations.count >= bones.count, @"Rotations array is too small to be a proper animation state.");
+    
+    for (int i = 0; i < bones.count; i++)
+    {
+        CC3GLMatrix *destinationMatrix = [[CC3GLMatrix alloc] init];
+        [destinationMatrix populateFromQuaternion:[boneRotations vector4AtIndex:i]];
+        destinationArray[i] = CC3Matrix .CreateFromQuaternion(boneRotations[i]);
+        if (bones[i].ParentIndex != -1)
+        {
+            destinationArray[i].M42 = bones[bones[i].ParentIndex].Length;
+            destinationArray[i] = destinationArray[i] * destinationArray[bones[i].ParentIndex];
+        }
+    }
+}
+
 /// <summary>
 /// Finds the distance from the root to the tip of each branch, and writes it in an array.
 /// Then returns the longest of those distances found.

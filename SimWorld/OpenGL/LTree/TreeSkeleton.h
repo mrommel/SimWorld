@@ -21,6 +21,8 @@
 @property (atomic) CC3Vector *leafAxis;
 
 - (void)copyAbsoluteBranchTransformsTo:(NSMutableArray *)destinationMatrices;
+- (void)copyAbsoluteBoneTranformsTo:(NSMutableArray *)destinationMatrices andBoneRotation:(NSMutableArray *)boneRotations;
+
 - (float)longestBranching:(NSMutableArray *)destinationArray;
 
 - (TreeBranch *)branchAtIndex:(int)branchIndex;

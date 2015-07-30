@@ -43,6 +43,9 @@ CC3BoundingSphere CC3BoundingSphereMake(GLfloat x, GLfloat y, GLfloat z, GLfloat
 CC3BoundingSphere CC3BoundingSphereMakeFromCenter(CC3Vector center, GLfloat radius);
 
 
+/** Unit vector pointing in the same direction as the positive Y-axis. */
+static const CC3Vector kCC3VectorUp = { 0.0,  1.0,  0.0 };
+
 /** Unit vector pointing in the same direction as the positive X-axis. */
 static const CC3Vector kCC3VectorRight = { 1.0,  0.0,  0.0 };
 
@@ -73,10 +76,19 @@ static const CC3Vector kCC3VectorBackward = { 0.0,  0.0, -1.0 };
 /** get the translation value of the matrix */
 - (CC3Vector)extractTranslation;
 
+/** Transforms a 3D vector normal by a matrix. */
+- (CC3Vector)transformNormal:(CC3Vector)normal;
+
 @end
 
 @interface NSMutableArray (Matrix)
 
--(CC3GLMatrix *)matrixAtIndex:(NSUInteger)index;
+- (CC3GLMatrix *)matrixAtIndex:(NSUInteger)index;
+- (void)addMatrix:(CC3GLMatrix *)matrix;
+- (void)insertMatrix:(CC3GLMatrix *)matrix atIndex:(NSUInteger)index;
+
+- (void)addVector4:(CC3Vector4)vector;
+- (void)insertVector4:(CC3Vector4)vector atIndex:(NSUInteger)index;
+- (CC3Vector4)vector4AtIndex:(NSUInteger)index;
 
 @end

@@ -218,4 +218,26 @@
     return [self objectForKey: key] != nil;
 }
 
+- (NSDictionary *)dictForKey:(NSString *)key
+{
+    return [self objectForKey:key];
+}
+
+- (NSString *)stringForKey:(NSString *)key
+{
+    return [self objectForKey:key];
+}
+
+- (int)intForKey:(NSString *)key
+{
+    return [[self objectForKey:key] intValue];
+}
+
+- (CC3Vector)vector3ForKey:(NSString *)key
+{
+    NSString *src = [self stringForKey:key];
+    NSArray *vectorComponents = [src componentsSeparatedByString:@","];
+    return CC3VectorMake([[vectorComponents objectAtIndex:0] floatValue], [[vectorComponents objectAtIndex:1] floatValue], [[vectorComponents objectAtIndex:2] floatValue]);
+}
+
 @end

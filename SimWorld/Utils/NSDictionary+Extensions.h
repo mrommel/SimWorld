@@ -20,6 +20,11 @@
  */
 -(id)getValueForKeyPath:(NSString *)path;
 
+- (NSDictionary *)dictForKey:(NSString *)key;
+- (NSString *)stringForKey:(NSString *)key;
+- (int)intForKey:(NSString *)key;
+- (CC3Vector)vector3ForKey:(NSString *)key;
+
 -(id)getValueForKeyPath:(NSString *)path withDefaultValue: (id)defaultValue;
 -(int)getIntValueForKeyPath:(NSString *)path withDefaultValue: (int)defaultValue;
 -(id)getObjectForKeyPath:(NSString *)path withDefaultValue: (id)defaultValue;
