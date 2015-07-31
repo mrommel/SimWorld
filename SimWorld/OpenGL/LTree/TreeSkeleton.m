@@ -90,7 +90,7 @@
     for (int i = 0; i < self.branches.count; i++)
     {
         float dist = [[self.branches objectAtIndex:i] length];
-        int parentIndex = ((TreeBranch *)[self.branches objectAtIndex:i]).parentIndex;
+        NSInteger parentIndex = ((TreeBranch *)[self.branches objectAtIndex:i]).parentIndex;
         if (parentIndex != -1) {
             dist += [[destinationArray objectAtIndex:parentIndex] floatValue]
             - [[branches objectAtIndex:parentIndex] length] * (1.0f - ((TreeBranch *)[self.branches objectAtIndex:i]).parentPosition);
@@ -103,9 +103,17 @@
     return maxdist;
 }
 
-- (TreeBranch *)branchAtIndex:(int)branchIndex
+#pragma mark -
+
+
+- (TreeBranch *)branchAtIndex:(NSUInteger)branchIndex
 {
     return [self.branches objectAtIndex:branchIndex];
+}
+
+- (void)insertBranch:(TreeBranch *)branch atIndex:(NSUInteger)branchIndex
+{
+    [self.branches insertObject:branch atIndex:branchIndex];
 }
 
 - (TreeLeaf *)leaveAtIndex:(int)leaveIndex
@@ -118,9 +126,31 @@
     return [self.bones objectAtIndex:boneIndex];
 }
 
+- (void)addBone:(TreeBone *)bone
+{
+    [self.bones addObject:bone];
+}
+
 - (float)trunkRadius
 {
     return [self branchAtIndex:0].startRadius;
+}
+
+- (void)closeEdgeBranches
+{
+    // Create a map of all the branches to remember if it is a parent or not
+    NSMutableArray *parentmap = [[NSMutableArray alloc] initWithCapacity:branches.count];
+    
+    for (NSInteger i = self.branches.count - 1; i >= 0; --i) {
+        NSInteger parent = [self branchAtIndex:i].parentIndex;
+        if (parent != -1)
+            [parentmap replaceObjectAtIndex:parent withObject:@YES];
+        if (![[parentmap objectAtIndex:i] boolValue]) {
+            TreeBranch *branch = [self branchAtIndex:i];
+            branch.endRadius = 0.0f;
+            [branches replaceObjectAtIndex:i withObject:branch];
+        }
+    }
 }
 
 @end

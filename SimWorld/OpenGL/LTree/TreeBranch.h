@@ -33,7 +33,7 @@
 /// <summary>
 /// Index of the parent branch, or -1 if this is the root branch.
 /// </summary>
-@property (atomic) NSUInteger parentIndex;
+@property (atomic) NSInteger parentIndex;
 
 /// <summary>
 /// Where on the parent the branch is located. 0.0f is at the start, 1.0f is at the end.

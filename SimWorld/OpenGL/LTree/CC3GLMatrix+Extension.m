@@ -65,12 +65,21 @@ CC3BoundingSphere CC3BoundingSphereMakeFromCenter(CC3Vector center, GLfloat radi
 // m10 => 1
 // m20 => 2
 // m30 => 3
+
 // m01 => 4
 // m11 => 5
 // m21 => 6
-//
+// m31 => 7
+
+// m02 => 8
 // m12 => 9
-//
+// m22 => 10
+// m32 => 11
+
+// m03 => 12
+// m13 => 13
+// m23 => 14
+// m33 => 15
 
 // one based (3x3)
 // m11 => 0
@@ -164,6 +173,25 @@ CC3BoundingSphere CC3BoundingSphereMakeFromCenter(CC3Vector center, GLfloat radi
     vector.y = normal.x * m[3] + normal.y * m[4] + normal.z * m[5];
     vector.z = normal.x * m[6] + normal.y * m[7] + normal.z * m[8];
     return vector;
+}
+
+- (CC3GLMatrix *)copyInverted
+{
+    CC3GLMatrix *result = [CC3GLMatrix matrix];
+    [result populateFrom:self];
+    [result invert];
+    
+    return result;
+}
+
+- (CC3GLMatrix *)copyMultipliedBy:(CC3GLMatrix *)mut
+{
+    CC3GLMatrix *result = [CC3GLMatrix matrix];
+    [result populateFrom:self];
+    [result multiplyByMatrix:mut];
+    
+    return result;
+
 }
 
 @end

@@ -44,6 +44,14 @@
 /// Index of the branch where the bone ends. Note that both ancestors and children of this branch
 /// may be controlled by this bone.
 /// </summary>
-@property (atomic) NSUInteger endBranchIndex;
+@property (atomic) NSInteger endBranchIndex;
+
+- (id)initWithRotation:(CC3GLMatrix *)rotation
+        andParentIndex:(int)parentIndex
+ andReferenceTransform:(CC3GLMatrix *)referenceTransform
+andInverseReferenceTransform:(CC3GLMatrix *)inverseReferenceTransform
+             andLength:(float)length
+          andStiffness:(float)stiffness
+     andEndBranchIndex:(int)endBranchIndex;
 
 @end

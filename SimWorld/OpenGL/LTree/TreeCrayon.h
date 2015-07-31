@@ -8,6 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
+@class TreeContraints;
+@class TreeSkeleton;
+
 @interface TreeCrayon : NSObject
+
+@property (atomic) int level;
+@property (atomic) int boneLevels;
+@property (nonatomic, retain) TreeContraints *constraints;
+@property (nonatomic, retain) TreeSkeleton *skeleton;
+@property (atomic, readonly) float currentScale;
+
+- (id)init;
+
+- (void)executeBoneWithDelta:(int)delta;
 
 @end

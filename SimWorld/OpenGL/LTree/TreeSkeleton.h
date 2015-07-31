@@ -25,10 +25,18 @@
 
 - (float)longestBranching:(NSMutableArray *)destinationArray;
 
-- (TreeBranch *)branchAtIndex:(int)branchIndex;
+- (TreeBranch *)branchAtIndex:(NSUInteger)branchIndex;
+- (void)insertBranch:(TreeBranch *)branch atIndex:(NSUInteger)branchIndex;
+
 - (TreeLeaf *)leaveAtIndex:(int)leaveIndex;
+
 - (TreeBone *)boneAtIndex:(int)boneIndex;
+- (void)addBone:(TreeBone *)bone;
 
 - (float)trunkRadius;
+
+/// @brief Sets the EndRadius to 0.0f on all branches without children.
+/// This is automatically called by the TreeGenerator.
+- (void)closeEdgeBranches;
 
 @end

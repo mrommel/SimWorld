@@ -10,19 +10,25 @@
 
 #import "XMLReader.h"
 #import "NSDictionary+Extensions.h"
+#import "Production.h"
+#import "TreeCrayonInstruction.h"
+#import "TreeCrayon.h"
+#import "TreeBone.h"
+#import "TreeSkeleton.h"
+#import "TreeCompositeConstraints.h"
 
 @interface ProductionNodePair : NSObject
 
 @property (nonatomic, retain) Production *production;
 @property (nonatomic, retain) NSDictionary *node;
 
--(id) initWithProduction:(Production *)production andNode:(NSDictionary *)node;
+- (id)initWithProduction:(Production *)production andNode:(NSDictionary *)node;
 
 @end
 
 @implementation ProductionNodePair
 
--(id) initWithProduction:(Production *)production andNode:(NSDictionary *)node
+- (id)initWithProduction:(Production *)production andNode:(NSDictionary *)node
 {
     self = [super init];
     
@@ -33,6 +39,12 @@
     
     return self;
 }
+
+@end
+
+@interface TreeGenerator()
+
+TreeCompositeConstraints *_constraints;
 
 @end
 
@@ -70,38 +82,39 @@
                     self.leafAxis = CC3VectorNormalize(self.leafAxis);
                 } else if ([@"Production" isEqualToString:key]) {
                     NSString *name = [[tree dictForKey:key] stringForKey:@"id"];
-                    [productions setObject:[[ProductionNodePair alloc] initWithDict:[tree dictForKey:key] ] forKey:name]
+                    Production *production = [[Production alloc] init];
+                    NSDictionary *node = [tree dictForKey:key];
+                    [productions setObject:[[ProductionNodePair alloc] initWithProduction:production andNode:node] forKey:name];
+                } else if ([@"ConstrainUnderground" isEqualToString:key]) {
+                    // TODO
+                    // generator.Constraints.Constaints.Add(new ConstrainUndergroundBranches(XmlUtil.GetFloat(child, "lowerBound", 256.0f)));
+                } else if ([@"TextureHeight" isEqualToString:key]) {
+                    // TODO
+                    // generator.TextureHeight = XmlUtil.GetFloat(child, "height");
+                    // generator.TextureHeightVariation = XmlUtil.GetFloat(child, "variation", 0.0f);
                 }
             }
         }
         
+        NSAssert(self.rootName != nil, @"Root name must be specified.");
         
-        // TODO
-        /*foreach (XmlNode child in root.ChildNodes)
-        {
-            switch (child.Name)
-            {
-                case "ConstrainUnderground":
-                    generator.Constraints.Constaints.Add(new ConstrainUndergroundBranches(XmlUtil.GetFloat(child, "lowerBound", 256.0f)));
-                    break;
-                    
-                case "TextureHeight":
-                    generator.TextureHeight = XmlUtil.GetFloat(child, "height");
-                    generator.TextureHeightVariation = XmlUtil.GetFloat(child, "variation", 0.0f);
-                    break;
+        // Now we have a map of names -> productions, so we can start parsing the the productions
+        for (ProductionNodePair *pn in productions.allValues) {
+            for (NSString *key in pn.node.allKeys) {
+                TreeCrayonInstruction *instruction = nil;
+                
+                if ([@"Call" isEqualToString:key]) {
+                    NSArray* refs = nil;
+                    int delta = -1;
+                    instruction = [[Call alloc] initWithProductions:refs andDelta:delta];
+                }
+
+                [pn.production.instructions addObject:instruction];
             }
         }
         
-        if (rootName == null)
-            throw new ArgumentException("Root name must be specified.");
+        self.root = ((ProductionNodePair*)[productions objectForKey:self.rootName]).production;
         
-        // Now we have a map of names -> productions, so we can start parsing the the productions
-        foreach (ProductionNodePair pn in productions.Values)
-        {
-            ParseInstructionsFromXml(pn.Node, pn.Production.Instructions, productions);
-        }
-        
-        generator.Root = productions[rootName][0].Production;*/
         self.maxLevel = levels;
         self.boneLevels = boneLevels;
     }
@@ -111,8 +124,30 @@
 
 - (TreeSkeleton *)generateTree
 {
+    [self generateTreeWithContraints:nil];
+}
+
+- (TreeSkeleton *)generateTreeWithContraints:(TreeContraints *)userConstraint
+{
     // TODO
-    return nil;
+    NSAssert(self.root != nil && self.maxLevel != 0, @"TreeGenerator has not been initialized. Must set Root and MaxLevel before generating a tree.");
+    
+    TreeCrayon *crayon = [[TreeCrayon alloc] init];
+    crayon.level = self.maxLevel;
+    crayon.boneLevels = self.boneLevels;
+    crayon.constraints = _constraints;
+    _constraints.userConstraint = userConstraint;
+    crayon.skeleton.leafAxis = self.leafAxis;
+    
+    TreeBone *bone = [[TreeBone alloc] initWithRotation:[CC3GLMatrix identity] andParentIndex:-1 andReferenceTransform:[CC3GLMatrix identity] andInverseReferenceTransform:[CC3GLMatrix identity] andLength:1 andStiffness:1 andEndBranchIndex:-1];
+    [crayon.skeleton addBone:bone];
+    [self.root executeCrayon:crayon];
+    
+    [crayon.skeleton closeEdgeBranches];
+    
+    crayon.skeleton.textureHeight = self.textureHeight + self.textureHeightVariation * (2.0f * RandomFloat() - 1.0f);
+    
+    return crayon.skeleton;
 }
 
 @end

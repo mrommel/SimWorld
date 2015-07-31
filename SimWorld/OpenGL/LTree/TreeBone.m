@@ -10,4 +10,21 @@
 
 @implementation TreeBone
 
+- (id)initWithRotation:(CC3GLMatrix *)rotation
+        andParentIndex:(int)parentIndex
+ andReferenceTransform:(CC3GLMatrix *)referenceTransform
+andInverseReferenceTransform:(CC3GLMatrix *)inverseReferenceTransform
+             andLength:(float)length
+          andStiffness:(float)stiffness
+     andEndBranchIndex:(int)endBranchIndex
+{
+    self.rotation = rotation;
+    self.parentIndex = parentIndex;
+    self.referenceTransform = referenceTransform;
+    self.inverseReferenceTransform = inverseReferenceTransform;
+    self.length = length;
+    self.stiffness = stiffness;
+    self.endBranchIndex = endBranchIndex;
+}
+
 @end

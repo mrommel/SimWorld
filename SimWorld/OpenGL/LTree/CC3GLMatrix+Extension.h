@@ -79,6 +79,12 @@ static const CC3Vector kCC3VectorBackward = { 0.0,  0.0, -1.0 };
 /** Transforms a 3D vector normal by a matrix. */
 - (CC3Vector)transformNormal:(CC3Vector)normal;
 
+/** copies the current Matrix and inverts it */
+- (CC3GLMatrix *)copyInverted;
+
+/** copies the current Matrix and multiplies it */
+- (CC3GLMatrix *)copyMultipliedBy:(CC3GLMatrix *)mut;
+
 @end
 
 @interface NSMutableArray (Matrix)
