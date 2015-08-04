@@ -12,6 +12,7 @@
 #import "TreeProfile.h"
 #import "WindStrengthSin.h"
 #import "TreeWindAnimator.h"
+#import "SimpleTree.h"
 
 #define PROFILES @[@"Birch", @"Pine", @"Gardenwood", @"Graywood", @"Rug", @"Willow"]
 
@@ -32,7 +33,7 @@
     GLuint _indexBufferTerrains;
 }
 
-@property (atomic) TreeType type;
+@property (atomic) NSUInteger type;
 @property (nonatomic, retain) NSMutableArray *profiles;
 @property (nonatomic, retain) WindStrengthSin *wind;
 @property (nonatomic, retain) TreeWindAnimator *animator;
@@ -41,12 +42,12 @@
 
 @implementation TreeNode
 
-- (id)initWithType:(TreeType)type
+- (id)initWithType:(NSUInteger)tree;
 {
     self = [super init];
     
     if (self) {
-        self.type = type;
+        self.type = tree;
         
         self.wind = [[WindStrengthSin alloc] init];
         self.animator = [[TreeWindAnimator alloc] initWithWind:self.wind];
@@ -68,6 +69,16 @@
     for (NSString *profileName in PROFILES) {
         [self.profiles addObject:[[TreeProfile alloc] initWithProfileName:profileName]];
     }
+    
+    SimpleTree *tree = [[self treeProfileAtIndex:self.type] generateSimpleTree];
+    
+    NSLog(@"Tree: %@", tree);
+    //tree.
+}
+
+- (TreeProfile *)treeProfileAtIndex:(NSUInteger)index
+{
+    return [self.profiles objectAtIndex:index];
 }
 
 - (void)setupRenderBuffer

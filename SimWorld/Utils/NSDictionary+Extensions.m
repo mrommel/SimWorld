@@ -233,6 +233,12 @@
     return [[self objectForKey:key] intValue];
 }
 
+- (int)intForKey:(NSString *)key withDefault:(int)value
+{
+    id node = [self objectForKey:key];
+    return node != nil ? [node intValue] : value;
+}
+
 - (CC3Vector)vector3ForKey:(NSString *)key
 {
     NSString *src = [self stringForKey:key];

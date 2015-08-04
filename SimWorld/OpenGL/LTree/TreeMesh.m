@@ -84,7 +84,7 @@
         int bottomRadials = [self radialSegmentsBottomFromIndex:i andSkeleton:skeleton];
         
         // Add bottom vertices
-        int parentIndex = [skeleton branchAtIndex:i].parentIndex;
+        NSInteger parentIndex = [skeleton branchAtIndex:i].parentIndex;
         NSUInteger bottomIndex = vertices.count;
         CC3GLMatrix *bottomTransform = [transforms objectAtIndex:i];
         CC3GLMatrix *parentTransform = [transforms objectAtIndex:parentIndex];
@@ -125,8 +125,8 @@
         float txspan = 0.25f + 0.75f * [skeleton branchAtIndex:i].startRadius / skeleton.trunkRadius;
         
         // Bones
-        int parentBoneIndex = (parentIndex == -1? [skeleton branchAtIndex:i].boneIndex : [skeleton branchAtIndex:parentIndex].boneIndex);
-        int branchBoneIndex = [skeleton branchAtIndex:i].boneIndex;
+        NSUInteger parentBoneIndex = (parentIndex == -1? [skeleton branchAtIndex:i].boneIndex : [skeleton branchAtIndex:parentIndex].boneIndex);
+        NSUInteger branchBoneIndex = [skeleton branchAtIndex:i].boneIndex;
         
         [self addCircleVerticesWithTransform:bottomTransform andRadius:[skeleton branchAtIndex:i].startRadius andSegments:bottomRadials andTextureY:ty andTextureStartX:0.0f andTextureSpanX:txspan andVertices:vertices andBone1:parentBoneIndex andBone2:parentBoneIndex];
         
@@ -205,26 +205,22 @@
 }
 
 - (void)addCylinderIndicesWithBottomIndex:(int)bottomIndex
-                           andBottomVertices:(int)numBottomVertices
-                                 andTopIndex:(NSUInteger)topIndex
-                              andTopVertices:(NSUInteger)numTopVertices
-                                  andIndices:(NSMutableArray *)indices
+                        andBottomVertices:(int)numBottomVertices
+                              andTopIndex:(NSUInteger)topIndex
+                           andTopVertices:(NSUInteger)numTopVertices
+                               andIndices:(NSMutableArray *)indices
 {
     int bi = 0; // Bottom index
     int ti = 0; // Top index
-    while (bi < numBottomVertices || ti < numTopVertices)
-    {
-        if (bi * numTopVertices < ti * numBottomVertices)
-        {
+    while (bi < numBottomVertices || ti < numTopVertices) {
+        if (bi * numTopVertices < ti * numBottomVertices) {
             // Move bottom index forward
             [indices addObject:[NSNumber numberWithInt:(bottomIndex + bi + 1)]];
             [indices addObject:[NSNumber numberWithInt:(topIndex + ti)]];
             [indices addObject:[NSNumber numberWithInt:(bottomIndex + bi)]];
             
             bi++;
-        }
-        else
-        {
+        } else {
             // Move top index forward
             [indices addObject:[NSNumber numberWithInt:(bottomIndex + bi)]];
             [indices addObject:[NSNumber numberWithInt:(topIndex + ti + 1)]];

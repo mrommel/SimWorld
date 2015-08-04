@@ -159,6 +159,12 @@ CC3BoundingSphere CC3BoundingSphereMakeFromCenter(CC3Vector center, GLfloat radi
     m[14] = aVector.z;
 }
 
+- (void)setTranslationY:(float)y
+{
+    GLfloat* m = self.glMatrix;
+    m[13] = y;
+}
+
 - (CC3Vector)extractTranslation
 {
     GLfloat* m = self.glMatrix;
@@ -191,7 +197,13 @@ CC3BoundingSphere CC3BoundingSphereMakeFromCenter(CC3Vector center, GLfloat radi
     [result multiplyByMatrix:mut];
     
     return result;
+}
 
++ (CC3GLMatrix *)matrixFromQuaternion:(CC3Vector4)quaternion
+{
+    CC3GLMatrix *mat = [CC3GLMatrix matrix];
+    [mat populateFromQuaternion:quaternion];
+    return mat;
 }
 
 @end
@@ -236,6 +248,21 @@ CC3BoundingSphere CC3BoundingSphereMakeFromCenter(CC3Vector center, GLfloat radi
     }
     
     return kCC3Vector4Zero;
+}
+
+@end
+
+@implementation CC3GLVector
+
+- (id)initWithVector:(CC3Vector)vector
+{
+    self = [super init];
+    
+    if (self) {
+        self.value = vector;
+    }
+    
+    return self;
 }
 
 @end

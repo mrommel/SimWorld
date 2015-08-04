@@ -14,7 +14,7 @@
 
 @interface TreeGenerator : NSObject
 
-@property (nonatomic, retain) NSString *rootName;
+//@property (nonatomic, retain) NSString *rootName;
 @property (atomic) CC3Vector leafAxis;
 @property (atomic) int maxLevel;
 @property (atomic) int boneLevels;

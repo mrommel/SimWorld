@@ -73,6 +73,8 @@ static const CC3Vector kCC3VectorBackward = { 0.0,  0.0, -1.0 };
 /** set the translation value of the matrix */
 - (void)setTranslation:(CC3Vector)aVector;
 
+- (void)setTranslationY:(float)y;
+
 /** get the translation value of the matrix */
 - (CC3Vector)extractTranslation;
 
@@ -85,6 +87,8 @@ static const CC3Vector kCC3VectorBackward = { 0.0,  0.0, -1.0 };
 /** copies the current Matrix and multiplies it */
 - (CC3GLMatrix *)copyMultipliedBy:(CC3GLMatrix *)mut;
 
++ (CC3GLMatrix *)matrixFromQuaternion:(CC3Vector4)quaternion;
+
 @end
 
 @interface NSMutableArray (Matrix)
@@ -96,5 +100,13 @@ static const CC3Vector kCC3VectorBackward = { 0.0,  0.0, -1.0 };
 - (void)addVector4:(CC3Vector4)vector;
 - (void)insertVector4:(CC3Vector4)vector atIndex:(NSUInteger)index;
 - (CC3Vector4)vector4AtIndex:(NSUInteger)index;
+
+@end
+
+@interface CC3GLVector : NSObject
+
+@property (atomic) CC3Vector value;
+
+- (id)initWithVector:(CC3Vector)vector;
 
 @end

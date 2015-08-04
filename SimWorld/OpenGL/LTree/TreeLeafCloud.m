@@ -47,7 +47,7 @@
             // Get the position of the leaf
             CC3Vector position = CC3VectorAdd([[transforms matrixAtIndex:leaf.parentIndex] extractTranslation], CC3VectorScaleUniform([[transforms matrixAtIndex:leaf.parentIndex] extractUpDirection], [skeleton branchAtIndex:leaf.parentIndex].length));
             if (skeleton.leafAxis != nil) {
-                position = CC3VectorAdd(position, CC3VectorScaleUniform(*(skeleton.leafAxis), leaf.axisOffset));
+                position = CC3VectorAdd(position, CC3VectorScaleUniform(skeleton.leafAxis.value, leaf.axisOffset));
             }
             
             // Orientation

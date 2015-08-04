@@ -10,4 +10,9 @@
 
 @implementation TreeContraints
 
+- (BOOL)constrainForwardWithCrayon:(TreeCrayon *)crayon andDistance:(float *)distance andRadiusEndScale:(float *)radiusEndScale
+{
+    return YES;
+}
+
 @end

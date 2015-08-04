@@ -22,7 +22,10 @@
 
 - (NSDictionary *)dictForKey:(NSString *)key;
 - (NSString *)stringForKey:(NSString *)key;
+
 - (int)intForKey:(NSString *)key;
+- (int)intForKey:(NSString *)key withDefault:(int)value;
+
 - (CC3Vector)vector3ForKey:(NSString *)key;
 
 -(id)getValueForKeyPath:(NSString *)path withDefaultValue: (id)defaultValue;

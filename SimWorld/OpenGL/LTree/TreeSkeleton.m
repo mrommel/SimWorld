@@ -20,6 +20,19 @@
 @synthesize leaves;
 @synthesize textureHeight;
 
+- (id)init
+{
+    self = [super init];
+    
+    if (self) {
+        self.branches = [[NSMutableArray alloc] init];
+        self.leaves = [[NSMutableArray alloc] init];
+        self.bones = [[NSMutableArray alloc] init];
+    }
+    
+    return self;
+}
+
 /// <summary>
 /// Calculates the absolute transform of each branch, and copies it into a given matrix array.
 /// </summary>
@@ -62,15 +75,14 @@
     NSAssert(destinationArray.count >= bones.count, @"Destination array is too small.");
     NSAssert(boneRotations.count >= bones.count, @"Rotations array is too small to be a proper animation state.");
     
-    for (int i = 0; i < bones.count; i++)
-    {
-        CC3GLMatrix *destinationMatrix = [[CC3GLMatrix alloc] init];
-        [destinationMatrix populateFromQuaternion:[boneRotations vector4AtIndex:i]];
-        destinationArray[i] = CC3Matrix .CreateFromQuaternion(boneRotations[i]);
-        if (bones[i].ParentIndex != -1)
-        {
-            destinationArray[i].M42 = bones[bones[i].ParentIndex].Length;
-            destinationArray[i] = destinationArray[i] * destinationArray[bones[i].ParentIndex];
+    for (int i = 0; i < bones.count; i++) {
+        [destinationArray insertObject:[CC3GLMatrix matrixFromQuaternion:[boneRotations vector4AtIndex:i]] atIndex:i];
+        if ([self boneAtIndex:i].parentIndex != -1) {
+            float m42 = [self boneAtIndex:[self boneAtIndex:i].parentIndex].length;
+            CC3GLMatrix *destination = [destinationArray matrixAtIndex:i];
+            [destination setTranslationY:m42];
+            [destination multiplyByMatrix:[destinationArray matrixAtIndex:[self boneAtIndex:i].parentIndex]];
+            [destinationArray replaceObjectAtIndex:i withObject:destination];
         }
     }
 }
@@ -121,7 +133,7 @@
     return [self.leaves objectAtIndex:leaveIndex];
 }
 
-- (TreeBone *)boneAtIndex:(int)boneIndex
+- (TreeBone *)boneAtIndex:(NSUInteger)boneIndex
 {
     return [self.bones objectAtIndex:boneIndex];
 }

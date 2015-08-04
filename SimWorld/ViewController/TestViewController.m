@@ -28,7 +28,7 @@
     [self.world addLight:light];
     
     // Tree
-    self.treeNode = [[TreeNode alloc] initWithType:TreeTypeNormal];
+    self.treeNode = [[TreeNode alloc] initWithType:TREE_TYPE_BIRCH];
     [self.world addChild:self.treeNode];
 }
 

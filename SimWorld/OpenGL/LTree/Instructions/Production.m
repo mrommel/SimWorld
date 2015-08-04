@@ -12,6 +12,17 @@
 
 @implementation Production
 
+- (id)init
+{
+    self = [super init];
+    
+    if (self) {
+        self.instructions = [[NSMutableArray alloc] init];
+    }
+    
+    return self;
+}
+
 - (void)executeCrayon:(TreeCrayon *)crayon
 {
     for (TreeCrayonInstruction *instruction in self.instructions) {

@@ -14,6 +14,8 @@
 
 @property (nonatomic, retain) NSMutableArray *instructions; // TreeCrayonInstruction
 
+- (id)init;
+
 - (void)executeCrayon:(TreeCrayon *)crayon;
 
 @end

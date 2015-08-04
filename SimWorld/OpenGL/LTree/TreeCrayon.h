@@ -23,4 +23,6 @@
 
 - (void)executeBoneWithDelta:(int)delta;
 
+- (CC3GLMatrix *)transform;
+
 @end

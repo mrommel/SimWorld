@@ -18,13 +18,19 @@ andInverseReferenceTransform:(CC3GLMatrix *)inverseReferenceTransform
           andStiffness:(float)stiffness
      andEndBranchIndex:(int)endBranchIndex
 {
-    self.rotation = rotation;
-    self.parentIndex = parentIndex;
-    self.referenceTransform = referenceTransform;
-    self.inverseReferenceTransform = inverseReferenceTransform;
-    self.length = length;
-    self.stiffness = stiffness;
-    self.endBranchIndex = endBranchIndex;
+    self = [super init];
+    
+    if (self) {
+        self.rotation = rotation;
+        self.parentIndex = parentIndex;
+        self.referenceTransform = referenceTransform;
+        self.inverseReferenceTransform = inverseReferenceTransform;
+        self.length = length;
+        self.stiffness = stiffness;
+        self.endBranchIndex = endBranchIndex;
+    }
+    
+    return self;
 }
 
 @end

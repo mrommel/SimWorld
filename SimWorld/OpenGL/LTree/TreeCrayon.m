@@ -29,6 +29,10 @@
 
 @end
 
+@implementation TreeCrayonState
+
+@end
+
 @interface TreeCrayon() {
     
 }
@@ -60,6 +64,8 @@
         self.state.boneLevel = 0;
         
         self.boneLevels = 3;
+        
+        self.skeleton = [[TreeSkeleton alloc] init];
     }
     
     return self;

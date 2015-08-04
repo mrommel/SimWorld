@@ -12,13 +12,17 @@
 @class TreeLeaf;
 @class TreeBone;
 
+#import "CC3GLMatrix+Extension.h"
+
 @interface TreeSkeleton : NSObject
 
-@property (retain) NSMutableArray *branches; // TreeBranch
-@property (retain) NSMutableArray *leaves; // TreeLeaf
-@property (retain) NSMutableArray *bones; // TreeBone
+@property (nonatomic, retain) NSMutableArray *branches; // TreeBranch
+@property (nonatomic, retain) NSMutableArray *leaves; // TreeLeaf
+@property (nonatomic, retain) NSMutableArray *bones; // TreeBone
 @property (atomic) float textureHeight;
-@property (atomic) CC3Vector *leafAxis;
+@property (nonatomic, retain) CC3GLVector *leafAxis;
+
+- (id)init;
 
 - (void)copyAbsoluteBranchTransformsTo:(NSMutableArray *)destinationMatrices;
 - (void)copyAbsoluteBoneTranformsTo:(NSMutableArray *)destinationMatrices andBoneRotation:(NSMutableArray *)boneRotations;
@@ -30,7 +34,7 @@
 
 - (TreeLeaf *)leaveAtIndex:(int)leaveIndex;
 
-- (TreeBone *)boneAtIndex:(int)boneIndex;
+- (TreeBone *)boneAtIndex:(NSUInteger)boneIndex;
 - (void)addBone:(TreeBone *)bone;
 
 - (float)trunkRadius;

@@ -8,12 +8,15 @@
 
 #import "REKeyframedMeshNode.h"
 
-typedef enum {
-    TreeTypeNormal
-} TreeType;
+#define TREE_TYPE_BIRCH         0
+#define TREE_TYPE_PINE          1
+#define TREE_TYPE_GARDENWOOD    2
+#define TREE_TYPE_GRAYWOOD      3
+#define TREE_TYPE_RUG           4
+#define TREE_TYPE_WILLOW        5
 
 @interface TreeNode : REKeyframedMeshNode
 
-- (id)initWithType:(TreeType)type;
+- (id)initWithType:(NSUInteger)tree;
 
 @end

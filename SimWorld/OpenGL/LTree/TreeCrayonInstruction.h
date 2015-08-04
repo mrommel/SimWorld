@@ -27,7 +27,7 @@
 
 @interface Call : TreeCrayonInstruction
 
-@property (nonatomic, retain)NSArray *productions;
+@property (nonatomic, retain) NSArray *productions;
 @property (atomic) int delta;
 
 - (id)initWithProductions:(NSArray *)productions andDelta:(int)delta;

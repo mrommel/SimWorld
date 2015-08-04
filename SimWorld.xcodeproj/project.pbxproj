@@ -183,6 +183,8 @@
 		1A7A45F01B54D97400C03FD6 /* NSArray+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A7A45EF1B54D97400C03FD6 /* NSArray+Extensions.m */; };
 		1A9B5B5C1A5C4A8300E887B6 /* GenerateMapTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B5B5B1A5C4A8300E887B6 /* GenerateMapTask.m */; };
 		1AA98E791A1CEE0600873A2B /* HexPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA98E781A1CEE0600873A2B /* HexPoint.m */; };
+		1ABE5B251B6BB6A000E06C48 /* TreeCompositeConstraints.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE5B241B6BB6A000E06C48 /* TreeCompositeConstraints.m */; };
+		1ABE5B281B6BFB5700E06C48 /* TreeConstrainUndergroundBranches.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE5B271B6BFB5700E06C48 /* TreeConstrainUndergroundBranches.m */; };
 		1AD54C211B5678D700A602CB /* CC3GLMatrix+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD54C201B5678D700A602CB /* CC3GLMatrix+Extension.m */; };
 		1AD54C241B577B1300A602CB /* TreeVertex.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD54C231B577B1300A602CB /* TreeVertex.m */; };
 		1AD54C271B57BC9100A602CB /* TreeProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD54C261B57BC9100A602CB /* TreeProfile.m */; };
@@ -496,6 +498,10 @@
 		1A9B5B5B1A5C4A8300E887B6 /* GenerateMapTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GenerateMapTask.m; path = MapGenerators/GenerateMapTask.m; sourceTree = "<group>"; };
 		1AA98E771A1CEE0600873A2B /* HexPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexPoint.h; path = Map/HexPoint.h; sourceTree = "<group>"; };
 		1AA98E781A1CEE0600873A2B /* HexPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HexPoint.m; path = Map/HexPoint.m; sourceTree = "<group>"; };
+		1ABE5B231B6BB6A000E06C48 /* TreeCompositeConstraints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreeCompositeConstraints.h; path = OpenGL/LTree/TreeCompositeConstraints.h; sourceTree = "<group>"; };
+		1ABE5B241B6BB6A000E06C48 /* TreeCompositeConstraints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreeCompositeConstraints.m; path = OpenGL/LTree/TreeCompositeConstraints.m; sourceTree = "<group>"; };
+		1ABE5B261B6BFB5700E06C48 /* TreeConstrainUndergroundBranches.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreeConstrainUndergroundBranches.h; path = OpenGL/LTree/TreeConstrainUndergroundBranches.h; sourceTree = "<group>"; };
+		1ABE5B271B6BFB5700E06C48 /* TreeConstrainUndergroundBranches.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreeConstrainUndergroundBranches.m; path = OpenGL/LTree/TreeConstrainUndergroundBranches.m; sourceTree = "<group>"; };
 		1AD54C1F1B5678D700A602CB /* CC3GLMatrix+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CC3GLMatrix+Extension.h"; path = "OpenGL/LTree/CC3GLMatrix+Extension.h"; sourceTree = "<group>"; };
 		1AD54C201B5678D700A602CB /* CC3GLMatrix+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CC3GLMatrix+Extension.m"; path = "OpenGL/LTree/CC3GLMatrix+Extension.m"; sourceTree = "<group>"; };
 		1AD54C221B577B1300A602CB /* TreeVertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreeVertex.h; path = OpenGL/LTree/TreeVertex.h; sourceTree = "<group>"; };
@@ -1113,6 +1119,10 @@
 				1AD54C6D1B5E72DF00A602CB /* TreeCrayon.m */,
 				1AD54C721B5E8B6D00A602CB /* TreeContraints.h */,
 				1AD54C731B5E8B6D00A602CB /* TreeContraints.m */,
+				1ABE5B231B6BB6A000E06C48 /* TreeCompositeConstraints.h */,
+				1ABE5B241B6BB6A000E06C48 /* TreeCompositeConstraints.m */,
+				1ABE5B261B6BFB5700E06C48 /* TreeConstrainUndergroundBranches.h */,
+				1ABE5B271B6BFB5700E06C48 /* TreeConstrainUndergroundBranches.m */,
 			);
 			name = LTree;
 			sourceTree = "<group>";
@@ -1404,6 +1414,7 @@
 				1A7A45E71B4E51DB00C03FD6 /* TreeMesh.m in Sources */,
 				1A0F5AB319E520EB00B8BB5D /* OpenGLUtil.m in Sources */,
 				1AD54C6B1B5E60BD00A602CB /* Production.m in Sources */,
+				1ABE5B281B6BFB5700E06C48 /* TreeConstrainUndergroundBranches.m in Sources */,
 				1A5289601A3B894E00C2F439 /* GLRay.m in Sources */,
 				1AD54C301B57D59000A602CB /* TreeLeafCloud.m in Sources */,
 				1A5289841A40C78700C2F439 /* SetupGameStep4ViewController.m in Sources */,
@@ -1470,6 +1481,7 @@
 				1A0F5A4D19E06B1A00B8BB5D /* main.m in Sources */,
 				1AD54C2A1B57D14500A602CB /* TreeGenerator.m in Sources */,
 				1A37D74C1A6C57C2006B5B88 /* REScene.m in Sources */,
+				1ABE5B251B6BB6A000E06C48 /* TreeCompositeConstraints.m in Sources */,
 				1A5289E21A482F6400C2F439 /* CircularProgressView.m in Sources */,
 				1A37D7481A6C57C2006B5B88 /* RENSArrayAdditions.m in Sources */,
 				1A528A5D1A48A6FA00C2F439 /* HeightMap.m in Sources */,
