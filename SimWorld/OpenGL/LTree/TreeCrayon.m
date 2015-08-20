@@ -15,6 +15,8 @@
 #import "TreeBone.h"
 #import "TreeBranch.h"
 #import "CC3GLMatrix+Extension.h"
+#import "MathHelper.h"
+#import "TreeLeaf.h"    
 
 @interface TreeCrayonState : NSObject
 
@@ -24,7 +26,7 @@
 @property (nonatomic, retain) CC3GLMatrix *rotation;
 @property (atomic) int level;
 @property (atomic) float radiusScale;
-@property (atomic) int parentBoneIndex;
+@property (atomic) NSInteger parentBoneIndex;
 @property (atomic) int boneLevel;
 
 @end
@@ -63,9 +65,14 @@
         self.state.parentBoneIndex = -1;
         self.state.boneLevel = 0;
         
+        self.stack = [[MiRoStack alloc] init];
+        
         self.boneLevels = 3;
         
         self.skeleton = [[TreeSkeleton alloc] init];
+        
+        self.branchTransforms = [[NSMutableArray alloc] init];
+        self.boneEndings = [[NSMutableArray alloc] init];
     }
     
     return self;
@@ -93,9 +100,23 @@
     if (self.state.parentIndex == -1)
         return m;
     
-    m.glMatrix[13] = self.state.parentPosition * [self.skeleton branchAtIndex:self.state.parentIndex].length;
-    [m multiplyByMatrix:[self.branchTransforms matrixAtIndex:self.state.parentIndex]];
+    [m setTranslationY:(self.state.parentPosition * [self.skeleton branchAtIndex:self.state.parentIndex].length)];
+    
+    // TODO: remove
+    if (self.state.parentIndex < self.branchTransforms.count) {
+        [m multiplyByMatrix:[self.branchTransforms matrixAtIndex:self.state.parentIndex]];
+    }
     return m;
+}
+
+- (void)pushState
+{
+    [self.stack pushObject:self.state];
+}
+
+- (void)popState
+{
+    self.state = [self.stack popObject];
 }
 
 - (void)executeBoneWithDelta:(int)delta
@@ -105,7 +126,7 @@
     }
     
     // Get index of the parent
-    int parent = self.state.parentBoneIndex;
+    NSInteger parent = self.state.parentBoneIndex;
     
     // Get the parent's absolute transform
     CC3GLMatrix *parentTransform = [CC3GLMatrix identity];
@@ -178,6 +199,142 @@
         [self.skeleton insertBranch:branch atIndex:branchIndex];
         branchIndex = branch.parentIndex;
     }
+}
+
+#pragma mark -
+#pragma mark TreeCrayon instructions
+
+/// <summary>
+/// Moves forward while painting a branch here.
+/// </summary>
+/// <param name="length">Length of the new branch. The current scale will be applied to this.</param>
+/// <param name="radiusEndScale">How much smaller the ending radius should be. The equation is: StartRadius * RadiusEndScale = EndRadius.</param>
+/// <remarks>
+/// The crayon always moves along its local Y-axis, which is initially upwards.
+/// </remarks>
+- (void)forwardWithDistance:(float)distance andRadius:(float)radiusEndScale
+{
+    // Run the constraints
+    if (self.constraints != nil && ![self.constraints constrainForwardWithCrayon:self andDistance:&distance andRadiusEndScale:&radiusEndScale]) {
+        return;
+    }
+    
+    // Create the branch
+    TreeBranch *branch = [[TreeBranch alloc] initWithQuaternion:self.state.rotation
+                                                      andLength:distance * self.state.scale
+                                                       andStart:[self radiusAtParentIndex:self.state.parentIndex andPosition:self.state.parentPosition] * self.state.radiusScale
+                                                         andEnd:[self radiusAtParentIndex:self.state.parentIndex andPosition:self.state.parentPosition] * self.state.radiusScale * radiusEndScale
+                                                 andParentIndex:self.state.parentIndex
+                                              andParentPosition:self.state.parentPosition];
+
+    branch.boneIndex = self.state.parentBoneIndex;
+    [self.skeleton addBranch:branch];
+    [self.branchTransforms addObject:[self transform]];
+    
+    // Set newest branch to parent
+    self.state.parentIndex = self.skeleton.branches.count - 1;
+    
+    // Rotation is relative to the current parent, so set to identity
+    // to maintain original orientation
+    self.state.rotation = [CC3GLMatrix identity];
+    
+    // Move to the end of the branch
+    self.state.parentPosition = 1.0f;
+    
+    // Move radius scale back to one, since the radius will now be relative to the new parent
+    self.state.radiusScale = 1.0f;
+}
+
+/// <summary>
+/// Moves backwards without drawing any branches.
+/// </summary>
+/// <param name="distance">Distance to move backwards.</param>
+/// <remarks>
+/// This follows the hiarchy of branches towards the root, so it may not
+/// move in a straight line.
+/// </remarks>
+- (void)backwardWithDistance:(float)distance
+{
+    distance = distance * self.state.scale;
+    while (self.state.parentIndex != -1 && distance > 0.0f) {
+        float distanceOnBranch = self.state.parentPosition * [self.skeleton branchAtIndex:self.state.parentIndex].length;
+        if (distance > distanceOnBranch) {
+            self.state.parentIndex = [self.skeleton branchAtIndex:self.state.parentIndex].parentIndex;
+            self.state.parentPosition = 1.0f;
+            self.state.rotation = [CC3GLMatrix identity];
+        } else {
+            self.state.parentPosition -= distance / [self.skeleton branchAtIndex:self.state.parentIndex].length;
+        }
+        distance -= distanceOnBranch;
+    }
+    self.state.boneLevel = 99;
+}
+
+/// <summary>
+/// Rotates the crayon around its local X-axis.
+/// </summary>
+- (void)pitchWithAngle:(float)angle
+{
+    GLKMatrix4 rotation = Matrix4MakeFromYawPitchRoll(0, angle, 0);
+    CC3GLMatrix *rotationMatrix = [CC3GLMatrix matrixFromGLMatrix:rotation.m];
+    self.state.rotation = [self.state.rotation copyMultipliedBy:rotationMatrix];
+}
+
+/// <summary>
+/// Scales the length of following branches.
+/// </summary>
+- (void)scaleBy:(float)scale
+{
+    self.state.scale = self.state.scale * scale;
+}
+
+/// <summary>
+/// Scales the radius of following branches.
+/// Note that radius is proportional to the radius at the parent's branch where the branch sprouts.
+/// </summary>
+/// <param name="scale"></param>
+- (void)scaleRadiusBy:(float)scale
+{
+    self.state.radiusScale = self.state.radiusScale * scale;
+}
+
+/// <summary>
+/// Rotates the crayon around its local Y-axis.
+/// </summary>
+- (void)twistByAngle:(float)angleInRadians
+{
+    GLKMatrix4 rotation = Matrix4MakeFromYawPitchRoll(angleInRadians, 0, 0);
+    CC3GLMatrix *rotationMatrix = [CC3GLMatrix matrixFromGLMatrix:rotation.m];
+    self.state.rotation = [self.state.rotation copyMultipliedBy:rotationMatrix];
+}
+
+- (void)leafWithRotation:(float)rotation andSize:(CC3Vector2)size andColor:(CC3Vector4)color andAxisOffset:(float)axisOffset
+{
+    ccColor4F color4f;
+    color4f.r = color.x;
+    color4f.g = color.y;
+    color4f.b = color.z;
+    color4f.a = color.w;
+    
+    [self.skeleton addLeave:[[TreeLeaf alloc] initWithParentIndex:self.state.parentIndex
+                                                         andColor:color4f
+                                                      andRotation:rotation
+                                                          andSize:size
+                                                     andBoneIndex:self.state.parentBoneIndex
+                                                    andAxisOffset:axisOffset]];
+}
+
+/// <summary>
+/// Returns the radius of a given branch at the height.
+/// </summary>
+- (float)radiusAtParentIndex:(NSInteger)parentIndex andPosition:(float)position
+{
+    if (parentIndex == -1)
+        return 128.0f;
+    
+    TreeBranch *branch = [self.skeleton branchAtIndex:parentIndex];
+    
+    return branch.startRadius + position * (branch.endRadius - branch.startRadius);
 }
 
 @end

@@ -67,10 +67,12 @@
 {
     self.profiles = [[NSMutableArray alloc] init];
     for (NSString *profileName in PROFILES) {
+        NSLog(@"Loading tree: %@", profileName);
         [self.profiles addObject:[[TreeProfile alloc] initWithProfileName:profileName]];
     }
     
-    SimpleTree *tree = [[self treeProfileAtIndex:self.type] generateSimpleTree];
+    TreeProfile *profile = [self treeProfileAtIndex:self.type];
+    SimpleTree *tree = [profile generateSimpleTree];
     
     NSLog(@"Tree: %@", tree);
     //tree.

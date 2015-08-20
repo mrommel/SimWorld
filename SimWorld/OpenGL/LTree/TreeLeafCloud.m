@@ -12,6 +12,7 @@
 #import "CC3GLMatrix+Extension.h"
 #import "TreeLeaf.h"
 #import "TreeBranch.h"
+#import "NSArray+Extensions.h"
 
 @implementation TreeLeafCloud
 
@@ -24,6 +25,7 @@
             return nil;
         
         NSMutableArray *transforms = [[NSMutableArray alloc] initWithCapacity:skeleton.branches.count];
+        [transforms fillWith:[CC3GLMatrix matrix] andTimes:skeleton.branches.count];
         [skeleton copyAbsoluteBranchTransformsTo:transforms];
         
         CC3Vector center = kCC3VectorZero;
@@ -51,12 +53,12 @@
             }
             
             // Orientation
-            CC2Vector right = CC2VectorMake((float)cos(leaf.rotation), (float)sin(leaf.rotation));
-            CC2Vector up = CC2VectorMake(-right.y, right.x);
+            CC3Vector2 right = CC3Vector2Make((float)cos(leaf.rotation), (float)sin(leaf.rotation));
+            CC3Vector2 up = CC3Vector2Make(-right.y, right.x);
             
             // Scale vectors by size
-            right = CC2VectorScaleUniform(right, leaf.size.x);
-            up = CC2VectorScaleUniform(up, leaf.size.y);
+            right = CC3Vector2ScaleUniform(right, leaf.size.x);
+            up = CC3Vector2ScaleUniform(up, leaf.size.y);
             
             // Choose a normal vector for lighting calculations
             float distanceFromCenter = CC3VectorDistance(position, center);
@@ -83,7 +85,7 @@
             [self setTriangleAt:(iindex++) withIndex1:(vidx) andIndex2:(vidx + 2) andIndex3:(vidx + 3)];
             
             // Update the bounding sphere
-            float size = CC2VectorLength(leaf.size) / 2.0f;
+            float size = CC3Vector2Length(leaf.size) / 2.0f;
             self.boundingSphere = CC3BoundingSphereMakeFromCenter(self.boundingSphere.center, MAX(self.boundingSphere.radius, distanceFromCenter + size));
         }
         

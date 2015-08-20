@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "CC3GLMatrix+Extension.h"
+
 @class TreeContraints;
 @class TreeSkeleton;
 
@@ -24,5 +26,17 @@
 - (void)executeBoneWithDelta:(int)delta;
 
 - (CC3GLMatrix *)transform;
+
+- (void)pushState;
+- (void)popState;
+
+// instrctions
+- (void)forwardWithDistance:(float)distance andRadius:(float)radius;
+- (void)backwardWithDistance:(float)distance;
+- (void)pitchWithAngle:(float)angle;
+- (void)scaleBy:(float)value;
+- (void)scaleRadiusBy:(float)value;
+- (void)twistByAngle:(float)angleInRadians;
+- (void)leafWithRotation:(float)rotation andSize:(CC3Vector2)size andColor:(CC3Vector4)color andAxisOffset:(float)axisOffset;
 
 @end

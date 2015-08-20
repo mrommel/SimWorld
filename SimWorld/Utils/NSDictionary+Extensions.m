@@ -239,11 +239,66 @@
     return node != nil ? [node intValue] : value;
 }
 
+- (float)floatForKey:(NSString *)key
+{
+    return [[self objectForKey:key] floatValue];
+}
+
+- (float)floatForKey:(NSString *)key withDefault:(float)value
+{
+    id node = [self objectForKey:key];
+    return node != nil ? [node floatValue] : value;
+}
+
 - (CC3Vector)vector3ForKey:(NSString *)key
 {
     NSString *src = [self stringForKey:key];
     NSArray *vectorComponents = [src componentsSeparatedByString:@","];
     return CC3VectorMake([[vectorComponents objectAtIndex:0] floatValue], [[vectorComponents objectAtIndex:1] floatValue], [[vectorComponents objectAtIndex:2] floatValue]);
+}
+
+- (CC3Vector)vector3ForKey:(NSString *)key withDefault:(CC3Vector)value
+{
+    NSString *src = [self stringForKey:key];
+    if (src == nil) {
+        return value;
+    }
+    NSArray *vectorComponents = [src componentsSeparatedByString:@","];
+    return CC3VectorMake([[vectorComponents objectAtIndex:0] floatValue], [[vectorComponents objectAtIndex:1] floatValue], [[vectorComponents objectAtIndex:2] floatValue]);
+}
+
+- (CC3Vector4)vector4ForKey:(NSString *)key
+{
+    NSString *src = [self stringForKey:key];
+    NSArray *vectorComponents = [src componentsSeparatedByString:@","];
+    return CC3Vector4Make([[vectorComponents objectAtIndex:0] floatValue], [[vectorComponents objectAtIndex:1] floatValue], [[vectorComponents objectAtIndex:2] floatValue], [[vectorComponents objectAtIndex:3] floatValue]);
+}
+
+- (CC3Vector4)vector4ForKey:(NSString *)key withDefault:(CC3Vector4)value
+{
+    NSString *src = [self stringForKey:key];
+    if (src == nil) {
+        return value;
+    }
+    NSArray *vectorComponents = [src componentsSeparatedByString:@","];
+    return CC3Vector4Make([[vectorComponents objectAtIndex:0] floatValue], [[vectorComponents objectAtIndex:1] floatValue], [[vectorComponents objectAtIndex:2] floatValue], [[vectorComponents objectAtIndex:3] floatValue]);
+}
+
+- (CC3Vector2)vector2ForKey:(NSString *)key
+{
+    NSString *src = [self stringForKey:key];
+    NSArray *vectorComponents = [src componentsSeparatedByString:@","];
+    return CC3Vector2Make([[vectorComponents objectAtIndex:0] floatValue], [[vectorComponents objectAtIndex:1] floatValue]);
+}
+
+- (CC3Vector2)vector2ForKey:(NSString *)key withDefault:(CC3Vector2)value
+{
+    NSString *src = [self stringForKey:key];
+    if (src == nil) {
+        return value;
+    }
+    NSArray *vectorComponents = [src componentsSeparatedByString:@","];
+    return CC3Vector2Make([[vectorComponents objectAtIndex:0] floatValue], [[vectorComponents objectAtIndex:1] floatValue]);
 }
 
 @end

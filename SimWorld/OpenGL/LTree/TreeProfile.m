@@ -41,7 +41,8 @@
 
 - (SimpleTree *)generateSimpleTree
 {
-    SimpleTree *tree = [[SimpleTree alloc] initWithSkeleton:[self.generator generateTree]];
+    TreeSkeleton *skeleton = [self.generator generateTree];
+    SimpleTree *tree = [[SimpleTree alloc] initWithSkeleton:skeleton];
     tree.trunkTexture = self.trunkTexture;
     tree.leafTexture = self.leafTexture;
     return tree;

@@ -10,11 +10,11 @@
 
 @implementation TreeLeaf
 
-- (id)initWithParentIndex:(int)parentIndex
+- (id)initWithParentIndex:(NSInteger)parentIndex
                  andColor:(ccColor4F)color
               andRotation:(float)rotation
-                  andSize:(CC2Vector)size
-             andBoneIndex:(int)boneIndex
+                  andSize:(CC3Vector2)size
+             andBoneIndex:(NSInteger)boneIndex
             andAxisOffset:(float)axisOffset
 {
     self = [super init];

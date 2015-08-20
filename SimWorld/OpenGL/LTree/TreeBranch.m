@@ -14,8 +14,8 @@
                andLength:(float)length
                 andStart:(float)startRadius
                   andEnd:(float)endRadius
-          andParentIndex:(int)parentIndex
-       andParentPosition:(int)parentPosition
+          andParentIndex:(NSInteger)parentIndex
+       andParentPosition:(float)parentPosition
 {
     self = [super init];
     if (self) {

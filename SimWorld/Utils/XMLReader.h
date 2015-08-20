@@ -7,7 +7,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface XMLReader : NSObject<NSXMLParserDelegate>
 {
     NSMutableArray *dictionaryStack;

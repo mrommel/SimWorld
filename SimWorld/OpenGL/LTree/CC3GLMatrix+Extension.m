@@ -11,25 +11,46 @@
 #pragma mark -
 #pragma mark vector 2D structure and functions
 
-CC2Vector CC2VectorMake(GLfloat x, GLfloat y)
+CC3Vector2 CC3Vector2Make(GLfloat x, GLfloat y)
 {
-    CC2Vector v;
+    CC3Vector2 v;
     v.x = x;
     v.y = y;
     return v;
 }
 
-CC2Vector CC2VectorScaleUniform(CC2Vector v, GLfloat scale)
+CC3Vector2 CC3Vector2Add(CC3Vector2 vector1, CC3Vector2 vector2)
 {
-    CC2Vector result;
+    CC3Vector2 result;
+    result.x = vector1.x + vector2.x;
+    result.y = vector1.y + vector2.y;
+    return result;
+}
+
+CC3Vector2 CC3Vector2ScaleUniform(CC3Vector2 v, GLfloat scale)
+{
+    CC3Vector2 result;
     result.x = v.x * scale;
     result.y = v.y * scale;
     return result;
 }
 
-GLfloat CC2VectorLength(CC2Vector v)
+GLfloat CC3Vector2Length(CC3Vector2 v)
 {
     return sqrtf(v.x * v.x + v.y * v.y);
+}
+
+#pragma mark -
+
+CC3Vector4 CC3Vector4Add(CC3Vector4 vector1, CC3Vector4 vector2)
+{
+    CC3Vector4 result;
+    result.x = vector1.x + vector2.x;
+    result.y = vector1.y + vector2.y;
+    result.z = vector1.z + vector2.z;
+    result.w = vector1.w + vector2.w;
+    return result;
+
 }
 
 #pragma mark -
@@ -169,6 +190,15 @@ CC3BoundingSphere CC3BoundingSphereMakeFromCenter(CC3Vector center, GLfloat radi
 {
     GLfloat* m = self.glMatrix;
     return CC3VectorMake(m[12], m[13], m[14]);
+}
+
++ (CC3Vector)extractBackwardDirectionFrom:(GLfloat*) aGLMatrix {
+    return cc3v(aGLMatrix[8], aGLMatrix[9], aGLMatrix[10]);
+}
+
+- (CC3Vector)extractBackwardDirection
+{
+    return [[self class] extractBackwardDirectionFrom:self.glMatrix];
 }
 
 - (CC3Vector)transformNormal:(CC3Vector)normal

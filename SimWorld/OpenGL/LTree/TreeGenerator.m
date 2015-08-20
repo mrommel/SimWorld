@@ -18,19 +18,22 @@
 #import "TreeCompositeConstraints.h"
 #import "TreeConstrainUndergroundBranches.h"
 #import "CC3GLMatrix+Extension.h"
+#import "GDataXMLNode.h"
+#import "GDataXMLNode+Extension.h"
+#import "MultiMap.h"
 
 @interface ProductionNodePair : NSObject
 
 @property (nonatomic, retain) Production *production;
-@property (nonatomic, retain) NSDictionary *node;
+@property (nonatomic, retain) GDataXMLElement *node;
 
-- (id)initWithProduction:(Production *)production andNode:(NSDictionary *)node;
+- (id)initWithProduction:(Production *)production andNode:(GDataXMLElement *)node;
 
 @end
 
 @implementation ProductionNodePair
 
-- (id)initWithProduction:(Production *)production andNode:(NSDictionary *)node
+- (id)initWithProduction:(Production *)production andNode:(GDataXMLElement *)node
 {
     self = [super init];
     
@@ -76,104 +79,58 @@
         NSString *rootName = nil;
         int levels = -1;
         int boneLevels = 3;
-        //MultiMap<string, ProductionNodePair> productions = new MultiMap<string, ProductionNodePair>();
-        NSMutableDictionary *productions = [[NSMutableDictionary alloc] init];
+
+        MultiMap *productions = [MultiMap map];
         
         NSData *myData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:ltreeFilename
-                                                                                         ofType:@"ltree"]];
+                                                                                        ofType:@"ltree"]];
+        
         NSError* error = nil;
-        NSDictionary *root = [XMLReader dictionaryForXMLData:myData error:&error];
-        
+        GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:myData options:0 error:&error];
+
         if (!error) {
-            NSDictionary *tree = [root valueForKey:@"Tree"];
-            //NSLog(@"Nodes: %lu", (unsigned long)tree.count);
+            GDataXMLElement *rootElement = [doc rootElement];
+            NSLog(@"Nodes: %lu", (unsigned long)rootElement.childCount);
         
-            for (NSString *key in [tree allKeys]) {
-                //NSLog(@"Parse: %@", key);
-                NSDictionary *node = [tree dictForKey:key];
-                if ([@"Root" isEqualToString:key]) {
-                    rootName = [node stringForKey:@"ref"];
-                } else if ([@"Levels" isEqualToString:key]) {
-                    levels = [node intForKey:@"value"];
-                } else if ([@"BoneLevels" isEqualToString:key]) {
-                    boneLevels = [node intForKey:@"value"];
-                } else if ([@"LeafAxis" isEqualToString:key]) {
-                    self.leafAxis = [node vector3ForKey:@"value"];
+            for (GDataXMLElement *node in rootElement.children) {
+                NSLog(@"Parse: %@", node.name);
+                
+                if ([@"Root" isEqualToString:node.name]) {
+                    rootName = [[node attributeForName:@"ref"] stringValue];
+                } else if ([@"Levels" isEqualToString:node.name]) {
+                    levels = [[node attributeForName:@"value"] intValue];
+                } else if ([@"BoneLevels" isEqualToString:node.name]) {
+                    boneLevels = [[node attributeForName:@"value"] intValue];
+                } else if ([@"LeafAxis" isEqualToString:node.name]) {
+                    self.leafAxis = [[node attributeForName:@"value"] vector3Value];
                     self.leafAxis = CC3VectorNormalize(self.leafAxis);
-                } else if ([@"Production" isEqualToString:key]) {
-                    for (NSDictionary *productionNode in node) {
-                        NSString *name = [productionNode stringForKey:@"id"];
-                        Production *production = [[Production alloc] init];
-                        [productions setObject:[[ProductionNodePair alloc] initWithProduction:production andNode:productionNode] forKey:name];
-                    }
-                } else if ([@"ConstrainUnderground" isEqualToString:key]) {
-                    id lowerBoundObj = [node objectForKey:@"lowerBound"];
-                    float lowerBound = lowerBoundObj != nil ? [lowerBoundObj floatValue] : 256.0f;
+                } else if ([@"Production" isEqualToString:node.name]) {
+                    NSString *name = [[node attributeForName:@"id"] stringValue];
+                    Production *production = [[Production alloc] init];
+                    [productions addObject:[[ProductionNodePair alloc] initWithProduction:production andNode:node] forKey:name];
+                } else if ([@"ConstrainUnderground" isEqualToString:node.name]) {
+                    float lowerBound = [[node attributeForName:@"lowerBound"] floatValueWithDefault:256.0f];
                     TreeConstrainUndergroundBranches *constrainUndergroundBranches = [[TreeConstrainUndergroundBranches alloc] initWithLimit:lowerBound];
                     [_constraints.constaints addObject:constrainUndergroundBranches];
-                } else if ([@"TextureHeight" isEqualToString:key]) {
-                    id heightObj = [node objectForKey:@"height"];
-                    id variationObj = [node objectForKey:@"variation"];
-                    _textureHeight = heightObj != nil ? [heightObj floatValue] : 0.0f;
-                    _textureHeightVariation = variationObj != nil ? [variationObj floatValue] : 0.0f;
+                } else if ([@"TextureHeight" isEqualToString:node.name]) {
+                    _textureHeight = [[node attributeForName:@"height"] floatValueWithDefault:0.0f];
+                    _textureHeightVariation = [[node attributeForName:@"variation"] floatValueWithDefault:0.0f];
                 }
             }
         }
         
         NSAssert(rootName != nil, @"Root name must be specified.");
         
-        // Now we have a map of names -> productions, so we can start parsing the the productions
+        // Now we have a map of names -> productions, so we can start parsing the productions
         for (ProductionNodePair *pn in productions.allValues) {
-            for (NSString *key in pn.node.allKeys) {
-                TreeCrayonInstruction *instruction = nil;
-                NSDictionary *child = [pn.node dictForKey:key];
-                
-                if ([@"Call" isEqualToString:key]) {
-                    NSString *name = [child stringForKey:@"ref"];
-                    NSArray* refs = [TreeGenerator productionsByName:name fromProductionList:productions];
-                    int delta = [child intForKey:@"delta" withDefault:-1];
-                    instruction = [[Call alloc] initWithProductions:refs andDelta:delta];
-                } else if ([@"Child" isEqualToString:key]) {
-                    Child ch = new Child();
-                    ParseInstructionsFromXml(child, ch.Instructions, map);
-                    instructions.Add(ch);
-                } else if ([@"Maybe" isEqualToString:key]) {
-                    Maybe maybe = new Maybe(XmlUtil.GetFloat(child, "chance", 0.50f));
-                    ParseInstructionsFromXml(child, maybe.Instructions, map);
-                    instructions.Add(maybe);
-                } else if ([@"Forward" isEqualToString:key]) {
-                    instructions.Add(new Forward(XmlUtil.GetFloat(child, "distance"), XmlUtil.GetFloat(child, "variation", 0.0f), XmlUtil.GetFloat(child, "radius", 0.86f)));
-                } else if ([@"Backward" isEqualToString:key]) {
-                    instructions.Add(new Backward(XmlUtil.GetFloat(child, "distance"), XmlUtil.GetFloat(child, "variation", 0.0f)));
-                } else if ([@"Pitch" isEqualToString:key]) {
-                    instructions.Add(new Pitch(XmlUtil.GetFloat(child, "angle"), XmlUtil.GetFloat(child, "variation", 0.0f)));
-                } else if ([@"Scale" isEqualToString:key]) {
-                    instructions.Add(new Scale(XmlUtil.GetFloat(child, "scale"), XmlUtil.GetFloat(child, "variation", 0.0f)));
-                } else if ([@"ScaleRadius" isEqualToString:key]) {
-                    instructions.Add(new ScaleRadius(XmlUtil.GetFloat(child, "scale"), XmlUtil.GetFloat(child, "variation", 0.0f)));
-                } else if ([@"Twist" isEqualToString:key]) {
-                    instructions.Add(new Twist(XmlUtil.GetFloat(child, "angle", 0), XmlUtil.GetFloat(child, "variation", 360.0f)));
-                } else if ([@"Level" isEqualToString:key]) {
-                    instructions.Add(new Level(XmlUtil.GetInt(child, "delta", -1)));
-                } else if ([@"Leaf" isEqualToString:key]) {
-                    instructions.Add(ParseLeafFromXml(child));
-                } else if ([@"Bone" isEqualToString:key]) {
-                    instructions.Add(new Bone(XmlUtil.GetInt(child, "delta", -1)));
-                } else if ([@"RequireLevel" isEqualToString:key]) {
-                    NSString *type = XmlUtil.GetStringOrNull(child, "type");
-                    CompareType ctype = type == "less" ? CompareType.Less : CompareType.Greater;
-                    RequireLevel req = new RequireLevel(XmlUtil.GetInt(child, "level"), ctype);
-                    ParseInstructionsFromXml(child, req.Instructions, map);
-                    instructions.Add(req);
-                } else if ([@"Align" isEqualToString:key]) {
-                    instruction = [[Align alloc] init];
-                }
-
+            for (GDataXMLElement *node in pn.node.children) {
+                TreeCrayonInstruction *instruction = [TreeGenerator parseInstructionFromKey:node.name andNode:node andProductions:productions];
                 [pn.production.instructions addObject:instruction];
             }
         }
         
-        self.root = ((ProductionNodePair*)[productions objectForKey:rootName]).production;
+        // productions[rootName][0].Production
+        self.root = ((ProductionNodePair*)[[productions objectsForKey:rootName] firstObject]).production;
         
         self.maxLevel = levels;
         self.boneLevels = boneLevels;
@@ -182,14 +139,119 @@
     return self;
 }
 
-+ (NSMutableArray *)productionsByName:(NSString *)name fromProductionList:(NSMutableDictionary *)map
++ (NSMutableArray *)parseInstructionsFromKey:(NSString *)parentKey andNode:(id)node andProductions:(MultiMap *)productions
+{
+    NSMutableArray *instructions = [[NSMutableArray alloc] init];
+    
+    if ([node isKindOfClass:[NSArray class]]) {
+        for (NSDictionary *cnode in node) {
+            [instructions addObject:[TreeGenerator parseInstructionFromKey:parentKey andNode:cnode andProductions:productions]];
+        }
+    } else if ([node isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *dict = node;
+        for (NSString *key in dict.allKeys) {
+            NSDictionary *cnode = [node dictForKey:key];
+            [instructions addObject:[TreeGenerator parseInstructionFromKey:key andNode:cnode andProductions:productions]];
+        }
+    }
+    
+    return instructions;
+}
+
++ (TreeCrayonInstruction *)parseInstructionFromKey:(NSString *)key andNode:(GDataXMLElement *)node andProductions:(MultiMap *)productions
+{
+    NSLog(@"Parsing: %@", key);
+    if ([@"Call" isEqualToString:key]) {
+        NSString *name = [[node attributeForName:@"ref"] stringValue];
+        NSArray* refs = [TreeGenerator productionsByName:name fromProductionList:productions];
+        int delta = [[node attributeForName:@"delta"] intValueWithDefault:-1];
+        return [[Call alloc] initWithProductions:refs andDelta:delta];
+    } else if ([@"Child" isEqualToString:key]) {
+        Child *child = [[Child alloc] init];
+        
+        for (GDataXMLNode* childNode in node.children) {
+            TreeCrayonInstruction *instruction = [TreeGenerator parseInstructionFromKey:childNode.name andNode:childNode andProductions:productions];
+            [child addInstruction:instruction];
+        }
+        
+        /*for (TreeCrayonInstruction *instruction in [TreeGenerator parseInstructionsFromKey:key andNode:node andProductions:productions]) {
+            [child addInstruction:instruction];
+        }*/
+        return child;
+    } else if ([@"Maybe" isEqualToString:key]) {
+        float chance = [[node attributeForName:@"chance"] floatValueWithDefault:0.50f];
+        Maybe *maybe = [[Maybe alloc] initWithChance:chance];
+        for (TreeCrayonInstruction *instruction in [TreeGenerator parseInstructionsFromKey:key andNode:node andProductions:productions]) {
+            [maybe addInstruction:instruction];
+        }
+        return maybe;
+    } else if ([@"Forward" isEqualToString:key]) {
+        float distance = [[node attributeForName:@"distance"] floatValue];
+        float variation = [[node attributeForName:@"variation"] floatValueWithDefault:0.0f];
+        float radius = [[node attributeForName:@"radius"] floatValueWithDefault:0.86f];
+        return [[Forward alloc] initWithDistance:distance andVariation:variation andRadius:radius];
+    } else if ([@"Backward" isEqualToString:key]) {
+        float distance = [[node attributeForName:@"distance"] floatValue];
+        float variation = [[node attributeForName:@"variation"] floatValueWithDefault:0.0f];
+        return [[Backward alloc] initWithDistance:distance andVariation:variation];
+    } else if ([@"Pitch" isEqualToString:key]) {
+        float angle = [[node attributeForName:@"angle"] floatValue];
+        float variation = [[node attributeForName:@"variation"] floatValueWithDefault:0.0f];
+        return [[Pitch alloc] initWithAngle:angle andVariation:variation];
+    } else if ([@"Scale" isEqualToString:key]) {
+        float scale = [[node attributeForName:@"scale"] floatValue];
+        float variation = [[node attributeForName:@"variation"] floatValueWithDefault:0.0f];
+        return [[Scale alloc] initWithScale:scale andVariation:variation];
+    } else if ([@"ScaleRadius" isEqualToString:key]) {
+        float scale = [[node attributeForName:@"scale"] floatValue];
+        float variation = [[node attributeForName:@"variation"] floatValueWithDefault:0.0f];
+        return [[ScaleRadius alloc] initWithScale:scale andVariation:variation];
+    } else if ([@"Twist" isEqualToString:key]) {
+        float angle = [[node attributeForName:@"angle"] floatValueWithDefault:0];
+        float variation = [[node attributeForName:@"variation"] floatValueWithDefault:360.0f];
+        return [[Twist alloc] initWithAngle:angle andVariation:variation];
+    } else if ([@"Level" isEqualToString:key]) {
+        int delta = [[node attributeForName:@"delta"] intValueWithDefault:-1];
+        return [[Level alloc] initWithDelta:delta];
+    } else if ([@"Leaf" isEqualToString:key]) {
+        Leaf *leaf = [[Leaf alloc] init];
+        GDataXMLElement *colorNode = [[node elementsForName:@"Color"] firstObject];
+        leaf.color = [[colorNode attributeForName:@"value"] vector4Value];
+        leaf.colorVariation = [[colorNode attributeForName:@"variation"] vector4ValueWithDefault:kCC3Vector4Zero];
+        GDataXMLElement *sizeNode = [[node elementsForName:@"Size"] firstObject];
+        leaf.size = [[sizeNode attributeForName:@"value"] vector2Value];
+        leaf.sizeVariation = [[sizeNode attributeForName:@"variation"] vector2ValueWithDefault:kCC3Vector2Zero];
+        GDataXMLElement *axisOffsetNode = [[node elementsForName:@"AxisOffset"] firstObject];
+        leaf.axisOffset = [[axisOffsetNode attributeForName:@"value"] floatValue];
+        return leaf;
+    } else if ([@"Bone" isEqualToString:key]) {
+        float delta = [[node attributeForName:@"delta"] intValueWithDefault:-1];
+        return [[Bone alloc] initWithDelta:delta];
+    } else if ([@"RequireLevel" isEqualToString:key]) {
+        NSString *compareType = [[node attributeForName:@"type"] stringValue];
+        int level = [[node attributeForName:@"level"] intValue];
+        RequireLevel *requireLevel = [[RequireLevel alloc] initWithLevel:level andCompareType:compareType];
+        for (TreeCrayonInstruction *instruction in [TreeGenerator parseInstructionsFromKey:key andNode:node andProductions:productions]) {
+            [requireLevel addInstruction:instruction];
+        }
+        return requireLevel;
+    } else if ([@"Align" isEqualToString:key]) {
+        return [[Align alloc] init];
+    } else {
+        return nil;
+    }
+}
+
++ (NSMutableArray *)productionsByName:(NSString *)name fromProductionList:(MultiMap *)map
 {
     NSArray *names = [name componentsSeparatedByString:@"|"];
     NSMutableArray *list = [[NSMutableArray alloc] init];
     
     for (NSString *n in names) {
-        NSAssert([map objectForKey:n] != nil, @"No production exists with the name '%@'", n);
-        NSArray *np = [map objectForKey:n];
+        NSAssert([map objectsForKey:n].count > 0, @"No production exists with the name '%@'", n);
+        NSArray *np = [map objectsForKey:n];
+        
+        if (np.count == 0) continue;
         for (ProductionNodePair *pair in np) {
             [list addObject:pair.production];
         }

@@ -11,15 +11,21 @@
 typedef struct {
     GLfloat x;			/**< The X-componenent of the vector. */
     GLfloat y;			/**< The Y-componenent of the vector. */
-} CC2Vector;
+} CC3Vector2;
 
-/** Returns a CC2Vector structure constructed from the vector components. */
-CC2Vector CC2VectorMake(GLfloat x, GLfloat y);
+static const CC3Vector2 kCC3Vector2Zero = { 0.0, 0.0 };
 
-CC2Vector CC2VectorScaleUniform(CC2Vector v, GLfloat scale);
+/** Returns a CC3Vector2 structure constructed from the vector components. */
+CC3Vector2 CC3Vector2Make(GLfloat x, GLfloat y);
 
-GLfloat CC2VectorLength(CC2Vector v);
+CC3Vector2 CC3Vector2Add(CC3Vector2 vector1, CC3Vector2 vector2);
+CC3Vector2 CC3Vector2ScaleUniform(CC3Vector2 v, GLfloat scale);
 
+GLfloat CC3Vector2Length(CC3Vector2 v);
+
+
+
+CC3Vector4 CC3Vector4Add(CC3Vector4 vector1, CC3Vector4 vector2);
 
 /**
  * Defines an axially-aligned-bounding-sphere (AABB), describing
@@ -77,6 +83,8 @@ static const CC3Vector kCC3VectorBackward = { 0.0,  0.0, -1.0 };
 
 /** get the translation value of the matrix */
 - (CC3Vector)extractTranslation;
+
+- (CC3Vector)extractBackwardDirection;
 
 /** Transforms a 3D vector normal by a matrix. */
 - (CC3Vector)transformNormal:(CC3Vector)normal;

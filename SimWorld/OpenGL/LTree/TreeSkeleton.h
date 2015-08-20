@@ -31,8 +31,10 @@
 
 - (TreeBranch *)branchAtIndex:(NSUInteger)branchIndex;
 - (void)insertBranch:(TreeBranch *)branch atIndex:(NSUInteger)branchIndex;
+- (void)addBranch:(TreeBranch *)branch;
 
 - (TreeLeaf *)leaveAtIndex:(int)leaveIndex;
+- (void)addLeave:(TreeLeaf *)leaf;
 
 - (TreeBone *)boneAtIndex:(NSUInteger)boneIndex;
 - (void)addBone:(TreeBone *)bone;

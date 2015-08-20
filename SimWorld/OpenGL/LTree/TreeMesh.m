@@ -69,11 +69,13 @@
     NSMutableArray *indices = [[NSMutableArray alloc] init]; // int
     
     // Absolute transformation of branches
-    NSMutableArray *transforms = [[NSMutableArray alloc] initWithCapacity:skeleton.branches.count]; // GLKMatrix4
+    NSMutableArray *transforms = [[NSMutableArray alloc] initWithCapacity:skeleton.branches.count]; // CC3GLMatrix
+    [transforms fillWith:[CC3GLMatrix matrix] andTimes:skeleton.branches.count];
     [skeleton copyAbsoluteBranchTransformsTo:transforms];
     
     // Branch topological distances from root
     NSMutableArray *distances = [[NSMutableArray alloc] initWithCapacity:skeleton.branches.count]; // float
+    [distances fillWithFloat:0.0f andTimes:skeleton.branches.count];
     [skeleton longestBranching:distances];
     
     //
@@ -87,8 +89,8 @@
         NSInteger parentIndex = [skeleton branchAtIndex:i].parentIndex;
         NSUInteger bottomIndex = vertices.count;
         CC3GLMatrix *bottomTransform = [transforms objectAtIndex:i];
-        CC3GLMatrix *parentTransform = [transforms objectAtIndex:parentIndex];
-        if (parentIndex != -1 && [skeleton branchAtIndex:i].parentPosition > 0.99f && CC3VectorDot([bottomTransform extractUpDirection], [parentTransform extractUpDirection]) > 0.7f)
+
+        if (parentIndex != -1 && [skeleton branchAtIndex:i].parentPosition > 0.99f && CC3VectorDot([bottomTransform extractUpDirection], [[transforms objectAtIndex:parentIndex] extractUpDirection]) > 0.7f)
         {
             bottomTransform = [transforms objectAtIndex:parentIndex];
             [bottomTransform translateBy: CC3VectorScaleUniform([bottomTransform extractUpDirection], [skeleton branchAtIndex:parentIndex].length)];
@@ -200,7 +202,7 @@
 
         float tx = textureStartX + (i / (float)(segments)) * textureSpanX;
         
-        [vertices addObject:[[TreeVertex alloc] initWithTranslation:CC3VectorAdd([transform extractTranslation], CC3VectorScaleUniform(dir, radius)) andDirection:dir andTextureCoords:CC2VectorMake(tx, textureY) andBone1:bone1 andBone2:bone2]];
+        [vertices addObject:[[TreeVertex alloc] initWithTranslation:CC3VectorAdd([transform extractTranslation], CC3VectorScaleUniform(dir, radius)) andDirection:dir andTextureCoords:CC3Vector2Make(tx, textureY) andBone1:bone1 andBone2:bone2]];
     }
 }
 

@@ -34,7 +34,7 @@ BoneIndex BoneIndexMake(NSUInteger bone1, NSUInteger bone2);
 /// <summary>
 /// Texture coordinates.
 /// </summary>
-@property (atomic) CC2Vector textureCoordinate;
+@property (atomic) CC3Vector2 textureCoordinate;
 
 /// <summary>
 /// Index of the bones. Set Bone1=Bone2 if only one bone is effective.
@@ -44,6 +44,6 @@ BoneIndex BoneIndexMake(NSUInteger bone1, NSUInteger bone2);
 /// </remarks>
 @property (atomic) BoneIndex bones;
 
-- (id)initWithTranslation:(CC3Vector)translation andDirection:(CC3Vector)direction andTextureCoords:(CC2Vector)textureCoord andBone1:(NSUInteger)bone1 andBone2:(NSUInteger)bone2;
+- (id)initWithTranslation:(CC3Vector)translation andDirection:(CC3Vector)direction andTextureCoords:(CC3Vector2)textureCoord andBone1:(NSUInteger)bone1 andBone2:(NSUInteger)bone2;
 
 @end

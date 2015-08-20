@@ -8,6 +8,24 @@
 
 #import "NSArray+Extensions.h"
 
+@implementation NSMutableArray (Extensions)
+
+- (void)fillWith:(id)obj andTimes:(int)amount
+{
+    for (int i = 0; i < amount; i++) {
+        [self addObject:obj];
+    }
+}
+
+- (void)fillWithFloat:(float)obj andTimes:(int)amount
+{
+    for (int i = 0; i < amount; i++) {
+        [self addObject:[NSNumber numberWithFloat:obj]];
+    }
+}
+
+@end
+
 @implementation NSArray (Extensions)
 
 - (float)floatAtIndex:(int)index

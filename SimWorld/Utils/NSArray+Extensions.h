@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+@interface NSMutableArray (Extensions)
+
+- (void)fillWith:(id)obj andTimes:(int)amount;
+- (void)fillWithFloat:(float)obj andTimes:(int)amount;
+
+@end
+
 @interface NSArray (Extensions)
 
 - (float)floatAtIndex:(int)index;

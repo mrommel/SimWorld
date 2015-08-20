@@ -18,7 +18,7 @@ BoneIndex BoneIndexMake(NSUInteger bone1, NSUInteger bone2)
 
 @implementation TreeVertex
 
-- (id)initWithTranslation:(CC3Vector)translation andDirection:(CC3Vector)direction andTextureCoords:(CC2Vector)textureCoord andBone1:(NSUInteger)bone1 andBone2:(NSUInteger)bone2
+- (id)initWithTranslation:(CC3Vector)translation andDirection:(CC3Vector)direction andTextureCoords:(CC3Vector2)textureCoord andBone1:(NSUInteger)bone1 andBone2:(NSUInteger)bone2
 {
     self = [super init];
     

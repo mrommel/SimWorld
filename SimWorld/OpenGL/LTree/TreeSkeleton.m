@@ -40,7 +40,7 @@
 - (void)copyAbsoluteBranchTransformsTo:(NSMutableArray *)destinationMatrices
 {
     NSAssert(destinationMatrices != nil, @"destinationMatrices");
-    NSAssert(destinationMatrices.count >= branches.count, @"Destination array is too small.");
+    NSAssert(destinationMatrices.count == self.branches.count, @"Destination array is too small.");
     
     for (int i = 0; i < self.branches.count; i++)
     {
@@ -72,8 +72,8 @@
 
 - (void)copyAbsoluteBoneTranformsTo:(NSMutableArray *)destinationArray andBoneRotation:(NSMutableArray *)boneRotations
 {
-    NSAssert(destinationArray.count >= bones.count, @"Destination array is too small.");
-    NSAssert(boneRotations.count >= bones.count, @"Rotations array is too small to be a proper animation state.");
+    NSAssert(destinationArray.count == self.bones.count, @"Destination array is too small.");
+    NSAssert(boneRotations.count == self.bones.count, @"Rotations array is too small to be a proper animation state.");
     
     for (int i = 0; i < bones.count; i++) {
         [destinationArray insertObject:[CC3GLMatrix matrixFromQuaternion:[boneRotations vector4AtIndex:i]] atIndex:i];
@@ -101,15 +101,15 @@
     float maxdist = 0.0f;
     for (int i = 0; i < self.branches.count; i++)
     {
-        float dist = [[self.branches objectAtIndex:i] length];
-        NSInteger parentIndex = ((TreeBranch *)[self.branches objectAtIndex:i]).parentIndex;
+        float dist = [[self branchAtIndex:i] length];
+        NSInteger parentIndex = [self branchAtIndex:i].parentIndex;
         if (parentIndex != -1) {
             dist += [[destinationArray objectAtIndex:parentIndex] floatValue]
             - [[branches objectAtIndex:parentIndex] length] * (1.0f - ((TreeBranch *)[self.branches objectAtIndex:i]).parentPosition);
         }
         if (dist > maxdist)
             maxdist = dist;
-        [destinationArray insertObject:[NSNumber numberWithFloat:dist] atIndex:i];
+        [destinationArray replaceObjectAtIndex:i withObject:[NSNumber numberWithFloat:dist]];
     }
     
     return maxdist;
@@ -128,9 +128,19 @@
     [self.branches insertObject:branch atIndex:branchIndex];
 }
 
+- (void)addBranch:(TreeBranch *)branch
+{
+    [self.branches addObject:branch];
+}
+
 - (TreeLeaf *)leaveAtIndex:(int)leaveIndex
 {
     return [self.leaves objectAtIndex:leaveIndex];
+}
+
+- (void)addLeave:(TreeLeaf *)leaf
+{
+    [self.leaves addObject:leaf];
 }
 
 - (TreeBone *)boneAtIndex:(NSUInteger)boneIndex
@@ -152,6 +162,10 @@
 {
     // Create a map of all the branches to remember if it is a parent or not
     NSMutableArray *parentmap = [[NSMutableArray alloc] initWithCapacity:branches.count];
+    
+    for (int i = 0; i < branches.count; i++) {
+        [parentmap addObject:@NO];
+    }
     
     for (NSInteger i = self.branches.count - 1; i >= 0; --i) {
         NSInteger parent = [self branchAtIndex:i].parentIndex;

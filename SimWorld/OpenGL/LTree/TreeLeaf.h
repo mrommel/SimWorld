@@ -19,7 +19,7 @@ typedef struct {
     float BranchNormal[3];
 } LeafVertex;
 
-LeafVertex LeafVertexMake(CC3Vector position, ccColor4F color, CC2Vector texcoord, CC2Vector offset, int boneIndex, CC3Vector branchNormal);
+LeafVertex LeafVertexMake(CC3Vector position, ccColor4F color, CC3Vector2 texcoord, CC3Vector2 offset, int boneIndex, CC3Vector branchNormal);
 
 
 @interface TreeLeaf : NSObject
@@ -27,7 +27,7 @@ LeafVertex LeafVertexMake(CC3Vector position, ccColor4F color, CC2Vector texcoor
 /// <summary>
 /// Index of the branch carrying the leaf.
 /// </summary>
-@property (atomic) int parentIndex;
+@property (atomic) NSInteger parentIndex;
 
 /// <summary>
 /// Color tint of the leaf.
@@ -42,12 +42,12 @@ LeafVertex LeafVertexMake(CC3Vector position, ccColor4F color, CC2Vector texcoor
 /// <summary>
 /// Width and height of the leaf.
 /// </summary>
-@property (atomic) CC2Vector size;
+@property (atomic) CC3Vector2 size;
 
 /// <summary>
 /// Index of the bone controlling this leaf.
 /// </summary>
-@property (atomic) int boneIndex;
+@property (atomic) NSInteger boneIndex;
 
 /// <summary>
 /// Leaf's position offset along the leaf axis. Only used when the leaf axis is non-null on the tree skeleton.
@@ -58,7 +58,7 @@ LeafVertex LeafVertexMake(CC3Vector position, ccColor4F color, CC2Vector texcoor
 - (id)initWithParentIndex:(int)parentIndex
                  andColor:(ccColor4F)color
               andRotation:(float)rotation
-                  andSize:(CC2Vector)size
+                  andSize:(CC3Vector2)size
              andBoneIndex:(int)boneIndex
             andAxisOffset:(float)axisOffset;
 @end

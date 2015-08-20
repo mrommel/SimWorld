@@ -32,6 +32,8 @@
     self.leaves = [[TreeLeafCloud alloc] initWithTreeSkeleton:skeleton];
     self.animationState = [[TreeAnimationState alloc] initWithTreeSkeleton:skeleton];
     self.bindingMatrices = [[NSMutableArray alloc] initWithCapacity:skeleton.bones.count];
+    
+    self.skeleton = skeleton;
 }
 
 @end
