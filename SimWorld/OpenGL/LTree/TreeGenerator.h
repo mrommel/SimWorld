@@ -14,11 +14,12 @@
 
 @interface TreeGenerator : NSObject
 
-//@property (nonatomic, retain) NSString *rootName;
 @property (atomic) CC3Vector leafAxis;
 @property (atomic) int maxLevel;
 @property (atomic) int boneLevels;
 @property (nonatomic, retain) Production *root;
+@property (nonatomic, retain) NSString *trunkTextureName;
+@property (nonatomic, retain) NSString *leafTextureName;
 
 - (id)initFromTreeFile:(NSString *)ltreeFilename;
 

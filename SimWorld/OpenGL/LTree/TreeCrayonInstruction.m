@@ -418,7 +418,12 @@
     if (self) {
         self.instructions = [[NSMutableArray alloc] init];
         self.level = level;
-        self.compareType = compareType;
+        
+        if (compareType == nil) {
+            self.compareType = kCompareTypeLess;
+        } else {
+            self.compareType = compareType;
+        }
     }
     
     return self;
@@ -431,7 +436,7 @@
 
 - (void)executeCrayon:(TreeCrayon *)crayon
 {
-    if ((crayon.level >= self.level && ![self.compareType isEqualToString:kCompareTypeLess]) || (crayon.level <= self.level && [self.compareType isEqualToString:kCompareTypeLess]))
+    if ((crayon.level >= self.level && [self.compareType isEqualToString:kCompareTypeGreater]) || (crayon.level <= self.level && [self.compareType isEqualToString:kCompareTypeLess]))
     {
         for (TreeCrayonInstruction *instruction in self.instructions) {
             [instruction executeCrayon:crayon];

@@ -115,6 +115,10 @@
                 } else if ([@"TextureHeight" isEqualToString:node.name]) {
                     _textureHeight = [[node attributeForName:@"height"] floatValueWithDefault:0.0f];
                     _textureHeightVariation = [[node attributeForName:@"variation"] floatValueWithDefault:0.0f];
+                } else if ([@"TrunkTexture" isEqualToString:node.name]) {
+                    self.trunkTextureName = [node stringValue];
+                } else if ([@"LeafTexture" isEqualToString:node.name]) {
+                    self.leafTextureName = [node stringValue];
                 }
             }
         }
@@ -139,25 +143,6 @@
     return self;
 }
 
-+ (NSMutableArray *)parseInstructionsFromKey:(NSString *)parentKey andNode:(id)node andProductions:(MultiMap *)productions
-{
-    NSMutableArray *instructions = [[NSMutableArray alloc] init];
-    
-    if ([node isKindOfClass:[NSArray class]]) {
-        for (NSDictionary *cnode in node) {
-            [instructions addObject:[TreeGenerator parseInstructionFromKey:parentKey andNode:cnode andProductions:productions]];
-        }
-    } else if ([node isKindOfClass:[NSDictionary class]]) {
-        NSDictionary *dict = node;
-        for (NSString *key in dict.allKeys) {
-            NSDictionary *cnode = [node dictForKey:key];
-            [instructions addObject:[TreeGenerator parseInstructionFromKey:key andNode:cnode andProductions:productions]];
-        }
-    }
-    
-    return instructions;
-}
-
 + (TreeCrayonInstruction *)parseInstructionFromKey:(NSString *)key andNode:(GDataXMLElement *)node andProductions:(MultiMap *)productions
 {
     NSLog(@"Parsing: %@", key);
@@ -169,19 +154,17 @@
     } else if ([@"Child" isEqualToString:key]) {
         Child *child = [[Child alloc] init];
         
-        for (GDataXMLNode* childNode in node.children) {
+        for (GDataXMLElement* childNode in node.children) {
             TreeCrayonInstruction *instruction = [TreeGenerator parseInstructionFromKey:childNode.name andNode:childNode andProductions:productions];
             [child addInstruction:instruction];
         }
-        
-        /*for (TreeCrayonInstruction *instruction in [TreeGenerator parseInstructionsFromKey:key andNode:node andProductions:productions]) {
-            [child addInstruction:instruction];
-        }*/
+
         return child;
     } else if ([@"Maybe" isEqualToString:key]) {
         float chance = [[node attributeForName:@"chance"] floatValueWithDefault:0.50f];
         Maybe *maybe = [[Maybe alloc] initWithChance:chance];
-        for (TreeCrayonInstruction *instruction in [TreeGenerator parseInstructionsFromKey:key andNode:node andProductions:productions]) {
+        for (GDataXMLElement* childNode in node.children) {
+            TreeCrayonInstruction *instruction = [TreeGenerator parseInstructionFromKey:childNode.name andNode:childNode andProductions:productions];
             [maybe addInstruction:instruction];
         }
         return maybe;
@@ -231,7 +214,8 @@
         NSString *compareType = [[node attributeForName:@"type"] stringValue];
         int level = [[node attributeForName:@"level"] intValue];
         RequireLevel *requireLevel = [[RequireLevel alloc] initWithLevel:level andCompareType:compareType];
-        for (TreeCrayonInstruction *instruction in [TreeGenerator parseInstructionsFromKey:key andNode:node andProductions:productions]) {
+        for (GDataXMLElement* childNode in node.children) {
+            TreeCrayonInstruction *instruction = [TreeGenerator parseInstructionFromKey:childNode.name andNode:childNode andProductions:productions];
             [requireLevel addInstruction:instruction];
         }
         return requireLevel;

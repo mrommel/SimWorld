@@ -13,6 +13,8 @@
 #import "WindStrengthSin.h"
 #import "TreeWindAnimator.h"
 #import "SimpleTree.h"
+#import "Mesh.h"
+#import "TreeMesh.h"
 
 #define PROFILES @[@"Birch", @"Pine", @"Gardenwood", @"Graywood", @"Rug", @"Willow"]
 
@@ -35,8 +37,10 @@
 
 @property (atomic) NSUInteger type;
 @property (nonatomic, retain) NSMutableArray *profiles;
+
 @property (nonatomic, retain) WindStrengthSin *wind;
 @property (nonatomic, retain) TreeWindAnimator *animator;
+@property (nonatomic, retain) SimpleTree *tree;
 
 @end
 
@@ -48,16 +52,24 @@
     
     if (self) {
         self.type = tree;
-        
-        self.wind = [[WindStrengthSin alloc] init];
-        self.animator = [[TreeWindAnimator alloc] initWithWind:self.wind];
+        self.tree = nil;
         
         [self loadTreeGenerators];
         [self setupRenderBuffer];
         [self setupDepthBuffer];
         [self setupFrameBuffer];
         [self compileShaders];
-        [self setupVBOs];
+        
+        glGenBuffers(1, &_vertexBufferTerrains);
+        glBindBuffer(GL_ARRAY_BUFFER, _vertexBufferTerrains);
+        glBufferData(GL_ARRAY_BUFFER, self.tree.trunk.numberOfVertices * sizeof(Vertex), self.tree.trunk.vertices, GL_STATIC_DRAW);
+        
+        glGenBuffers(1, &_indexBufferTerrains);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBufferTerrains);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, self.tree.trunk.numberOfIndices * sizeof(Index), self.tree.trunk.indices, GL_STATIC_DRAW);
+    
+        self.wind = [[WindStrengthSin alloc] init];
+        self.animator = [[TreeWindAnimator alloc] initWithWind:self.wind];
     }
     
     return self;
@@ -72,10 +84,9 @@
     }
     
     TreeProfile *profile = [self treeProfileAtIndex:self.type];
-    SimpleTree *tree = [profile generateSimpleTree];
+    self.tree = [profile generateSimpleTree];
     
-    NSLog(@"Tree: %@", tree);
-    //tree.
+    NSLog(@"Tree: %@", self.tree);
 }
 
 - (TreeProfile *)treeProfileAtIndex:(NSUInteger)index
@@ -89,7 +100,8 @@
     glBindRenderbuffer(GL_RENDERBUFFER, _colorRenderBuffer);
 }
 
-- (void)setupDepthBuffer {
+- (void)setupDepthBuffer
+{
     glGenRenderbuffers(1, &_depthRenderBuffer);
     glBindRenderbuffer(GL_RENDERBUFFER, _depthRenderBuffer);
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, 200, 200);
@@ -103,21 +115,6 @@
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
                               GL_RENDERBUFFER, _colorRenderBuffer);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _depthRenderBuffer);
-}
-
-- (void)setupVBOs
-{
-    /*TextureAtlas *textureAtlas = [[TextureAtlas alloc] initWithAtlasFileName:@"terrains"];
-    TextureAtlas *riverAtlas = [[TextureAtlas alloc] initWithAtlasFileName:@"rivers"];
-    _terrainMesh = [[HexagonMapMesh alloc] initWithMap:self.map andTerrainAtlas:textureAtlas andRiverAtlas:riverAtlas];
-    
-    glGenBuffers(1, &_vertexBufferTerrains);
-    glBindBuffer(GL_ARRAY_BUFFER, _vertexBufferTerrains);
-    glBufferData(GL_ARRAY_BUFFER, _terrainMesh.numberOfVertices * sizeof(Vertex), _terrainMesh.vertices, GL_STATIC_DRAW);
-    
-    glGenBuffers(1, &_indexBufferTerrains);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBufferTerrains);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, _terrainMesh.numberOfIndices * sizeof(Index), _terrainMesh.indices, GL_STATIC_DRAW);*/
 }
 
 - (void)compileShaders
@@ -148,7 +145,7 @@
 {
     [super draw];
     
-    glClearColor(0.0/255.0, 20.0/255.0, 0.0/255.0, 1.0);
+    glClearColor(127.0/255.0, 127.0/255.0, 127.0/255.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
     
@@ -163,35 +160,37 @@
     const CC3GLMatrix *viewMatrix = [self.camera viewMatrix];
     
     // ---------------------------------
-    
-    // Bind the base map
-    /*
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, _terrainMesh.texture);
-    
-    // we've bound our textures in textures 0.
-    const GLint samplers[1] = {0};
-    glUniform1iv(_samplerArrayLoc, 1, samplers);
-    
-    glBindBuffer(GL_ARRAY_BUFFER, _vertexBufferTerrains);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBufferTerrains);
-    
-    glUniformMatrix4fv(_modelViewUniform, 1, 0, viewMatrix.glMatrix);
-    
-    glVertexAttribPointer(_positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-    glVertexAttribPointer(_colorSlot, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) (sizeof(float) * 3));
-    glVertexAttribPointer(_texCoordSlot, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) (sizeof(float) * 7));
-    glVertexAttribPointer(_texCoordSlot2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) (sizeof(float) * 9));
-    
-    glEnableVertexAttribArray(_positionSlot);
-    glEnableVertexAttribArray(_colorSlot);
-    glEnableVertexAttribArray(_texCoordSlot);
-    glEnableVertexAttribArray(_texCoordSlot2);
-    
-    glDrawElements(GL_TRIANGLES, _terrainMesh.numberOfIndices, GL_UNSIGNED_INT, 0);
-    
-    // unbind textures
-    [RETexture unbind];*/
+
+    /*if (self.tree) {
+
+        // Bind the base map
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, self.tree.trunkTexture);
+        
+        // we've bound our textures in textures 0.
+        const GLint samplers[1] = {0};
+        glUniform1iv(_samplerArrayLoc, 1, samplers);
+        
+        glBindBuffer(GL_ARRAY_BUFFER, _vertexBufferTerrains);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBufferTerrains);
+        
+        glUniformMatrix4fv(_modelViewUniform, 1, 0, viewMatrix.glMatrix);
+        
+        glVertexAttribPointer(_positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
+        glVertexAttribPointer(_colorSlot, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) (sizeof(float) * 3));
+        glVertexAttribPointer(_texCoordSlot, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) (sizeof(float) * 7));
+        glVertexAttribPointer(_texCoordSlot2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) (sizeof(float) * 9));
+        
+        glEnableVertexAttribArray(_positionSlot);
+        glEnableVertexAttribArray(_colorSlot);
+        glEnableVertexAttribArray(_texCoordSlot);
+        glEnableVertexAttribArray(_texCoordSlot2);
+        
+        //glDrawElements(GL_TRIANGLES, self.tree.trunk.numberOfIndices, GL_UNSIGNED_INT, 0);
+     
+        // unbind textures
+        [RETexture unbind];
+    }*/
 }
 
 @end

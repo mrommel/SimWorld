@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Tree>
-    <TrunkTexture>Textures/BirchBark</TrunkTexture>
-    <LeafTexture>Textures/BirchLeaf</LeafTexture>
+    <TrunkTexture>BirchBark.png</TrunkTexture>
+    <LeafTexture>BirchLeaf.png</LeafTexture>
     
     <Root ref="root" />
 	<Levels value="4" />

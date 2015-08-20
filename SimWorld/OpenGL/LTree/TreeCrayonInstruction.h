@@ -120,6 +120,7 @@
 @end
 
 #define kCompareTypeLess @"less"
+#define kCompareTypeGreater @"greater"
 
 @interface RequireLevel : TreeCrayonInstruction
 

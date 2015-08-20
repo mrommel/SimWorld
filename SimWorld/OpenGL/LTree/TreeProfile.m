@@ -10,6 +10,7 @@
 
 #import "TreeGenerator.h"
 #import "SimpleTree.h"
+#import "OpenGLUtil.h"
 
 @implementation TreeProfile
 
@@ -19,8 +20,8 @@
     
     if (self) {
         self.generator = [[TreeGenerator alloc] initFromTreeFile:profileName];
-        self.trunkTexture = 0; // TODO
-        self.leafTexture = 0; // TODO
+        self.trunkTexture = [[OpenGLUtil sharedInstance] setupTexture:self.generator.trunkTextureName];
+        self.leafTexture = [[OpenGLUtil sharedInstance] setupTexture:self.generator.leafTextureName];
     }
     
     return self;
