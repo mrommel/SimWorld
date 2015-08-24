@@ -145,7 +145,7 @@
 {
     [super draw];
     
-    glClearColor(127.0/255.0, 127.0/255.0, 127.0/255.0, 1.0);
+    glClearColor(100.0/255.0, 149.0/255.0, 237.0/255.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
     
@@ -161,7 +161,7 @@
     
     // ---------------------------------
 
-    /*if (self.tree) {
+    if (self.tree) {
 
         // Bind the base map
         glActiveTexture(GL_TEXTURE0);
@@ -186,11 +186,11 @@
         glEnableVertexAttribArray(_texCoordSlot);
         glEnableVertexAttribArray(_texCoordSlot2);
         
-        //glDrawElements(GL_TRIANGLES, self.tree.trunk.numberOfIndices, GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_TRIANGLES, self.tree.trunk.numberOfIndices, GL_UNSIGNED_INT, 0);
      
         // unbind textures
         [RETexture unbind];
-    }*/
+    }
 }
 
 @end

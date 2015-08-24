@@ -65,6 +65,7 @@
     
     // Initialize transformations
     _zoomManager = [[ZoomManager alloc] init];
+    [_zoomManager addZoomLevel:0.01f withName:@"nano"];
     [_zoomManager addZoomLevel:0.10f withName:@"pico"];
     [_zoomManager addZoomLevel:0.25f withName:@"local"];
     [_zoomManager addZoomLevel:0.50f withName:@"detail"];
@@ -73,6 +74,8 @@
     [_zoomManager addZoomLevel:1.25f withName:@"zoomed out"];
     [_zoomManager addZoomLevel:1.50f withName:@"far"];
     [_zoomManager addZoomLevel:2.00f withName:@"global"];
+    [_zoomManager addZoomLevel:10.00f withName:@"luna"];
+    [_zoomManager addZoomLevel:50.00f withName:@"alpha centauri"];
     [_zoomManager setZoomName:@"normal"];
     
     _canZoom = YES;
@@ -125,6 +128,13 @@
     [_zoomManager zoomOut];
     self.camera.distance = _zoomManager.currentZoomLevel.zoom * kZoomDistance;
 }
+
+- (NSString *)getZoomLevel
+{
+    return [_zoomManager currentZoomLevel].name;
+}
+
+#pragma mark -
 
 - (void)center
 {

@@ -25,6 +25,8 @@
 
 - (void)zoomIn;
 - (void)zoomOut;
+@property (readonly, getter=getZoomLevel) NSString *zoomLevel;
+
 - (void)center;
 
 @end

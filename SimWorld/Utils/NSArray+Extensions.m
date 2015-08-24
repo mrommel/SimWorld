@@ -10,7 +10,7 @@
 
 @implementation NSMutableArray (Extensions)
 
-- (void)fillWith:(id)obj andTimes:(int)amount
+- (void)fillWith:(id)obj andTimes:(NSInteger)amount
 {
     for (int i = 0; i < amount; i++) {
         [self addObject:obj];

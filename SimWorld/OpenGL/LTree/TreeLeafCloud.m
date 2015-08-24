@@ -21,17 +21,17 @@
     self = [super init];
     
     if (self) {
-        if (skeleton.leaves.count == 0)
+        if (skeleton.leaves.count == 0) {
             return nil;
+        }
         
         NSMutableArray *transforms = [[NSMutableArray alloc] initWithCapacity:skeleton.branches.count];
         [transforms fillWith:[CC3GLMatrix matrix] andTimes:skeleton.branches.count];
         [skeleton copyAbsoluteBranchTransformsTo:transforms];
         
         CC3Vector center = kCC3VectorZero;
-        for (int i = 0; i < skeleton.leaves.count; i++)
-        {
-            int parentIndex = [skeleton leaveAtIndex:i].parentIndex;
+        for (int i = 0; i < skeleton.leaves.count; i++) {
+            NSInteger parentIndex = [skeleton leaveAtIndex:i].parentIndex;
             center = CC3VectorAdd(center, [[transforms matrixAtIndex:parentIndex] extractTranslation]);
         }
         center = CC3VectorScaleUniform(center, 1.0f / (float)skeleton.leaves.count);
@@ -82,7 +82,7 @@
             [self setTriangleAt:iindex++ withIndex1:vidx andIndex2:(vidx + 1) andIndex3:(vidx + 2)];
             [self setTriangleAt:iindex++ withIndex1:vidx andIndex2:(vidx + 2) andIndex3:(vidx + 3)];
             
-            [self setTriangleAt:(iindex++) withIndex1:(vidx) andIndex2:(vidx + 2) andIndex3:(vidx + 3)];
+            //[self setTriangleAt:(iindex++) withIndex1:(vidx) andIndex2:(vidx + 2) andIndex3:(vidx + 3)];
             
             // Update the bounding sphere
             float size = CC3Vector2Length(leaf.size) / 2.0f;
