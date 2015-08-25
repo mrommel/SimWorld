@@ -111,12 +111,28 @@
 
 - (void)pushState
 {
+    TreeCrayonState *newstate = [[TreeCrayonState alloc] init];
+    newstate.parentIndex = self.state.parentIndex;
+    newstate.parentPosition = self.state.parentPosition;
+    newstate.scale = self.state.scale;
+    newstate.rotation = [CC3GLMatrix matrixFromGLMatrix:self.state.rotation.glMatrix];
+    newstate.level = self.state.level;
+    newstate.radiusScale = self.state.radiusScale;
+    newstate.parentBoneIndex = self.state.parentBoneIndex;
+    newstate.boneLevel = self.state.boneLevel;
+    
     [self.stack pushObject:self.state];
+    self.state = newstate;
 }
 
 - (void)popState
 {
     self.state = [self.stack popObject];
+}
+
+- (NSUInteger)stackDepth
+{
+    return self.stack.count;
 }
 
 - (void)executeBoneWithDelta:(int)delta

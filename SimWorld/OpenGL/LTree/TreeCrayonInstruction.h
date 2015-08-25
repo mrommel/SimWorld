@@ -29,10 +29,11 @@
 
 @interface Call : TreeCrayonInstruction
 
+@property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSArray *productions;
 @property (atomic) int delta;
 
-- (id)initWithProductions:(NSArray *)productions andDelta:(int)delta;
+- (id)initWithName:(NSString *)name andProductions:(NSArray *)productions andDelta:(int)delta;
 - (void)executeCrayon:(TreeCrayon *)crayon;
 
 @end

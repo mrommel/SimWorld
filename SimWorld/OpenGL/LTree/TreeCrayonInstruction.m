@@ -49,11 +49,12 @@
 
 @implementation Call
 
-- (id)initWithProductions:(NSArray *)productions andDelta:(int)delta
+- (id)initWithName:(NSString *)name andProductions:(NSArray *)productions andDelta:(int)delta
 {
     self = [super init];
     
     if (self) {
+        self.name = name;
         self.delta = delta;
         self.productions = productions;
     }
@@ -63,12 +64,15 @@
 
 - (void)executeCrayon:(TreeCrayon *)crayon
 {
+    NSLog(@"executeCrayon Call of name: %@ and delta: %d", self.name, self.delta);
     NSAssert(self.productions.count > 0, @"No productions exist for call.");
+    NSAssert(self.delta <= 0, @"Delta must be negative or zero");
     
-    if (crayon.level + self.delta < 0)
+    if (crayon.level + self.delta < 0) {
         return;
+    }
     
-    crayon.level = crayon.level+ self.delta;
+    crayon.level = crayon.level + self.delta;
     
     NSUInteger i = RandomUIntBelow((unsigned int)self.productions.count);
     [[self.productions objectAtIndex:i] executeCrayon:crayon];
@@ -106,6 +110,7 @@
 
 - (void)executeCrayon:(TreeCrayon *)crayon
 {
+    NSLog(@"executeCrayon Child at depth: %ld", [crayon stackDepth]);
     [crayon pushState];
     for (TreeCrayonInstruction *instruction in self.instructions) {
         [instruction executeCrayon:crayon];

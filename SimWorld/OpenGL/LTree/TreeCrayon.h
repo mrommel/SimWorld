@@ -29,6 +29,7 @@
 
 - (void)pushState;
 - (void)popState;
+- (NSUInteger)stackDepth;
 
 // instrctions
 - (void)forwardWithDistance:(float)distance andRadius:(float)radius;

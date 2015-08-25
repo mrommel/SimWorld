@@ -30,7 +30,7 @@
     [self.world addLight:light];
     
     // Tree
-    self.treeNode = [[TreeNode alloc] initWithType:TREE_TYPE_BIRCH];
+    self.treeNode = [[TreeNode alloc] initWithType:TREE_TYPE_GARDENWOOD];
     [self.world addChild:self.treeNode];
     
     [self addZoomButtons];

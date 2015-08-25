@@ -12,11 +12,12 @@
 
 @implementation Production
 
-- (id)init
+- (id)initWithName:(NSString *)name
 {
     self = [super init];
     
     if (self) {
+        self.name = name;
         self.instructions = [[NSMutableArray alloc] init];
     }
     
@@ -25,6 +26,7 @@
 
 - (void)executeCrayon:(TreeCrayon *)crayon
 {
+    NSLog(@"executeCrayon Production with name: %@", self.name);
     for (TreeCrayonInstruction *instruction in self.instructions) {
         [instruction executeCrayon:crayon];
     }

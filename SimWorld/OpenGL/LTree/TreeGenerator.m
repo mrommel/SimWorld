@@ -90,10 +90,10 @@
 
         if (!error) {
             GDataXMLElement *rootElement = [doc rootElement];
-            NSLog(@"Nodes: %lu", (unsigned long)rootElement.childCount);
+            //NSLog(@"Nodes: %lu", (unsigned long)rootElement.childCount);
         
             for (GDataXMLElement *node in rootElement.children) {
-                NSLog(@"Parse: %@", node.name);
+                //NSLog(@"Parse: %@", node.name);
                 
                 if ([@"Root" isEqualToString:node.name]) {
                     rootName = [[node attributeForName:@"ref"] stringValue];
@@ -106,7 +106,7 @@
                     self.leafAxis = CC3VectorNormalize(self.leafAxis);
                 } else if ([@"Production" isEqualToString:node.name]) {
                     NSString *name = [[node attributeForName:@"id"] stringValue];
-                    Production *production = [[Production alloc] init];
+                    Production *production = [[Production alloc] initWithName:name];
                     [productions addObject:[[ProductionNodePair alloc] initWithProduction:production andNode:node] forKey:name];
                 } else if ([@"ConstrainUnderground" isEqualToString:node.name]) {
                     float lowerBound = [[node attributeForName:@"lowerBound"] floatValueWithDefault:256.0f];
@@ -145,12 +145,12 @@
 
 + (TreeCrayonInstruction *)parseInstructionFromKey:(NSString *)key andNode:(GDataXMLElement *)node andProductions:(MultiMap *)productions
 {
-    NSLog(@"Parsing: %@", key);
+    //NSLog(@"Parsing: %@", key);
     if ([@"Call" isEqualToString:key]) {
         NSString *name = [[node attributeForName:@"ref"] stringValue];
         NSArray* refs = [TreeGenerator productionsByName:name fromProductionList:productions];
         int delta = [[node attributeForName:@"delta"] intValueWithDefault:-1];
-        return [[Call alloc] initWithProductions:refs andDelta:delta];
+        return [[Call alloc] initWithName:name andProductions:refs andDelta:delta];
     } else if ([@"Child" isEqualToString:key]) {
         Child *child = [[Child alloc] init];
         
@@ -214,10 +214,10 @@
         NSString *compareType = [[node attributeForName:@"type"] stringValue];
         int level = [[node attributeForName:@"level"] intValue];
         RequireLevel *requireLevel = [[RequireLevel alloc] initWithLevel:level andCompareType:compareType];
-        for (GDataXMLElement* childNode in node.children) {
+        /*for (GDataXMLElement* childNode in node.children) {
             TreeCrayonInstruction *instruction = [TreeGenerator parseInstructionFromKey:childNode.name andNode:childNode andProductions:productions];
             [requireLevel addInstruction:instruction];
-        }
+        }*/
         return requireLevel;
     } else if ([@"Align" isEqualToString:key]) {
         return [[Align alloc] init];
@@ -250,7 +250,6 @@
 
 - (TreeSkeleton *)generateTreeWithContraints:(TreeContraints *)userConstraint
 {
-    // TODO
     NSAssert(self.root != nil && self.maxLevel != 0, @"TreeGenerator has not been initialized. Must set Root and MaxLevel before generating a tree.");
     
     TreeCrayon *crayon = [[TreeCrayon alloc] init];
@@ -262,6 +261,7 @@
     
     TreeBone *bone = [[TreeBone alloc] initWithRotation:[CC3GLMatrix identity] andParentIndex:-1 andReferenceTransform:[CC3GLMatrix identity] andInverseReferenceTransform:[CC3GLMatrix identity] andLength:1 andStiffness:1 andEndBranchIndex:-1];
     [crayon.skeleton addBone:bone];
+    
     [self.root executeCrayon:crayon];
     
     [crayon.skeleton closeEdgeBranches];

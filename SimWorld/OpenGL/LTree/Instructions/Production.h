@@ -12,9 +12,10 @@
 
 @interface Production : NSObject
 
+@property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSMutableArray *instructions; // TreeCrayonInstruction
 
-- (id)init;
+- (id)initWithName:(NSString *)name;
 
 - (void)executeCrayon:(TreeCrayon *)crayon;
 
