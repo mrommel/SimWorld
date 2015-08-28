@@ -207,6 +207,8 @@
 /** Add a child to the node hierarchy. */
 - (void)addChild:(RENode*)node;
 
+- (void)removeChild:(RENode*)node;
+
 /** Will trigger removeChild of parentNode '*/
 - (void)removeFromParentNode;
 

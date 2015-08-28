@@ -112,3 +112,40 @@
 }
 
 @end
+
+@implementation GDataXMLElement (Extension)
+
+- (int)intAttributeForName:(NSString *)name withDefault:(int)value
+{
+    GDataXMLNode * node = [self attributeForName:name];
+    
+    if (node) {
+        return [node intValue];
+    }
+    
+    return value;
+}
+
+- (float)floatAttributeForName:(NSString *)name withDefault:(float)value
+{
+    GDataXMLNode * node = [self attributeForName:name];
+    
+    if (node) {
+        return [node floatValue];
+    }
+    
+    return value;
+}
+
+- (NSString *)stringAttributeForName:(NSString *)name withDefault:(NSString *)value
+{
+    GDataXMLNode * node = [self attributeForName:name];
+    
+    if (node) {
+        return [node stringValue];
+    }
+    
+    return value;
+}
+
+@end

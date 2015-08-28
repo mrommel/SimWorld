@@ -18,12 +18,13 @@
 - (id)initWithTreeSkeleton:(TreeSkeleton *)skeleton andNumberOfRadialSegments:(int)numberOfRadialSegments;
 
 - (void)addCircleVerticesWithTransform:(CC3GLMatrix*)transform
-                             andRadius:(float)radius andSegments:(int)segments
+                             andRadius:(float)radius
+                           andSegments:(NSInteger)segments
                            andTextureY:(float)textureY
                       andTextureStartX:(float)textureStartX
                        andTextureSpanX:(float)textureSpanX
                            andVertices:(NSMutableArray*)vertices
-                              andBone1:(int)bone1
-                              andBone2:(int)bone2;
+                              andBone1:(NSInteger)bone1
+                              andBone2:(NSInteger)bone2;
 
 @end

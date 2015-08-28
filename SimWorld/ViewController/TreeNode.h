@@ -14,8 +14,12 @@
 #define TREE_TYPE_GRAYWOOD      3
 #define TREE_TYPE_RUG           4
 #define TREE_TYPE_WILLOW        5
+#define TREE_TYPES              6
 
 @interface TreeNode : REKeyframedMeshNode
+
+@property (atomic) BOOL showTrunk;
+@property (atomic) BOOL showLeaves;
 
 - (id)initWithType:(NSUInteger)tree;
 

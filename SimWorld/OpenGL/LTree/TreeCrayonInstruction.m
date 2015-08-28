@@ -13,6 +13,7 @@
 #import "CC3GLMatrix+Extension.h"
 #import <GLKit/GLKit.h>
 #import "TreeSkeleton.h"
+#import "Debug.h"
 
 @implementation TreeCrayonInstruction
 
@@ -40,7 +41,12 @@
 
 - (void)executeCrayon:(TreeCrayon *)crayon
 {
+    MiRoLog(@"executeCrayon %@", self);
     [crayon executeBoneWithDelta:self.delta];
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"[Bone delta=%d]", self.delta];
 }
 
 @end
@@ -54,6 +60,8 @@
     self = [super init];
     
     if (self) {
+        NSAssert(self.delta <= 0, @"Delta must be negative or zero");
+        
         self.name = name;
         self.delta = delta;
         self.productions = productions;
@@ -64,9 +72,8 @@
 
 - (void)executeCrayon:(TreeCrayon *)crayon
 {
-    NSLog(@"executeCrayon Call of name: %@ and delta: %d", self.name, self.delta);
+    MiRoLog(@"executeCrayon %@ at level=%d", self, crayon.level);
     NSAssert(self.productions.count > 0, @"No productions exist for call.");
-    NSAssert(self.delta <= 0, @"Delta must be negative or zero");
     
     if (crayon.level + self.delta < 0) {
         return;
@@ -74,10 +81,16 @@
     
     crayon.level = crayon.level + self.delta;
     
+    MiRoLog_Indent();
     NSUInteger i = RandomUIntBelow((unsigned int)self.productions.count);
     [[self.productions objectAtIndex:i] executeCrayon:crayon];
+    MiRoLog_Outdent();
     
     crayon.level = crayon.level - self.delta;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"[Call name=%@, delta=%d, productions=%lu]", self.name, self.delta, (unsigned long)self.productions.count];
 }
 
 @end
@@ -110,12 +123,24 @@
 
 - (void)executeCrayon:(TreeCrayon *)crayon
 {
-    NSLog(@"executeCrayon Child at depth: %ld", [crayon stackDepth]);
+    MiRoLog(@"executeCrayon %@", self);
+    
+    // TODO remove ?
+    /*if ([crayon stackDepth] > 5) {
+        return;
+    }*/
+    
+    MiRoLog_Indent();
     [crayon pushState];
     for (TreeCrayonInstruction *instruction in self.instructions) {
         [instruction executeCrayon:crayon];
     }
     [crayon popState];
+    MiRoLog_Outdent();
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"[Child instructions=%lu]", (unsigned long)self.instructions.count];
 }
 
 @end
@@ -149,11 +174,19 @@
 
 - (void)executeCrayon:(TreeCrayon *)crayon
 {
+    MiRoLog(@"executeCrayon %@", self);
+    
+    MiRoLog_Indent();
     if (RandomFloat() < self.chance) {
         for (TreeCrayonInstruction *instruction in self.instructions) {
             [instruction executeCrayon:crayon];
         }
     }
+    MiRoLog_Outdent();
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"[Maybe chance=%.00f, instructions=%lu]", self.chance, (unsigned long)self.instructions.count];
 }
 
 @end
@@ -185,7 +218,12 @@
 
 - (void)executeCrayon:(TreeCrayon *)crayon
 {
+    MiRoLog(@"executeCrayon %@", self);
     [crayon forwardWithDistance:(self.distance + self.variation * (RandomFloat() * 2.0f - 1.0f)) andRadius:self.radius];
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"[Forward distance=%.00f, variation=%.00f, radius=%.00f]", self.distance, self.variation, self.radius];
 }
 
 @end
@@ -215,8 +253,13 @@
 
 - (void)executeCrayon:(TreeCrayon *)crayon
 {
+    MiRoLog(@"executeCrayon %@", self);
     float randValue = self.distance + (RandomFloat() * 2.0 - 1.0) * self.variation;
     [crayon backwardWithDistance:randValue];
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"[Backward distance=%.00f, variation=%.00f]", self.distance, self.variation];
 }
 
 @end
@@ -246,8 +289,13 @@
 
 - (void)executeCrayon:(TreeCrayon *)crayon
 {
+    MiRoLog(@"executeCrayon %@", self);
     float randValue = self.angle + (RandomFloat() * 2.0 - 1.0) * self.variation;
     [crayon pitchWithAngle:randValue];
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"[Pitch angle=%.00f, variation=%.00f]", self.angle, self.variation];
 }
 
 @end
@@ -277,8 +325,13 @@
 
 - (void)executeCrayon:(TreeCrayon *)crayon
 {
+    MiRoLog(@"executeCrayon %@", self);
     float randValue = self.scale + (RandomFloat() * 2.0 - 1.0) * self.variation;
     [crayon scaleBy:randValue];
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"[Scale scale=%.00f, variation=%.00f]", self.scale, self.variation];
 }
 
 @end
@@ -305,10 +358,16 @@
     
     return self;
 }
+
 - (void)executeCrayon:(TreeCrayon *)crayon
 {
+    MiRoLog(@"executeCrayon %@", self);
     float randValue = self.scale + (RandomFloat() * 2.0 - 1.0) * self.variation;
     [crayon scaleRadiusBy:randValue];
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"[ScaleRadius scale=%.00f, variation=%.00f]", self.scale, self.variation];
 }
 
 @end
@@ -338,8 +397,13 @@
 
 - (void)executeCrayon:(TreeCrayon *)crayon
 {
+    MiRoLog(@"executeCrayon %@", self);
     float randValue = self.angle + (RandomFloat() * 2.0 - 1.0) * self.variation;
     [crayon twistByAngle:randValue];
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"[Twist angle=%.00f, variation=%.00f]", self.angle, self.variation];
 }
 
 @end
@@ -367,7 +431,12 @@
 
 - (void)executeCrayon:(TreeCrayon *)crayon
 {
+    MiRoLog(@"executeCrayon %@", self);
     crayon.level = crayon.level + self.deltaLevel;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"[Level deltaLevel=%d]", self.deltaLevel];
 }
 
 @end
@@ -389,6 +458,7 @@
 
 - (void)executeCrayon:(TreeCrayon *)crayon
 {
+    MiRoLog(@"executeCrayon %@ at level=%d", self, crayon.level);
     if (crayon.level == 0)
     {
         float rotation = 0.0f;
@@ -400,6 +470,10 @@
         CC3Vector4 color = CC3Vector4Add(self.color, CC3Vector4ScaleUniform(self.colorVariation, (2.0f * RandomFloat() - 1.0f)));
         [crayon leafWithRotation:rotation andSize:size andColor:color andAxisOffset:self.axisOffset];
     }
+}
+
+- (NSString *)description {
+    return @"Leaf";
 }
 
 @end
@@ -441,12 +515,17 @@
 
 - (void)executeCrayon:(TreeCrayon *)crayon
 {
+    MiRoLog(@"executeCrayon %@", self);
     if ((crayon.level >= self.level && [self.compareType isEqualToString:kCompareTypeGreater]) || (crayon.level <= self.level && [self.compareType isEqualToString:kCompareTypeLess]))
     {
         for (TreeCrayonInstruction *instruction in self.instructions) {
             [instruction executeCrayon:crayon];
         }
     }
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"[RequireLevel instructions=%lu, level=%d, compareType=%@]", (unsigned long)self.instructions.count, self.level, self.compareType];
 }
 
 @end
@@ -468,6 +547,7 @@
 
 - (void)executeCrayon:(TreeCrayon *)crayon
 {
+    MiRoLog(@"executeCrayon %@", self);
     CC3GLMatrix *transform = [crayon transform];
     
     CC3Vector branchDir = [transform extractUpDirection];
@@ -496,6 +576,10 @@
     
     // finally, perform the twist
     [crayon twistByAngle:rotation];
+}
+
+- (NSString *)description {
+    return @"Align";
 }
 
 @end

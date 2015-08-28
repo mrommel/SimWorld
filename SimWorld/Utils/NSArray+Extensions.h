@@ -11,7 +11,7 @@
 @interface NSMutableArray (Extensions)
 
 - (void)fillWith:(id)obj andTimes:(NSInteger)amount;
-- (void)fillWithFloat:(float)obj andTimes:(int)amount;
+- (void)fillWithFloat:(float)obj andTimes:(NSInteger)amount;
 
 @end
 

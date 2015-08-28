@@ -111,6 +111,7 @@
 
 - (void)pushState
 {
+    //NSLog(@"pushState: before depth=%ld", [self stackDepth]);
     TreeCrayonState *newstate = [[TreeCrayonState alloc] init];
     newstate.parentIndex = self.state.parentIndex;
     newstate.parentPosition = self.state.parentPosition;
@@ -123,11 +124,14 @@
     
     [self.stack pushObject:self.state];
     self.state = newstate;
+    //NSLog(@"pushState: after depth=%ld", [self stackDepth]);
 }
 
 - (void)popState
 {
+    //NSLog(@"popState: before depth=%ld", [self stackDepth]);
     self.state = [self.stack popObject];
+    //NSLog(@"popState: after depth=%ld", [self stackDepth]);
 }
 
 - (NSUInteger)stackDepth
@@ -165,13 +169,10 @@
     // Choose arbitrary perpendicular X and Z axes
     CC3Vector directionX;
     CC3Vector directionZ;
-    if (directionY.y < 0.50f)
-    {
+    if (directionY.y < 0.50f) {
         directionX = CC3VectorNormalize(CC3VectorCross(directionY, kCC3VectorUp));
         directionZ = CC3VectorNormalize(CC3VectorCross(directionX, directionY));
-    }
-    else
-    {
+    } else {
         directionX = CC3VectorNormalize(CC3VectorCross(directionY, kCC3VectorBackward));
         directionZ = CC3VectorNormalize(CC3VectorCross(directionX, directionY));
     }
@@ -208,8 +209,7 @@
     
     // Update the bone index on branches
     NSInteger branchIndex = self.state.parentIndex;
-    while (branchIndex != endIndex)
-    {
+    while (branchIndex != endIndex) {
         TreeBranch *branch = [self.skeleton branchAtIndex:branchIndex];
         branch.boneIndex = boneIndex;
         [self.skeleton insertBranch:branch atIndex:branchIndex];
@@ -351,6 +351,11 @@
     TreeBranch *branch = [self.skeleton branchAtIndex:parentIndex];
     
     return branch.startRadius + position * (branch.endRadius - branch.startRadius);
+}
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"[TreeCrayon level=%d, depth=%lu]", self.level, (unsigned long)[self stackDepth]];
 }
 
 @end

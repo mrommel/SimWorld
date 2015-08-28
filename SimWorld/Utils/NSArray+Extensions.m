@@ -17,7 +17,7 @@
     }
 }
 
-- (void)fillWithFloat:(float)obj andTimes:(int)amount
+- (void)fillWithFloat:(float)obj andTimes:(NSInteger)amount
 {
     for (int i = 0; i < amount; i++) {
         [self addObject:[NSNumber numberWithFloat:obj]];

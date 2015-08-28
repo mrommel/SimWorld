@@ -49,7 +49,7 @@
         TreeBranch *branch = [branches objectAtIndex:i];
         [rotationMatrix populateFromQuaternion:[branch.rotation extractQuaternion]];
         
-        int parent = branch.parentIndex;
+        NSInteger parent = branch.parentIndex;
         if (parent == -1)
         {
             // This is the root branch

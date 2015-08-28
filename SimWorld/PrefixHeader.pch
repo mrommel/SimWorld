@@ -21,6 +21,8 @@
 
 #import "Rend.h"
 
+// #define INTEND_LOGGING
+
 #endif
 
 #ifndef SimWorld_PrefixHeader_pch

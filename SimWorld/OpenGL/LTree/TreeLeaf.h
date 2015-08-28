@@ -55,10 +55,10 @@ LeafVertex LeafVertexMake(CC3Vector position, ccColor4F color, CC3Vector2 texcoo
 /// </summary>
 @property (atomic) float axisOffset;
 
-- (id)initWithParentIndex:(int)parentIndex
+- (id)initWithParentIndex:(NSInteger)parentIndex
                  andColor:(ccColor4F)color
               andRotation:(float)rotation
                   andSize:(CC3Vector2)size
-             andBoneIndex:(int)boneIndex
+             andBoneIndex:(NSInteger)boneIndex
             andAxisOffset:(float)axisOffset;
 @end

@@ -43,6 +43,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.scale = 5;
+    
     glView_ = [[REGLView alloc] initWithFrame:CGRectMake(0, 20 + STATUSBAR_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT - 20 - STATUSBAR_HEIGHT) colorFormat:kEAGLColorFormatRGBA8 multisampling:YES];
     [self.view addSubview:glView_];
     
@@ -213,9 +215,8 @@
     if (sender.numberOfTouches == 1)
     {
         CGPoint translation = [sender translationInView:sender.view];
-        float scale = 5;
-        float dx = translation.x/sender.view.frame.size.width * scale * 0.5f;
-        float dz = translation.y/sender.view.frame.size.height * scale;
+        float dx = translation.x/sender.view.frame.size.width * self.scale * 0.5f;
+        float dz = translation.y/sender.view.frame.size.height * self.scale;
         self.camera.target = CC3VectorMake(self.camera.target.x - dx, self.camera.target.y, self.camera.target.z + dz);
     }
 }

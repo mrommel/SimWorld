@@ -20,12 +20,13 @@
 @property (nonatomic, readonly) REScene *scene;
 @property (nonatomic, readonly) REWorld *world;
 @property (nonatomic, readonly) RECamera *camera;
+@property (readonly, getter=getZoomLevel) NSString *zoomLevel;
+@property (atomic) float scale;
 
 - (void)update:(float)dt;
 
 - (void)zoomIn;
 - (void)zoomOut;
-@property (readonly, getter=getZoomLevel) NSString *zoomLevel;
 
 - (void)center;
 

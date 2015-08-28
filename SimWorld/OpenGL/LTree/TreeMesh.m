@@ -183,50 +183,53 @@
 }
 
 - (void)addCircleVerticesWithTransform:(CC3GLMatrix*)transform
-                             andRadius:(float)radius andSegments:(int)segments
+                             andRadius:(float)radius
+                           andSegments:(NSInteger)segments
                            andTextureY:(float)textureY
                       andTextureStartX:(float)textureStartX
                        andTextureSpanX:(float)textureSpanX
                            andVertices:(NSMutableArray*)vertices
-                              andBone1:(int)bone1
-                              andBone2:(int)bone2
+                              andBone1:(NSInteger)bone1
+                              andBone2:(NSInteger)bone2
 {
     for (int i = 0; i < segments + 1; i++)
     {
         double angle = i / (double)(segments) * M_PI * 2.0;
         CC3Vector dir = CC3VectorMake(cosf(angle), 0, sinf(angle));
-        
-        //         Vector3.TransformNormal(ref dir, ref transform, out dir);
         CC3Vector dirNormal = CC3VectorNormalize(dir);
         dir = [transform transformDirection:dirNormal];
 
-        float tx = textureStartX + (i / (float)(segments)) * textureSpanX;
-        
-        [vertices addObject:[[TreeVertex alloc] initWithTranslation:CC3VectorAdd([transform extractTranslation], CC3VectorScaleUniform(dir, radius)) andDirection:dir andTextureCoords:CC3Vector2Make(tx, textureY) andBone1:bone1 andBone2:bone2]];
+        float tx = textureStartX + (i / (float)(segments)) * textureSpanX;        
+        CC3Vector translation = CC3VectorAdd([transform extractTranslation], CC3VectorScaleUniform(dir, radius));
+        //NSLog(@"TreeVertex dir: %@", NSStringFromCC3Vector(dir));
+        //NSLog(@"TreeVertex translation: %@", NSStringFromCC3Vector(translation));
+        [vertices addObject:[[TreeVertex alloc] initWithTranslation:translation andDirection:dir andTextureCoords:CC3Vector2Make(tx, textureY) andBone1:bone1 andBone2:bone2]];
     }
+    
+    return;
 }
 
-- (void)addCylinderIndicesWithBottomIndex:(int)bottomIndex
+- (void)addCylinderIndicesWithBottomIndex:(NSInteger)bottomIndex
                         andBottomVertices:(int)numBottomVertices
                               andTopIndex:(NSUInteger)topIndex
                            andTopVertices:(NSUInteger)numTopVertices
                                andIndices:(NSMutableArray *)indices
 {
-    int bi = 0; // Bottom index
-    int ti = 0; // Top index
+    NSInteger bi = 0; // Bottom index
+    NSInteger ti = 0; // Top index
     while (bi < numBottomVertices || ti < numTopVertices) {
         if (bi * numTopVertices < ti * numBottomVertices) {
             // Move bottom index forward
-            [indices addObject:[NSNumber numberWithInt:(bottomIndex + bi + 1)]];
-            [indices addObject:[NSNumber numberWithInt:(topIndex + ti)]];
-            [indices addObject:[NSNumber numberWithInt:(bottomIndex + bi)]];
+            [indices addObject:[NSNumber numberWithInteger:(bottomIndex + bi + 1L)]];
+            [indices addObject:[NSNumber numberWithInteger:(topIndex + ti)]];
+            [indices addObject:[NSNumber numberWithInteger:(bottomIndex + bi)]];
             
             bi++;
         } else {
             // Move top index forward
-            [indices addObject:[NSNumber numberWithInt:(bottomIndex + bi)]];
-            [indices addObject:[NSNumber numberWithInt:(topIndex + ti + 1)]];
-            [indices addObject:[NSNumber numberWithInt:(topIndex + ti)]];
+            [indices addObject:[NSNumber numberWithInteger:(bottomIndex + bi)]];
+            [indices addObject:[NSNumber numberWithInteger:(topIndex + ti + 1L)]];
+            [indices addObject:[NSNumber numberWithInteger:(topIndex + ti)]];
             
             ti++;
         }

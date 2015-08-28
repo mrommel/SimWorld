@@ -92,6 +92,9 @@
 		1A37D7571A6C57C2006B5B88 /* REWorld.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A37D73C1A6C57C2006B5B88 /* REWorld.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1A40CFD61A19FB0D0029C877 /* HexagonMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A40CFD51A19FB0D0029C877 /* HexagonMap.m */; };
 		1A40CFD81A19FC7E0029C877 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A40CFD71A19FC7E0029C877 /* CoreGraphics.framework */; };
+		1A4E6AF71B8F9E5C00D327AE /* Debug.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A4E6AF61B8F9E5C00D327AE /* Debug.m */; };
+		1A4E6AFA1B90E07E00D327AE /* TreeFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 1A4E6AF81B90E07E00D327AE /* TreeFragment.glsl */; };
+		1A4E6AFB1B90E07E00D327AE /* TreeVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 1A4E6AF91B90E07E00D327AE /* TreeVertex.glsl */; };
 		1A5289561A2F2A7100C2F439 /* ZoomManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A5289551A2F2A7100C2F439 /* ZoomManager.m */; };
 		1A5289601A3B894E00C2F439 /* GLRay.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A52895F1A3B894E00C2F439 /* GLRay.m */; };
 		1A52896C1A3E29E800C2F439 /* CreateStep1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A52896B1A3E29E800C2F439 /* CreateStep1ViewController.m */; };
@@ -375,6 +378,10 @@
 		1A40CFD41A19FB0D0029C877 /* HexagonMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HexagonMap.h; path = Map/HexagonMap.h; sourceTree = "<group>"; };
 		1A40CFD51A19FB0D0029C877 /* HexagonMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HexagonMap.m; path = Map/HexagonMap.m; sourceTree = "<group>"; };
 		1A40CFD71A19FC7E0029C877 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		1A4E6AF51B8F9E5C00D327AE /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Debug.h; path = Utils/Debug.h; sourceTree = "<group>"; };
+		1A4E6AF61B8F9E5C00D327AE /* Debug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Debug.m; path = Utils/Debug.m; sourceTree = "<group>"; };
+		1A4E6AF81B90E07E00D327AE /* TreeFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TreeFragment.glsl; path = Resource/OpenGL/TreeFragment.glsl; sourceTree = "<group>"; };
+		1A4E6AF91B90E07E00D327AE /* TreeVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TreeVertex.glsl; path = Resource/OpenGL/TreeVertex.glsl; sourceTree = "<group>"; };
 		1A5289541A2F2A7100C2F439 /* ZoomManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZoomManager.h; sourceTree = "<group>"; };
 		1A5289551A2F2A7100C2F439 /* ZoomManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoomManager.m; sourceTree = "<group>"; };
 		1A52895E1A3B894E00C2F439 /* GLRay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLRay.h; path = OpenGL/GLRay.h; sourceTree = "<group>"; };
@@ -694,13 +701,15 @@
 		1A0F5A8319E1C0E900B8BB5D /* OpenGL */ = {
 			isa = PBXGroup;
 			children = (
+				1A4E6AF81B90E07E00D327AE /* TreeFragment.glsl */,
+				1A4E6AF91B90E07E00D327AE /* TreeVertex.glsl */,
 				1A242F241A6E457F0012F60D /* sFragmentLighting.fsh */,
 				1A242F251A6E457F0012F60D /* sFragmentLighting.vsh */,
 				1A242F261A6E457F0012F60D /* sVertexLighting.fsh */,
 				1A242F271A6E457F0012F60D /* sVertexLighting.vsh */,
 				1A0F5A8419E1C10700B8BB5D /* SimpleVertex.glsl */,
-				1A0F5A8519E1C10700B8BB5D /* TemplateIcon2x.png */,
 				1A0F5A8819E1C18E00B8BB5D /* SimpleFragment.glsl */,
+				1A0F5A8519E1C10700B8BB5D /* TemplateIcon2x.png */,
 			);
 			name = OpenGL;
 			sourceTree = "<group>";
@@ -767,6 +776,8 @@
 				1AD54C701B5E89B600A602CB /* MiRoStack.m */,
 				1A5D4D661B84E2F10065BD00 /* MultiMap.h */,
 				1A5D4D671B84E2F10065BD00 /* MultiMap.m */,
+				1A4E6AF51B8F9E5C00D327AE /* Debug.h */,
+				1A4E6AF61B8F9E5C00D327AE /* Debug.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1311,6 +1322,7 @@
 				1A0F5AA719E4786200B8BB5D /* blueButton.png in Resources */,
 				1AD54C651B5CD88400A602CB /* PineBark.png in Resources */,
 				1A5289881A40C83100C2F439 /* setup_steps2.plist in Resources */,
+				1A4E6AFA1B90E07E00D327AE /* TreeFragment.glsl in Resources */,
 				1A0F5A8719E1C10700B8BB5D /* TemplateIcon2x.png in Resources */,
 				1A528A021A485B6900C2F439 /* Small.png in Resources */,
 				1A0F5AA919E4786200B8BB5D /* blueButton@2x.png in Resources */,
@@ -1371,6 +1383,7 @@
 				1A52896F1A3EC4E100C2F439 /* create_steps1.plist in Resources */,
 				1AD54C661B5CD88400A602CB /* PineLeaf.png in Resources */,
 				1A528A561A485D1E00C2F439 /* EuropeBNWv3b.Civ5Map in Resources */,
+				1A4E6AFB1B90E07E00D327AE /* TreeVertex.glsl in Resources */,
 				1A528A541A485D1E00C2F439 /* nap1796fixed.Civ5Map in Resources */,
 				1A5289FF1A485B6900C2F439 /* Duel.png in Resources */,
 				1A528A501A485D1E00C2F439 /* World_War_II_1941.Civ5Map in Resources */,
@@ -1437,6 +1450,7 @@
 				1A5289601A3B894E00C2F439 /* GLRay.m in Sources */,
 				1AD54C301B57D59000A602CB /* TreeLeafCloud.m in Sources */,
 				1A5289841A40C78700C2F439 /* SetupGameStep4ViewController.m in Sources */,
+				1A4E6AF71B8F9E5C00D327AE /* Debug.m in Sources */,
 				1A37D74F1A6C57C2006B5B88 /* RESprite.m in Sources */,
 				1AD54C741B5E8B6D00A602CB /* TreeContraints.m in Sources */,
 				1A7A45F01B54D97400C03FD6 /* NSArray+Extensions.m in Sources */,

@@ -28,5 +28,12 @@
 - (CC3Vector4)vector4Value;
 - (CC3Vector4)vector4ValueWithDefault:(CC3Vector4)defaultValue;
 
+@end
+
+@interface GDataXMLElement (Extension)
+
+- (int)intAttributeForName:(NSString *)name withDefault:(int)value;
+- (float)floatAttributeForName:(NSString *)name withDefault:(float)value;
+- (NSString *)stringAttributeForName:(NSString *)name withDefault:(NSString *)value;
 
 @end

@@ -9,6 +9,9 @@
 #import "Production.h"
 
 #import "TreeCrayonInstruction.h"
+#import "Debug.h"
+
+#define PRINT_ENABLED
 
 @implementation Production
 
@@ -26,10 +29,16 @@
 
 - (void)executeCrayon:(TreeCrayon *)crayon
 {
-    NSLog(@"executeCrayon Production with name: %@", self.name);
+    MiRoLog(@"executeCrayon %@", self);
+    MiRoLog_Indent();
     for (TreeCrayonInstruction *instruction in self.instructions) {
         [instruction executeCrayon:crayon];
     }
+    MiRoLog_Outdent();
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"[Production name=%@, instructions=%lu]", self.name, (unsigned long)self.instructions.count];
 }
 
 @end

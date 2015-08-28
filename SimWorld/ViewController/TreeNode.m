@@ -15,6 +15,7 @@
 #import "SimpleTree.h"
 #import "Mesh.h"
 #import "TreeMesh.h"
+#import "TreeLeafCloud.h"
 
 #define PROFILES @[@"Birch", @"Pine", @"Gardenwood", @"Graywood", @"Rug", @"Willow"]
 
@@ -28,11 +29,12 @@
     GLuint _depthRenderBuffer;
     
     GLuint _texCoordSlot;
-    GLuint _texCoordSlot2;
     GLint _samplerArrayLoc;
     
-    GLuint _vertexBufferTerrains;
-    GLuint _indexBufferTerrains;
+    GLuint _vertexBufferTrunk;
+    GLuint _indexBufferTrunk;
+    GLuint _vertexBufferLeaves;
+    GLuint _indexBufferLeaves;
 }
 
 @property (atomic) NSUInteger type;
@@ -60,13 +62,21 @@
         [self setupFrameBuffer];
         [self compileShaders];
         
-        glGenBuffers(1, &_vertexBufferTerrains);
-        glBindBuffer(GL_ARRAY_BUFFER, _vertexBufferTerrains);
+        glGenBuffers(1, &_vertexBufferTrunk);
+        glBindBuffer(GL_ARRAY_BUFFER, _vertexBufferTrunk);
         glBufferData(GL_ARRAY_BUFFER, self.tree.trunk.numberOfVertices * sizeof(Vertex), self.tree.trunk.vertices, GL_STATIC_DRAW);
         
-        glGenBuffers(1, &_indexBufferTerrains);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBufferTerrains);
+        glGenBuffers(1, &_indexBufferTrunk);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBufferTrunk);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, self.tree.trunk.numberOfIndices * sizeof(Index), self.tree.trunk.indices, GL_STATIC_DRAW);
+        
+        glGenBuffers(1, &_vertexBufferLeaves);
+        glBindBuffer(GL_ARRAY_BUFFER, _vertexBufferLeaves);
+        glBufferData(GL_ARRAY_BUFFER, self.tree.leaves.numberOfVertices * sizeof(Vertex), self.tree.trunk.vertices, GL_STATIC_DRAW);
+        
+        glGenBuffers(1, &_indexBufferLeaves);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBufferLeaves);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, self.tree.leaves.numberOfIndices * sizeof(Index), self.tree.trunk.indices, GL_STATIC_DRAW);
     
         self.wind = [[WindStrengthSin alloc] init];
         self.animator = [[TreeWindAnimator alloc] initWithWind:self.wind];
@@ -130,15 +140,13 @@
     
     _texCoordSlot = glGetAttribLocation(self.program.program, "TexCoordIn");
     glEnableVertexAttribArray(_texCoordSlot);
-    _texCoordSlot2 = glGetAttribLocation(self.program.program, "TexCoordIn2");
-    glEnableVertexAttribArray(_texCoordSlot2);
     _samplerArrayLoc = glGetUniformLocation(self.program.program, "texture");
 }
 
 + (REProgram*)program
 {
-    return [REProgram programWithVertexFilename:@"SimpleVertex.glsl"
-                               fragmentFilename:@"SimpleFragment.glsl"];
+    return [REProgram programWithVertexFilename:@"TreeVertex.glsl"
+                               fragmentFilename:@"TreeFragment.glsl"];
 }
 
 - (void)draw
@@ -149,12 +157,16 @@
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
     
-    glEnable (GL_BLEND);
+    glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    
+    //glEnable(GL_CULL_FACE);
+    glDisable(GL_CULL_FACE);
+    //glFrontFace(GL_CW); // GL_CW or GL_CCW
+    //glCullFace(GL_BACK); /* GL_FRONT or GL_BACK or even GL_FRONT_AND_BACK */
     
     // Projection Matrix
     const CC3GLMatrix *projectionMatrix = [self.camera projectionMatrix];
-    glUniformMatrix4fv(_projectionUniform, 1, 0, projectionMatrix.glMatrix);
     
     // View Matrix
     const CC3GLMatrix *viewMatrix = [self.camera viewMatrix];
@@ -162,35 +174,77 @@
     // ---------------------------------
 
     if (self.tree) {
-
-        // Bind the base map
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, self.tree.trunkTexture);
-        
-        // we've bound our textures in textures 0.
-        const GLint samplers[1] = {0};
-        glUniform1iv(_samplerArrayLoc, 1, samplers);
-        
-        glBindBuffer(GL_ARRAY_BUFFER, _vertexBufferTerrains);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBufferTerrains);
-        
-        glUniformMatrix4fv(_modelViewUniform, 1, 0, viewMatrix.glMatrix);
-        
-        glVertexAttribPointer(_positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-        glVertexAttribPointer(_colorSlot, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) (sizeof(float) * 3));
-        glVertexAttribPointer(_texCoordSlot, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) (sizeof(float) * 7));
-        glVertexAttribPointer(_texCoordSlot2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) (sizeof(float) * 9));
-        
-        glEnableVertexAttribArray(_positionSlot);
-        glEnableVertexAttribArray(_colorSlot);
-        glEnableVertexAttribArray(_texCoordSlot);
-        glEnableVertexAttribArray(_texCoordSlot2);
-        
-        glDrawElements(GL_TRIANGLES, self.tree.trunk.numberOfIndices, GL_UNSIGNED_INT, 0);
-     
-        // unbind textures
-        [RETexture unbind];
+        if (self.showTrunk) {
+            [self drawTrunkWithProjection:projectionMatrix andView:viewMatrix];
+        }
+        if (self.showLeaves) {
+            [self drawLeavesWithProjection:projectionMatrix andView:viewMatrix];
+        }
     }
+}
+
+- (void)drawTrunkWithProjection:(const CC3GLMatrix *)projectionMatrix andView:(const CC3GLMatrix *)viewMatrix
+{
+    // Bind the trunk texture
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, self.tree.trunkTexture);
+    
+    // we've bound our textures in textures 0.
+    const GLint samplers[1] = {0};
+    glUniform1iv(_samplerArrayLoc, 1, samplers);
+    
+    glBindBuffer(GL_ARRAY_BUFFER, _vertexBufferTrunk);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBufferTrunk);
+    
+    glUniformMatrix4fv(_projectionUniform, 1, 0, projectionMatrix.glMatrix);
+    glUniformMatrix4fv(_modelViewUniform, 1, 0, viewMatrix.glMatrix);
+    
+    glVertexAttribPointer(_positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
+    glVertexAttribPointer(_colorSlot, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) (sizeof(float) * 3));
+    glVertexAttribPointer(_texCoordSlot, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) (sizeof(float) * 7));
+    //glVertexAttribPointer(_texCoordSlot2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) (sizeof(float) * 9));
+    
+    glEnableVertexAttribArray(_positionSlot);
+    glEnableVertexAttribArray(_colorSlot);
+    glEnableVertexAttribArray(_texCoordSlot);
+    //glEnableVertexAttribArray(_texCoordSlot2);
+    
+    glDrawElements(GL_TRIANGLES, (int)self.tree.trunk.numberOfIndices, GL_UNSIGNED_INT, 0);
+    
+    // unbind textures
+    [RETexture unbind];
+}
+
+- (void)drawLeavesWithProjection:(const CC3GLMatrix *)projectionMatrix andView:(const CC3GLMatrix *)viewMatrix
+{
+    // Bind the trunk texture
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, self.tree.leafTexture);
+    
+    // we've bound our textures in textures 0.
+    const GLint samplers[1] = {0};
+    glUniform1iv(_samplerArrayLoc, 1, samplers);
+    
+    glBindBuffer(GL_ARRAY_BUFFER, _vertexBufferLeaves);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBufferLeaves);
+    
+    glUniformMatrix4fv(_projectionUniform, 1, 0, projectionMatrix.glMatrix);
+    glUniformMatrix4fv(_modelViewUniform, 1, 0, viewMatrix.glMatrix);
+    
+    glVertexAttribPointer(_positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
+    glVertexAttribPointer(_colorSlot, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) (sizeof(float) * 3));
+    glVertexAttribPointer(_texCoordSlot, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) (sizeof(float) * 7));
+    //glVertexAttribPointer(_texCoordSlot2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) (sizeof(float) * 9));
+    
+    glEnableVertexAttribArray(_positionSlot);
+    glEnableVertexAttribArray(_colorSlot);
+    glEnableVertexAttribArray(_texCoordSlot);
+    //glEnableVertexAttribArray(_texCoordSlot2);
+    
+    glDrawElements(GL_TRIANGLES, (int)self.tree.leaves.numberOfIndices, GL_UNSIGNED_INT, 0);
+    
+    // unbind textures
+    [RETexture unbind];
 }
 
 @end

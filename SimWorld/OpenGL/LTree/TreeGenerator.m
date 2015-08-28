@@ -149,16 +149,14 @@
     if ([@"Call" isEqualToString:key]) {
         NSString *name = [[node attributeForName:@"ref"] stringValue];
         NSArray* refs = [TreeGenerator productionsByName:name fromProductionList:productions];
-        int delta = [[node attributeForName:@"delta"] intValueWithDefault:-1];
+        int delta = [node intAttributeForName:@"delta" withDefault:-1];
         return [[Call alloc] initWithName:name andProductions:refs andDelta:delta];
     } else if ([@"Child" isEqualToString:key]) {
         Child *child = [[Child alloc] init];
-        
         for (GDataXMLElement* childNode in node.children) {
             TreeCrayonInstruction *instruction = [TreeGenerator parseInstructionFromKey:childNode.name andNode:childNode andProductions:productions];
             [child addInstruction:instruction];
         }
-
         return child;
     } else if ([@"Maybe" isEqualToString:key]) {
         float chance = [[node attributeForName:@"chance"] floatValueWithDefault:0.50f];
@@ -170,31 +168,31 @@
         return maybe;
     } else if ([@"Forward" isEqualToString:key]) {
         float distance = [[node attributeForName:@"distance"] floatValue];
-        float variation = [[node attributeForName:@"variation"] floatValueWithDefault:0.0f];
-        float radius = [[node attributeForName:@"radius"] floatValueWithDefault:0.86f];
+        float variation = [node floatAttributeForName:@"variation" withDefault:0.0f];
+        float radius = [node floatAttributeForName:@"radius" withDefault:0.86f];
         return [[Forward alloc] initWithDistance:distance andVariation:variation andRadius:radius];
     } else if ([@"Backward" isEqualToString:key]) {
         float distance = [[node attributeForName:@"distance"] floatValue];
-        float variation = [[node attributeForName:@"variation"] floatValueWithDefault:0.0f];
+        float variation = [node floatAttributeForName:@"variation" withDefault:0.0f];
         return [[Backward alloc] initWithDistance:distance andVariation:variation];
     } else if ([@"Pitch" isEqualToString:key]) {
         float angle = [[node attributeForName:@"angle"] floatValue];
-        float variation = [[node attributeForName:@"variation"] floatValueWithDefault:0.0f];
+        float variation = [node floatAttributeForName:@"variation" withDefault:0.0f];
         return [[Pitch alloc] initWithAngle:angle andVariation:variation];
     } else if ([@"Scale" isEqualToString:key]) {
         float scale = [[node attributeForName:@"scale"] floatValue];
-        float variation = [[node attributeForName:@"variation"] floatValueWithDefault:0.0f];
+        float variation = [node floatAttributeForName:@"variation" withDefault:0.0f];
         return [[Scale alloc] initWithScale:scale andVariation:variation];
     } else if ([@"ScaleRadius" isEqualToString:key]) {
         float scale = [[node attributeForName:@"scale"] floatValue];
-        float variation = [[node attributeForName:@"variation"] floatValueWithDefault:0.0f];
+        float variation = [node floatAttributeForName:@"variation" withDefault:0.0f];
         return [[ScaleRadius alloc] initWithScale:scale andVariation:variation];
     } else if ([@"Twist" isEqualToString:key]) {
-        float angle = [[node attributeForName:@"angle"] floatValueWithDefault:0];
-        float variation = [[node attributeForName:@"variation"] floatValueWithDefault:360.0f];
+        float angle = [node floatAttributeForName:@"angle" withDefault:0];
+        float variation = [node floatAttributeForName:@"variation" withDefault:360.0f];
         return [[Twist alloc] initWithAngle:angle andVariation:variation];
     } else if ([@"Level" isEqualToString:key]) {
-        int delta = [[node attributeForName:@"delta"] intValueWithDefault:-1];
+        int delta = [node intAttributeForName:@"delta" withDefault:-1];
         return [[Level alloc] initWithDelta:delta];
     } else if ([@"Leaf" isEqualToString:key]) {
         Leaf *leaf = [[Leaf alloc] init];
@@ -208,16 +206,16 @@
         leaf.axisOffset = [[axisOffsetNode attributeForName:@"value"] floatValue];
         return leaf;
     } else if ([@"Bone" isEqualToString:key]) {
-        float delta = [[node attributeForName:@"delta"] intValueWithDefault:-1];
+        float delta = [node intAttributeForName:@"delta" withDefault:-1];
         return [[Bone alloc] initWithDelta:delta];
     } else if ([@"RequireLevel" isEqualToString:key]) {
         NSString *compareType = [[node attributeForName:@"type"] stringValue];
-        int level = [[node attributeForName:@"level"] intValue];
+        int level = [node intAttributeForName:@"level" withDefault:-1];
         RequireLevel *requireLevel = [[RequireLevel alloc] initWithLevel:level andCompareType:compareType];
-        /*for (GDataXMLElement* childNode in node.children) {
+        for (GDataXMLElement* childNode in node.children) {
             TreeCrayonInstruction *instruction = [TreeGenerator parseInstructionFromKey:childNode.name andNode:childNode andProductions:productions];
             [requireLevel addInstruction:instruction];
-        }*/
+        }
         return requireLevel;
     } else if ([@"Align" isEqualToString:key]) {
         return [[Align alloc] init];
