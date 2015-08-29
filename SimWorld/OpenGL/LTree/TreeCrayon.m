@@ -50,7 +50,7 @@
 
 @implementation TreeCrayon
 
-- (id)init
+- (id)initWithName:(NSString *)name
 {
     self = [super init];
     
@@ -69,7 +69,7 @@
         
         self.boneLevels = 3;
         
-        self.skeleton = [[TreeSkeleton alloc] init];
+        self.skeleton = [[TreeSkeleton alloc] initWithName:name];
         
         self.branchTransforms = [[NSMutableArray alloc] init];
         self.boneEndings = [[NSMutableArray alloc] init];

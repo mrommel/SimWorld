@@ -17,7 +17,26 @@
 #import "TreeMesh.h"
 #import "TreeLeafCloud.h"
 
-#define PROFILES @[@"Birch", @"Pine", @"Gardenwood", @"Graywood", @"Rug", @"Willow"]
+@implementation TreeType
+
++ (TreeType *)treeWithIdentifier:(int)identifier andName:(NSString *)name
+{
+    return [[TreeType alloc] initWithIdentifier:identifier andName:name];
+}
+
+- (id)initWithIdentifier:(int)identifier andName:(NSString *)name
+{
+    self = [super init];
+    
+    if (self) {
+        self.identifier = identifier;
+        self.name = name;
+    }
+    
+    return self;
+}
+
+@end
 
 @interface TreeNode() {
     
@@ -48,12 +67,12 @@
 
 @implementation TreeNode
 
-- (id)initWithType:(NSUInteger)tree;
+- (id)initWithType:(TreeType *)tree;
 {
     self = [super init];
     
     if (self) {
-        self.type = tree;
+        self.type = tree.identifier;
         self.tree = nil;
         
         [self loadTreeGenerators];
@@ -72,11 +91,11 @@
         
         glGenBuffers(1, &_vertexBufferLeaves);
         glBindBuffer(GL_ARRAY_BUFFER, _vertexBufferLeaves);
-        glBufferData(GL_ARRAY_BUFFER, self.tree.leaves.numberOfVertices * sizeof(Vertex), self.tree.trunk.vertices, GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, self.tree.leaves.numberOfVertices * sizeof(Vertex), self.tree.leaves.vertices, GL_STATIC_DRAW);
         
         glGenBuffers(1, &_indexBufferLeaves);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBufferLeaves);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, self.tree.leaves.numberOfIndices * sizeof(Index), self.tree.trunk.indices, GL_STATIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, self.tree.leaves.numberOfIndices * sizeof(Index), self.tree.leaves.indices, GL_STATIC_DRAW);
     
         self.wind = [[WindStrengthSin alloc] init];
         self.animator = [[TreeWindAnimator alloc] initWithWind:self.wind];
@@ -88,9 +107,9 @@
 - (void)loadTreeGenerators
 {
     self.profiles = [[NSMutableArray alloc] init];
-    for (NSString *profileName in PROFILES) {
-        NSLog(@"Loading tree: %@", profileName);
-        [self.profiles addObject:[[TreeProfile alloc] initWithProfileName:profileName]];
+    for (TreeType *treeType in TREE_TYPES) {
+        NSLog(@"Loading tree: %@", treeType.name);
+        [self.profiles addObject:[[TreeProfile alloc] initWithProfileName:treeType.name]];
     }
     
     TreeProfile *profile = [self treeProfileAtIndex:self.type];
@@ -122,8 +141,7 @@
     GLuint framebuffer;
     glGenFramebuffers(1, &framebuffer);
     glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
-                              GL_RENDERBUFFER, _colorRenderBuffer);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, _colorRenderBuffer);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _depthRenderBuffer);
 }
 
@@ -202,12 +220,10 @@
     glVertexAttribPointer(_positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
     glVertexAttribPointer(_colorSlot, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) (sizeof(float) * 3));
     glVertexAttribPointer(_texCoordSlot, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) (sizeof(float) * 7));
-    //glVertexAttribPointer(_texCoordSlot2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) (sizeof(float) * 9));
     
     glEnableVertexAttribArray(_positionSlot);
     glEnableVertexAttribArray(_colorSlot);
     glEnableVertexAttribArray(_texCoordSlot);
-    //glEnableVertexAttribArray(_texCoordSlot2);
     
     glDrawElements(GL_TRIANGLES, (int)self.tree.trunk.numberOfIndices, GL_UNSIGNED_INT, 0);
     
@@ -234,12 +250,10 @@
     glVertexAttribPointer(_positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
     glVertexAttribPointer(_colorSlot, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) (sizeof(float) * 3));
     glVertexAttribPointer(_texCoordSlot, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) (sizeof(float) * 7));
-    //glVertexAttribPointer(_texCoordSlot2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) (sizeof(float) * 9));
     
     glEnableVertexAttribArray(_positionSlot);
     glEnableVertexAttribArray(_colorSlot);
     glEnableVertexAttribArray(_texCoordSlot);
-    //glEnableVertexAttribArray(_texCoordSlot2);
     
     glDrawElements(GL_TRIANGLES, (int)self.tree.leaves.numberOfIndices, GL_UNSIGNED_INT, 0);
     

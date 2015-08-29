@@ -20,11 +20,12 @@
 @synthesize leaves;
 @synthesize textureHeight;
 
-- (id)init
+- (id)initWithName:(NSString *)name;
 {
     self = [super init];
     
     if (self) {
+        self.name = name;
         self.branches = [[NSMutableArray alloc] init];
         self.leaves = [[NSMutableArray alloc] init];
         self.bones = [[NSMutableArray alloc] init];

@@ -112,15 +112,17 @@
     [treeButton setBackgroundImage:buttonImageHighlight forState:UIControlStateHighlighted];
     [treeButton handleControlEvent:UIControlEventTouchUpInside
                            withBlock:^{
-                               NSLog(@"Next Tree");
-                               [weakSelf nextTree];
+                               int treeIndex = RandomUIntBelow((int)TREE_TYPES.count);
+                               TreeType *type = [TREE_TYPES objectAtIndex:treeIndex];
+                               NSLog(@"Next Tree: %@", type);
+                               [weakSelf nextTree:type];
                            }];
     [treeButton setTitle:@"TR" forState:UIControlStateNormal];
     treeButton.frame = CGRectMake(BU + BU2 + BU + BU2 + BU + BU2 + BU + BU2 + BU + BU2 + BU, BU, BU2 + BU, BU2);
     [glView_ addSubview:treeButton];
 }
 
-- (void)nextTree
+- (void)nextTree:(TreeType *)treeType
 {
     // remove old tree
     BOOL showTrunk = self.treeNode.showTrunk;
@@ -128,8 +130,7 @@
     [self.world removeChild:self.treeNode];
     
     // Tree
-    int treeIndex = RandomUIntBelow(TREE_TYPES);
-    self.treeNode = [[TreeNode alloc] initWithType:treeIndex];
+    self.treeNode = [[TreeNode alloc] initWithType:treeType];
     self.treeNode.showTrunk = showTrunk;
     self.treeNode.showLeaves = showLeaves;
     [self.world addChild:self.treeNode];

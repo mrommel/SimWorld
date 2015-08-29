@@ -54,6 +54,8 @@
     float _textureHeightVariation;
 }
 
+@property (nonatomic, retain) NSString *profileName;
+
 @end
 
 @implementation TreeGenerator
@@ -76,6 +78,8 @@
     self = [self init];
     
     if (self) {
+        self.profileName = ltreeFilename;
+        
         NSString *rootName = nil;
         int levels = -1;
         int boneLevels = 3;
@@ -250,7 +254,7 @@
 {
     NSAssert(self.root != nil && self.maxLevel != 0, @"TreeGenerator has not been initialized. Must set Root and MaxLevel before generating a tree.");
     
-    TreeCrayon *crayon = [[TreeCrayon alloc] init];
+    TreeCrayon *crayon = [[TreeCrayon alloc] initWithName:self.profileName];
     crayon.level = self.maxLevel;
     crayon.boneLevels = self.boneLevels;
     crayon.constraints = _constraints;

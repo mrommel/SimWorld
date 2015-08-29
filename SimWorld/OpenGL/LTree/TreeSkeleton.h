@@ -16,13 +16,14 @@
 
 @interface TreeSkeleton : NSObject
 
+@property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSMutableArray *branches; // TreeBranch
 @property (nonatomic, retain) NSMutableArray *leaves; // TreeLeaf
 @property (nonatomic, retain) NSMutableArray *bones; // TreeBone
 @property (atomic) float textureHeight;
 @property (nonatomic, retain) CC3GLVector *leafAxis;
 
-- (id)init;
+- (id)initWithName:(NSString *)name;
 
 - (void)copyAbsoluteBranchTransformsTo:(NSMutableArray *)destinationMatrices;
 - (void)copyAbsoluteBoneTranformsTo:(NSMutableArray *)destinationMatrices andBoneRotation:(NSMutableArray *)boneRotations;

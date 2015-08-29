@@ -21,7 +21,7 @@
 @property (nonatomic, retain) TreeSkeleton *skeleton;
 @property (atomic, readonly) float currentScale;
 
-- (id)init;
+- (id)initWithName:(NSString *)name;
 
 - (void)executeBoneWithDelta:(int)delta;
 
