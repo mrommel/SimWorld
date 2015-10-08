@@ -14,6 +14,7 @@
 #import "TreeBranch.h"
 #import "NSArray+Extensions.h"
 
+
 @implementation TreeLeafCloud
 
 - (id)initWithTreeSkeleton:(TreeSkeleton *)skeleton
@@ -26,7 +27,7 @@
         }
         
         NSMutableArray *transforms = [[NSMutableArray alloc] initWithCapacity:skeleton.branches.count];
-        [transforms fillWith:[CC3GLMatrix matrix] andTimes:skeleton.branches.count];
+        [transforms fillWith:[CC3GLMatrix matrix] forAmount:skeleton.branches.count];
         [skeleton copyAbsoluteBranchTransformsTo:transforms];
         
         CC3Vector center = kCC3VectorZero;

@@ -220,6 +220,41 @@ CC3BoundingSphere CC3BoundingSphereMakeFromCenter(CC3Vector center, GLfloat radi
     return result;
 }
 
+- (CC3GLMatrix *)copyMultipliedByConst:(const CC3GLMatrix *)mut
+{
+    CC3GLMatrix *result = [CC3GLMatrix matrix];
+    [result populateFrom:self];
+    [result multiplyByMatrixConst:mut];
+    
+    return result;
+}
+
+-(void) multiplyByMatrixConst:(const CC3GLMatrix*) aGLMatrix {
+    
+    // If other matrix is identity, this matrix doesn't change, so leave
+    if (aGLMatrix.isIdentity) {
+        return;
+    }
+    
+    // If this matrix is identity, it just becomes the other matrix
+    if (self.isIdentity) {
+        [self populateFromConst: aGLMatrix];
+        return;
+    }
+    
+    // Otherwise, go through with the multiplication
+    [[self class] multiply: self.glMatrix byMatrix: aGLMatrix.glMatrix];
+    isIdentity = NO;
+}
+
+-(void) populateFromConst: (const CC3GLMatrix*) aMtx {
+    if (aMtx.isIdentity) {
+        [self populateIdentity];
+    } else {
+        [self populateFromGLMatrix: aMtx.glMatrix];
+    }
+}
+
 - (CC3GLMatrix *)copyMultipliedBy:(CC3GLMatrix *)mut
 {
     CC3GLMatrix *result = [CC3GLMatrix matrix];

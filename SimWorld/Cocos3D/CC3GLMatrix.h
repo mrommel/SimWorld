@@ -87,7 +87,7 @@
  * Allocates and returns an initialized autoreleased instance with all elements
  * populated as an identity matrix (ones on the diagonal, zeros elsewhere).
  */
-+(id) identity;
++(instancetype) identity;
 
 /**
  * Returns an initialized instance with all elements copied from the specified

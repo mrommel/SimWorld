@@ -11,6 +11,7 @@
 #import "TreeNode.h"
 #import "UIBlockButton.h"
 #import "UIConstants.h"
+#import "Debug.h"
 
 @interface TestViewController() {
     
@@ -53,7 +54,7 @@
     [showTrunkButton handleControlEvent:UIControlEventTouchUpInside
                               withBlock:^{
                                   weakSelf.treeNode.showTrunk = !weakSelf.treeNode.showTrunk;
-                                  NSLog(@"Show Trunk: %d", weakSelf.treeNode.showTrunk);
+                                  NSLog(@"Show Trunk: %@", NSStringFromBOOL(weakSelf.treeNode.showTrunk));
                               }];
     [showTrunkButton setTitle:@"T" forState:UIControlStateNormal];
     showTrunkButton.frame = CGRectMake(BU, BU, BU2, BU2);
@@ -65,7 +66,7 @@
     [showLeavesButton handleControlEvent:UIControlEventTouchUpInside
                            withBlock:^{
                                weakSelf.treeNode.showLeaves = !weakSelf.treeNode.showLeaves;
-                               NSLog(@"Show Leaves: %d", weakSelf.treeNode.showLeaves);
+                               NSLog(@"Show Leaves: %@", NSStringFromBOOL(weakSelf.treeNode.showLeaves));
                            }];
     [showLeavesButton setTitle:@"L" forState:UIControlStateNormal];
     showLeavesButton.frame = CGRectMake(BU + BU2 + BU, BU, BU2, BU2);
@@ -134,6 +135,14 @@
     self.treeNode.showTrunk = showTrunk;
     self.treeNode.showLeaves = showLeaves;
     [self.world addChild:self.treeNode];
+}
+
+- (void)update:(float)dt
+{
+    static float angle = 0;
+    
+    angle += 2;
+    self.treeNode.rotationAngle = angle;
 }
 
 @end

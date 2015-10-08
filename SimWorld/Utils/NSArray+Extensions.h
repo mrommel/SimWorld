@@ -8,15 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
+#import "TreeVertex.h"
+
 @interface NSMutableArray (Extensions)
 
-- (void)fillWith:(id)obj andTimes:(NSInteger)amount;
-- (void)fillWithFloat:(float)obj andTimes:(NSInteger)amount;
+- (void)fillWith:(id)obj forAmount:(NSInteger)amount;
+- (void)fillWithFloat:(float)obj forAmount:(NSInteger)amount;
+
+- (void)addTreeVertex:(TreeVertex)treeVertex;
+- (TreeVertex)treeVertexAtIndex:(int)index;
 
 @end
 
 @interface NSArray (Extensions)
 
 - (float)floatAtIndex:(int)index;
+- (int)intAtIndex:(int)index;
 
 @end

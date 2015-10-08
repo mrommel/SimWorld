@@ -18,10 +18,6 @@
 #import "TreeVertex.h"
 
 @interface TreeMesh() {
-    GLuint _vertexBuffer;
-    GLuint _indexBuffer;
-    int _numVertices;
-    int _numTriangles;
     int _maxRadialSegments;
 }
 
@@ -70,12 +66,12 @@
     
     // Absolute transformation of branches
     NSMutableArray *transforms = [[NSMutableArray alloc] initWithCapacity:skeleton.branches.count]; // CC3GLMatrix
-    [transforms fillWith:[CC3GLMatrix matrix] andTimes:skeleton.branches.count];
+    [transforms fillWith:[CC3GLMatrix matrix] forAmount:skeleton.branches.count];
     [skeleton copyAbsoluteBranchTransformsTo:transforms];
     
     // Branch topological distances from root
     NSMutableArray *distances = [[NSMutableArray alloc] initWithCapacity:skeleton.branches.count]; // float
-    [distances fillWithFloat:0.0f andTimes:skeleton.branches.count];
+    [distances fillWithFloat:0.0f forAmount:skeleton.branches.count];
     [skeleton longestBranching:distances];
     
     //
@@ -157,13 +153,16 @@
     
     // fill vertices
     for(int i = 0; i < vertices.count; ++i) {
-        TreeVertex *vertex = [vertices objectAtIndex:i];
-        [self setVertexAt:i andX:vertex.position.x andY:vertex.position.y andZ:vertex.position.z andTextureX:vertex.textureCoordinate.x andTextureY:vertex.textureCoordinate.y];
+        TreeVertex vertex = [vertices treeVertexAtIndex:i];
+        [self setVertexAt:i andX:vertex.Position[0] andY:vertex.Position[1] andZ:vertex.Position[2]
+               andNormalX:vertex.Normal[0] andNormalY:vertex.Normal[1] andNormalZ:vertex.Normal[2]
+              andTextureX:vertex.TexCoord[0] andTextureY:vertex.TexCoord[1]
+                 andBone1:vertex.Bones[0] andBone2:vertex.Bones[1]];
     }
     
     // fill indices
     for(int i = 0; i < indices.count; ++i) {
-        [self setIndexAt:i toIndex:[[indices objectAtIndex:i] intValue]];
+        [self setIndexAt:i toIndex:[indices intAtIndex:i]];
     }
     
     // Set the bounding sphere
@@ -203,7 +202,7 @@
         CC3Vector translation = CC3VectorAdd([transform extractTranslation], CC3VectorScaleUniform(dir, radius));
         //NSLog(@"TreeVertex dir: %@", NSStringFromCC3Vector(dir));
         //NSLog(@"TreeVertex translation: %@", NSStringFromCC3Vector(translation));
-        [vertices addObject:[[TreeVertex alloc] initWithTranslation:translation andDirection:dir andTextureCoords:CC3Vector2Make(tx, textureY) andBone1:bone1 andBone2:bone2]];
+        [vertices addTreeVertex:TreeVertexMake(translation, dir, CC3Vector2Make(tx, textureY), (int)bone1, (int)bone2)];
     }
     
     return;
@@ -234,6 +233,39 @@
             ti++;
         }
     }
+}
+
+- (void)populateWithNumberOfVertices:(NSUInteger)numberOfVertices
+                  andNumberOfIndices:(NSUInteger)numberOfIndices
+{
+    self.vertices = malloc(numberOfVertices * sizeof(TreeVertex));
+    self.numberOfVertices = numberOfVertices;
+    self.indices = malloc(numberOfIndices * sizeof(Index));
+    self.numberOfIndices = numberOfIndices;
+}
+
+- (void)setIndexAt:(int)index
+           toIndex:(int)indexValue
+{
+    self.indices[index] = indexValue;
+}
+
+- (void)setVertexAt:(int)index
+               andX:(float)x andY:(float)y andZ:(float)z
+         andNormalX:(float)nx andNormalY:(float)ny andNormalZ:(float)nz
+        andTextureX:(float)tx andTextureY:(float)ty
+           andBone1:(NSUInteger)bone1 andBone2:(NSUInteger)bone2
+{
+    self.vertices[index].Position[0] = x;
+    self.vertices[index].Position[1] = y;
+    self.vertices[index].Position[2] = z;
+    self.vertices[index].Normal[0] = nx;
+    self.vertices[index].Normal[1] = ny;
+    self.vertices[index].Normal[2] = nz;
+    self.vertices[index].TexCoord[0] = tx;
+    self.vertices[index].TexCoord[1] = ty;
+    self.vertices[index].Bones[0] = bone1;
+    self.vertices[index].Bones[1] = bone2;
 }
 
 - (void)draw

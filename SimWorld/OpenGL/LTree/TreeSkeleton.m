@@ -12,6 +12,7 @@
 #import "TreeBranch.h"
 #import "TreeLeaf.h"
 #import "TreeBone.h"
+#import "CC3GLMatrix+Extension.h"
 
 @implementation TreeSkeleton
 
@@ -73,11 +74,12 @@
 
 - (void)copyAbsoluteBoneTranformsTo:(NSMutableArray *)destinationArray andBoneRotation:(NSMutableArray *)boneRotations
 {
-    NSAssert(destinationArray.count == self.bones.count, @"Destination array is too small.");
+    NSAssert(destinationArray.count == self.bones.count, @"Destination array is too small. dest: %d, bones: %d", destinationArray.count, self.bones.count);
     NSAssert(boneRotations.count == self.bones.count, @"Rotations array is too small to be a proper animation state.");
     
     for (int i = 0; i < bones.count; i++) {
-        [destinationArray insertObject:[CC3GLMatrix matrixFromQuaternion:[boneRotations vector4AtIndex:i]] atIndex:i];
+        //[destinationArray insertObject:[CC3GLMatrix matrixFromQuaternion:[boneRotations vector4AtIndex:i]] atIndex:i];
+        [destinationArray insertObject:[boneRotations matrixAtIndex:i] atIndex:i];
         if ([self boneAtIndex:i].parentIndex != -1) {
             float m42 = [self boneAtIndex:[self boneAtIndex:i].parentIndex].length;
             CC3GLMatrix *destination = [destinationArray matrixAtIndex:i];

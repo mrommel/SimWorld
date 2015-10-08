@@ -26,3 +26,8 @@ void MiRoLog(NSString * format, ...)
     va_end(args);
 #endif // INTEND_LOGGING
 }
+
+NSString* NSStringFromBOOL(BOOL value)
+{
+    return value ? @"YES" : @"NO";
+}

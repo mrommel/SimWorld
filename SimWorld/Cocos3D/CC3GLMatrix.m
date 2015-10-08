@@ -141,7 +141,7 @@
 	}
 }
 
-+(id) identity {
++(instancetype) identity {
 	if ( [self isSubclassOfClass: [CC3GLArrayMatrix class]] ) {
 		return [[[self alloc] initIdentity] autorelease];
 	} else {

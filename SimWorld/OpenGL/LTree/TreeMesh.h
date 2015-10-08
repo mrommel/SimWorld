@@ -8,11 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
+#import "TreeVertex.h"
 #import "Mesh.h"
 
 @class TreeSkeleton;
 
-@interface TreeMesh : Mesh
+@interface TreeMesh : NSObject
+
+@property (nonatomic, assign) TreeVertex* vertices;
+@property (nonatomic, assign) NSUInteger numberOfVertices;
+@property (nonatomic, assign) Index* indices;
+@property (nonatomic, assign) NSUInteger numberOfIndices;
+@property (nonatomic, assign) GLuint texture;
+@property (nonatomic, assign) CC3BoundingBox boundingBox;
 
 - (id)initWithTreeSkeleton:(TreeSkeleton *)skeleton;
 - (id)initWithTreeSkeleton:(TreeSkeleton *)skeleton andNumberOfRadialSegments:(int)numberOfRadialSegments;

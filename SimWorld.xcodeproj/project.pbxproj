@@ -177,7 +177,6 @@
 		1A5D4D651B83CAD40065BD00 /* GDataXMLNode+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A5D4D641B83CAD40065BD00 /* GDataXMLNode+Extension.m */; };
 		1A5D4D681B84E2F10065BD00 /* MultiMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A5D4D671B84E2F10065BD00 /* MultiMap.m */; };
 		1A5DEDE21B7620AD00818142 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DEDE01B7620AD00818142 /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		1A5DEDE41B7623B100818142 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5DEDE31B7623B100818142 /* libxml2.dylib */; };
 		1A7A45DA1B4CE3A000C03FD6 /* button_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A7A45D61B4CE3A000C03FD6 /* button_back.png */; };
 		1A7A45DB1B4CE3A000C03FD6 /* button_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A7A45D71B4CE3A000C03FD6 /* button_normal.png */; };
 		1A7A45DC1B4CE3A000C03FD6 /* navbar_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A7A45D81B4CE3A000C03FD6 /* navbar_bg.png */; };
@@ -227,6 +226,7 @@
 		1AF0539719F54C39003D54D2 /* TextureAtlas.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF0539619F54C39003D54D2 /* TextureAtlas.m */; };
 		1AF8DBDE1A03929E00338D62 /* terrains.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AF8DBDD1A03929E00338D62 /* terrains.png */; };
 		1AF8DBE01A0395B600338D62 /* tile_floor.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AF8DBDF1A0395B600338D62 /* tile_floor.png */; };
+		1AF94A951BB735200099A66D /* TreeVertex2.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 1AF94A941BB735200099A66D /* TreeVertex2.glsl */; settings = {ASSET_TAGS = (); }; };
 		1AFD7F1C1A2E3E2F00356281 /* AbstractCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD7F1B1A2E3E2F00356281 /* AbstractCamera.m */; };
 /* End PBXBuildFile section */
 
@@ -494,7 +494,6 @@
 		1A5D4D671B84E2F10065BD00 /* MultiMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MultiMap.m; path = Utils/MultiMap.m; sourceTree = "<group>"; };
 		1A5DEDE01B7620AD00818142 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		1A5DEDE11B7620AD00818142 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
-		1A5DEDE31B7623B100818142 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		1A7A45D61B4CE3A000C03FD6 /* button_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button_back.png; path = Resource/button_back.png; sourceTree = "<group>"; };
 		1A7A45D71B4CE3A000C03FD6 /* button_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button_normal.png; path = Resource/button_normal.png; sourceTree = "<group>"; };
 		1A7A45D81B4CE3A000C03FD6 /* navbar_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = navbar_bg.png; path = Resource/navbar_bg.png; sourceTree = "<group>"; };
@@ -573,6 +572,7 @@
 		1AF0539619F54C39003D54D2 /* TextureAtlas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TextureAtlas.m; path = OpenGL/TextureAtlas.m; sourceTree = "<group>"; };
 		1AF8DBDD1A03929E00338D62 /* terrains.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = terrains.png; path = Resource/TileSets/terrains.png; sourceTree = "<group>"; };
 		1AF8DBDF1A0395B600338D62 /* tile_floor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tile_floor.png; path = Resource/TileSets/tile_floor.png; sourceTree = "<group>"; };
+		1AF94A941BB735200099A66D /* TreeVertex2.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TreeVertex2.glsl; path = Resource/OpenGL/TreeVertex2.glsl; sourceTree = "<group>"; };
 		1AFD7F1A1A2E3E2F00356281 /* AbstractCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AbstractCamera.h; path = OpenGL/AbstractCamera.h; sourceTree = "<group>"; };
 		1AFD7F1B1A2E3E2F00356281 /* AbstractCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AbstractCamera.m; path = OpenGL/AbstractCamera.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -582,7 +582,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A5DEDE41B7623B100818142 /* libxml2.dylib in Frameworks */,
 				1A40CFD81A19FC7E0029C877 /* CoreGraphics.framework in Frameworks */,
 				1A0F5A7619E06C8100B8BB5D /* QuartzCore.framework in Frameworks */,
 				1A0F5A7419E06C6F00B8BB5D /* OpenGLES.framework in Frameworks */,
@@ -649,7 +648,6 @@
 				1A0F5A7F19E070B800B8BB5D /* Libraries */,
 				1A0F5AA219E4784F00B8BB5D /* Buttons */,
 				1A5289A71A4170C400C2F439 /* Localizable.strings */,
-				1A5DEDE31B7623B100818142 /* libxml2.dylib */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -703,6 +701,7 @@
 			children = (
 				1A4E6AF81B90E07E00D327AE /* TreeFragment.glsl */,
 				1A4E6AF91B90E07E00D327AE /* TreeVertex.glsl */,
+				1AF94A941BB735200099A66D /* TreeVertex2.glsl */,
 				1A242F241A6E457F0012F60D /* sFragmentLighting.fsh */,
 				1A242F251A6E457F0012F60D /* sFragmentLighting.vsh */,
 				1A242F261A6E457F0012F60D /* sVertexLighting.fsh */,
@@ -1325,6 +1324,7 @@
 				1A4E6AFA1B90E07E00D327AE /* TreeFragment.glsl in Resources */,
 				1A0F5A8719E1C10700B8BB5D /* TemplateIcon2x.png in Resources */,
 				1A528A021A485B6900C2F439 /* Small.png in Resources */,
+				1AF94A951BB735200099A66D /* TreeVertex2.glsl in Resources */,
 				1A0F5AA919E4786200B8BB5D /* blueButton@2x.png in Resources */,
 				1A22F5D71A758574005FC62D /* RuralStallRoof_Diffuce.jpg in Resources */,
 				1AD54C5F1B5CD88400A602CB /* BirchBark.png in Resources */,

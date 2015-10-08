@@ -11,3 +11,6 @@
 void MiRoLog_Indent();
 void MiRoLog_Outdent();
 void MiRoLog(NSString *format, ...);
+
+/** Returns a string description of the specified BOOL in the form "YES" / "NO" */
+NSString* NSStringFromBOOL(BOOL value);

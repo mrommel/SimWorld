@@ -8,28 +8,17 @@
 
 #import "TreeVertex.h"
 
-BoneIndex BoneIndexMake(NSUInteger bone1, NSUInteger bone2)
+TreeVertex TreeVertexMake(CC3Vector position, CC3Vector normal, CC3Vector2 textureCoordinate, int bone1, int bone2)
 {
-    BoneIndex bi;
-    bi.bone1 = bone1;
-    bi.bone2 = bone2;
-    return bi;
+    TreeVertex tv;
+    tv.Position[0] = position.x;
+    tv.Position[1] = position.y;
+    tv.Position[2] = position.z;
+    tv.Normal[0] = normal.x;
+    tv.Normal[1] = normal.y;
+    tv.Normal[2] = normal.z;
+    tv.TexCoord[0] = textureCoordinate.x;
+    tv.TexCoord[1] = textureCoordinate.y;
+    tv.Bones[0] = bone1, tv.Bones[1] = bone2;
+    return tv;
 }
-
-@implementation TreeVertex
-
-- (id)initWithTranslation:(CC3Vector)translation andDirection:(CC3Vector)direction andTextureCoords:(CC3Vector2)textureCoord andBone1:(NSUInteger)bone1 andBone2:(NSUInteger)bone2
-{
-    self = [super init];
-    
-    if (self) {
-        self.position = translation;
-        self.normal = direction;
-        self.textureCoordinate = textureCoord;
-        self.bones = BoneIndexMake(bone1, bone2);
-    }
-    
-    return self;
-}
-
-@end

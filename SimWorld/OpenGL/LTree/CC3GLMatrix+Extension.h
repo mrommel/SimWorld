@@ -94,6 +94,7 @@ static const CC3Vector kCC3VectorBackward = { 0.0,  0.0, -1.0 };
 
 /** copies the current Matrix and multiplies it */
 - (CC3GLMatrix *)copyMultipliedBy:(CC3GLMatrix *)mut;
+- (CC3GLMatrix *)copyMultipliedByConst:(const CC3GLMatrix *)mut;
 
 + (CC3GLMatrix *)matrixFromQuaternion:(CC3Vector4)quaternion;
 
