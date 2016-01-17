@@ -125,11 +125,6 @@
 {
     MiRoLog(@"executeCrayon %@", self);
     
-    // TODO remove ?
-    /*if ([crayon stackDepth] > 5) {
-        return;
-    }*/
-    
     MiRoLog_Indent();
     [crayon pushState];
     for (TreeCrayonInstruction *instruction in self.instructions) {

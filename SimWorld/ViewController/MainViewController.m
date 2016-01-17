@@ -47,7 +47,7 @@
         [weakSelf navigateToLoading];
     }];
     
-    [self addButton:SWLocalizedString(@"TXT_KEY_MAIN_TEST") atY:390 withBlock:^{
+    [self addButton:SWLocalizedString(@"TXT_KEY_MAIN_TREES") atY:390 withBlock:^{
         [weakSelf navigateToTest];
     }];
     

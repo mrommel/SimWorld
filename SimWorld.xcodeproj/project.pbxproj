@@ -226,7 +226,7 @@
 		1AF0539719F54C39003D54D2 /* TextureAtlas.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF0539619F54C39003D54D2 /* TextureAtlas.m */; };
 		1AF8DBDE1A03929E00338D62 /* terrains.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AF8DBDD1A03929E00338D62 /* terrains.png */; };
 		1AF8DBE01A0395B600338D62 /* tile_floor.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AF8DBDF1A0395B600338D62 /* tile_floor.png */; };
-		1AF94A951BB735200099A66D /* TreeVertex2.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 1AF94A941BB735200099A66D /* TreeVertex2.glsl */; settings = {ASSET_TAGS = (); }; };
+		1AF94A951BB735200099A66D /* TreeVertex2.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 1AF94A941BB735200099A66D /* TreeVertex2.glsl */; };
 		1AFD7F1C1A2E3E2F00356281 /* AbstractCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD7F1B1A2E3E2F00356281 /* AbstractCamera.m */; };
 /* End PBXBuildFile section */
 

@@ -39,8 +39,8 @@
     [self.world addLight:light];
     
     // Map
-    self.mapNode = [[HexagonMapNode alloc] initWithMap:self.map];
-    [self.world addChild:self.mapNode];
+    //self.mapNode = [[HexagonMapNode alloc] initWithMap:self.map];
+    //[self.world addChild:self.mapNode];
     
     // Teapot
     //self.teapotNode = [[TeapotNode alloc] initWithDefaultMesh:[REMeshCache meshNamed:@"teapot.obj"]];
@@ -114,7 +114,7 @@
                                 NSLog(@"Center");
                                 [weakSelf center];
                             }];
-    [centerButton setTitle:@"x" forState:UIControlStateNormal];
+    [centerButton setTitle:@"C" forState:UIControlStateNormal];
     centerButton.frame = CGRectMake(BU, 104, BU2, BU2);
     [glView_ addSubview:centerButton];
 }

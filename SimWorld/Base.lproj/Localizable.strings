@@ -9,6 +9,7 @@
 /** main */
 "TXT_KEY_MAIN_SETUP" = "Setup";
 "TXT_KEY_MAIN_LOAD_MAP" = "Load Map";
+"TXT_KEY_MAIN_TREES" = "Trees";
 "TXT_KEY_MAIN_ABOUT" = "About";
 
 /** setup - leader */

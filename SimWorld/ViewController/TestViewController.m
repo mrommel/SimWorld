@@ -142,7 +142,8 @@
     static float angle = 0;
     
     angle += 2;
-    self.treeNode.rotationAngle = angle;
+    self.treeNode.rotation = CC3VectorMake(180, angle, 0);
+    self.treeNode.scale = CC3VectorMake(0.01f, 0.01f, 0.01f);
 }
 
 @end

@@ -19,6 +19,7 @@
 #import "TreeSkeleton.h"
 #import "TreeAnimationState.h"
 #import "NSArray+Extensions.h"
+#import "OpenGLUtil.h"
 
 @implementation TreeType
 
@@ -55,7 +56,9 @@
     GLuint _worldUniform;
     GLuint _viewUniform;
     GLuint _projectionUniform;
-    GLuint _bonesUniform[20]; // 20 bones
+    GLuint _bonesUniform00; // 20 bones
+    GLuint _bonesUniform01;
+    GLuint _bonesUniform02;
     
     // texture
     GLint _samplerArrayLoc;
@@ -76,6 +79,7 @@
 @property (nonatomic, retain) WindStrengthSin *wind;
 @property (nonatomic, retain) TreeWindAnimator *animator;
 @property (nonatomic, retain) SimpleTree *tree;
+@property (atomic) GLuint grassTexture;
 
 @end
 
@@ -114,12 +118,13 @@
         self.wind = [[WindStrengthSin alloc] init];
         self.animator = [[TreeWindAnimator alloc] initWithWind:self.wind];
         
-        // quad
+        // grass
+        self.grassTexture = [[OpenGLUtil sharedInstance] setupTexture:@"Grass.jpg"];
         const TreeVertex quadVertices[] = {
-            {{1, -1, 0}, {0, 0, 1}, {0, 0}, {0, 0}},
-            {{1, 1, 0}, {0, 0, 1}, {1, 0}, {0, 0}},
-            {{-1, 1, 0}, {0, 0, 1}, {0, 1}, {0, 0}},
-            {{-1, -1, 0}, {0, 0, 1}, {1, 1}, {0, 0}}
+            {{1000, 0, -1000}, {0, 1, 0}, {0, 0}, {0, 0}},
+            {{1000, 0, 1000}, {0, 1, 0}, {5, 0}, {0, 0}},
+            {{-1000, 0, 1000}, {0, 1, 0}, {0, 5}, {0, 0}},
+            {{-1000, 0, -1000}, {0, 1, 0}, {5, 5}, {0, 0}}
         };
         
         glGenBuffers(1, &_vertexBufferQuad);
@@ -127,8 +132,8 @@
         glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(TreeVertex), quadVertices, GL_STATIC_DRAW);
         
         const Index quadIndices[] = {
-            0, 1, 2,
-            2, 3, 0
+            0, 2, 1,
+            2, 0, 3
         };
         glGenBuffers(1, &_indexBufferQuad);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBufferQuad);
@@ -191,10 +196,13 @@
     _boneSlot = glGetAttribLocation(self.program.program, "BoneIndex");
     glEnableVertexAttribArray(_boneSlot);
     
-    for( int i = 0; i < 20; i++) {
+    /*for( int i = 0; i < 20; i++) {
         NSString *boneString = [NSString stringWithFormat:@"Bones[%d]", i];
         _bonesUniform[i] = glGetUniformLocation(self.program.program, [boneString UTF8String]);
-    }
+    }*/
+    _bonesUniform00 = glGetUniformLocation(self.program.program, [@"Bones00" UTF8String]);
+    _bonesUniform01 = glGetUniformLocation(self.program.program, [@"Bones01" UTF8String]);
+    _bonesUniform02 = glGetUniformLocation(self.program.program, [@"Bones02" UTF8String]);
     
     _worldUniform = glGetUniformLocation(self.program.program, "World");
     _viewUniform = glGetUniformLocation(self.program.program, "View");
@@ -217,13 +225,14 @@
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
     
-    glEnable(GL_BLEND);
+    //glEnable(GL_BLEND);
     //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
-    glEnable(GL_CULL_FACE);
     //glDisable(GL_CULL_FACE);
-    //glFrontFace(GL_CW); // GL_CW or GL_CCW
-    glCullFace(GL_FRONT); /* GL_FRONT or GL_BACK or even GL_FRONT_AND_BACK */
+    glDisable(GL_CULL_FACE); // to see both sides of the trianlges
+    //glEnable(GL_CULL_FACE);
+    //glFrontFace(GL_CCW); // GL_CW or GL_CCW
+    //glCullFace(GL_FRONT_AND_BACK); /* GL_FRONT or GL_BACK or even GL_FRONT_AND_BACK */
     
     // Projection Matrix
     const CC3GLMatrix *projectionMatrix = [self.camera projectionMatrix];
@@ -232,6 +241,7 @@
     const CC3GLMatrix *viewMatrix = [self.camera viewMatrix];
     
     // ---------------------------------
+    [self drawGrassWithProjection:projectionMatrix andView:viewMatrix];
 
     if (self.tree) {
         if (self.showTrunk) {
@@ -241,15 +251,13 @@
             [self drawLeavesWithProjection:projectionMatrix andView:viewMatrix];
         }
     }
-    
-    //[self drawQuadWithProjection:projectionMatrix andView:viewMatrix];
 }
 
-- (void)drawQuadWithProjection:(const CC3GLMatrix *)projectionMatrix andView:(const CC3GLMatrix *)viewMatrix
+- (void)drawGrassWithProjection:(const CC3GLMatrix *)projectionMatrix andView:(const CC3GLMatrix *)viewMatrix
 {
     // Bind the trunk texture
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, self.tree.trunkTexture);
+    glBindTexture(GL_TEXTURE_2D, self.grassTexture);
     
     // we've bound our textures in textures 0.
     const GLint samplers[1] = {0};
@@ -263,13 +271,13 @@
     glUniformMatrix4fv(_worldUniform, 1, 0, [self transformMatrix].glMatrix);
     
     glEnableVertexAttribArray(_positionSlot);
-    glVertexAttribPointer(_positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(TreeVertex), 0);
+    glVertexAttribPointer(_positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(TreeVertex), (GLvoid*) (0 * sizeof(GLfloat)));
     glEnableVertexAttribArray(_normalSlot);
-    glVertexAttribPointer(_normalSlot, 4, GL_FLOAT, GL_FALSE, sizeof(TreeVertex), (GLvoid*) (sizeof(float) * 3));
+    glVertexAttribPointer(_normalSlot, 3, GL_FLOAT, GL_FALSE, sizeof(TreeVertex), (GLvoid*) (3 * sizeof(GLfloat)));
     glEnableVertexAttribArray(_texCoordSlot);
-    glVertexAttribPointer(_texCoordSlot, 2, GL_FLOAT, GL_FALSE, sizeof(TreeVertex), (GLvoid*) (sizeof(float) * 7));
+    glVertexAttribPointer(_texCoordSlot, 2, GL_FLOAT, GL_FALSE, sizeof(TreeVertex), (GLvoid*) (6 * sizeof(GLfloat)));
     glEnableVertexAttribArray(_boneSlot);
-    glVertexAttribPointer(_boneSlot, 2, GL_FLOAT, GL_FALSE, sizeof(TreeVertex), (GLvoid*) (sizeof(float) * 9));
+    glVertexAttribPointer(_boneSlot, 2, GL_FLOAT, GL_FALSE, sizeof(TreeVertex), (GLvoid*) (8 * sizeof(GLfloat)));
     
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     
@@ -279,6 +287,8 @@
 
 - (void)drawTrunkWithProjection:(const CC3GLMatrix *)projectionMatrix andView:(const CC3GLMatrix *)viewMatrix
 {
+    glClear(GL_DEPTH_BUFFER_BIT);
+    
     // Bind the trunk texture
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, self.tree.trunkTexture);
@@ -307,10 +317,13 @@
     [self.tree.skeleton copyAbsoluteBoneTranformsTo:self.tree.bindingMatrices andBoneRotation:self.tree.animationState.rotations];
 
     // Passing 20 matrices
-    for (int i = 0; i < self.tree.bindingMatrices.count; i++) {
+    /*for (int i = 0; i < self.tree.bindingMatrices.count; i++) {
         glUniformMatrix4fv(_bonesUniform[i], 1, false, [self.tree.bindingMatrices matrixAtIndex:i].glMatrix);
         //identify glUniformMatrix4fv(_bonesUniform[i], 1, false, [CC3GLMatrix identity].glMatrix);
-    }
+    }*/
+    glUniformMatrix4fv(_bonesUniform00, 1, false, [self.tree.bindingMatrices matrixAtIndex:0].glMatrix);
+    glUniformMatrix4fv(_bonesUniform01, 1, false, [self.tree.bindingMatrices matrixAtIndex:1].glMatrix);
+    glUniformMatrix4fv(_bonesUniform02, 1, false, [self.tree.bindingMatrices matrixAtIndex:2].glMatrix);
     
     // Debug
     // gl_Position = Projection * View * World * Bones[int(BoneIndex.x)] * Position;
@@ -321,15 +334,16 @@
     CC3Vector tmp3 = [projectionMatrix transformDirection:tmp2];*/
     
     glEnableVertexAttribArray(_positionSlot);
-    glVertexAttribPointer(_positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(TreeVertex), 0);
+    glVertexAttribPointer(_positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(TreeVertex), (GLvoid*) (0 * sizeof(GLfloat)));
     glEnableVertexAttribArray(_normalSlot);
-    glVertexAttribPointer(_normalSlot, 4, GL_FLOAT, GL_FALSE, sizeof(TreeVertex), (GLvoid*) (sizeof(float) * 3));
+    glVertexAttribPointer(_normalSlot, 4, GL_FLOAT, GL_FALSE, sizeof(TreeVertex), (GLvoid*) (3 * sizeof(GLfloat)));
     glEnableVertexAttribArray(_texCoordSlot);
-    glVertexAttribPointer(_texCoordSlot, 2, GL_FLOAT, GL_FALSE, sizeof(TreeVertex), (GLvoid*) (sizeof(float) * 7));
+    glVertexAttribPointer(_texCoordSlot, 2, GL_FLOAT, GL_FALSE, sizeof(TreeVertex), (GLvoid*) (6 * sizeof(GLfloat)));
     glEnableVertexAttribArray(_boneSlot);
-    glVertexAttribPointer(_boneSlot, 2, GL_FLOAT, GL_FALSE, sizeof(TreeVertex), (GLvoid*) (sizeof(float) * 9));
+    glVertexAttribPointer(_boneSlot, 2, GL_FLOAT, GL_FALSE, sizeof(TreeVertex), (GLvoid*) (8 * sizeof(GLfloat)));
     
-    glDrawElements(GL_TRIANGLES, (int)self.tree.trunk.numberOfIndices, GL_UNSIGNED_INT, 0);
+    //glDrawElements(GL_TRIANGLES, (int)self.tree.trunk.numberOfIndices, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, (int)27, GL_UNSIGNED_INT, 0);
     
     // unbind textures
     [RETexture unbind];
