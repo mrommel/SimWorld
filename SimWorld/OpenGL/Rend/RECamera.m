@@ -11,10 +11,10 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -101,7 +101,7 @@
     self.lookDirection = direction;
     isViewMatrixDirty = YES;
     
-   // NSLog(@"self.lookDirection: %f, %f, %f", self.lookDirection.x, self.lookDirection.y, self.lookDirection.z);
+    // NSLog(@"self.lookDirection: %f, %f, %f", self.lookDirection.x, self.lookDirection.y, self.lookDirection.z);
     //NSLog(@"self.upDirection: %f, %f, %f", self.upDirection.x, self.upDirection.y, self.upDirection.z);
 }
 
@@ -211,32 +211,32 @@
 #pragma mark - Conversions
 
 /*
-- (CC3Vector)convert:(CGPoint)point fromView:(REGLView*)view {
-    
-    CC3Vector worldCoordinate = CC3VectorMake(self.position.x + (point.x - view.frame.size.width / 2.0) / view.frame.size.width  * (frustumRight - frustumLeft),
-                                              self.position.y - (point.y - view.frame.size.height / 2.0) / view.frame.size.height * (frustumTop - frustumBottom),
-                                              self.position.z + frustumNear);
-    
-    NSLog(@"world: %f, %f, %f", worldCoordinate.x, worldCoordinate.y, worldCoordinate.z);
-    
-    
-    return [self.viewMatrix transformLocation:worldCoordinate];
-}
+ - (CC3Vector)convert:(CGPoint)point fromView:(REGLView*)view {
+ 
+ CC3Vector worldCoordinate = CC3VectorMake(self.position.x + (point.x - view.frame.size.width / 2.0) / view.frame.size.width  * (frustumRight - frustumLeft),
+ self.position.y - (point.y - view.frame.size.height / 2.0) / view.frame.size.height * (frustumTop - frustumBottom),
+ self.position.z + frustumNear);
+ 
+ NSLog(@"world: %f, %f, %f", worldCoordinate.x, worldCoordinate.y, worldCoordinate.z);
+ 
+ 
+ return [self.viewMatrix transformLocation:worldCoordinate];
+ }
  */
 
 /*
--(CC3Ray)tmp_unprojectPoint:(CGPoint)cc2Point size:(CGSize)size {
-    // CC_CONTENT_SCALE_FACTOR = 2.0 if Retina display active, or 1.0 otherwise.
+ -(CC3Ray)tmp_unprojectPoint:(CGPoint)cc2Point size:(CGSize)size {
+ // CC_CONTENT_SCALE_FACTOR = 2.0 if Retina display active, or 1.0 otherwise.
 	//CGPoint glPoint = ccpMult(cc2Point, CC_CONTENT_SCALE_FACTOR());
-    
-    CGPoint glPoint = cc2Point;
+ 
+ CGPoint glPoint = cc2Point;
 	
 	// Express the glPoint X & Y as proportion of the layer dimensions, based
 	// on an origin in the center of the layer (the center of the camera's view).
 	CGSize lb = size;
 	GLfloat xp = ((2.0 * glPoint.x) / lb.width) - 1;
 	//GLfloat yp = ((2.0 * glPoint.y) / lb.height) - 1;
-    GLfloat yp = -1 * (((2.0 * glPoint.y) / lb.height) - 1);
+ GLfloat yp = -1 * (((2.0 * glPoint.y) / lb.height) - 1);
 	
 	// Now that we have the location of the glPoint proportional to the layer dimensions,
 	// we need to map the layer dimensions onto the frustum near clipping plane.
@@ -255,149 +255,149 @@
 	GLfloat zNearTopRight = -frustumNear;
 	
 	LogTrace(@"%@ view point %@ mapped to proportion (%.3f, %.3f) of view bounds %@ and viewport %@",
-			 [self class], NSStringFromCGPoint(glPoint), xp, yp,
-			 NSStringFromCGSize(lb), NSStringFromCC3Viewport(self.viewportManager.viewport));
+ [self class], NSStringFromCGPoint(glPoint), xp, yp,
+ NSStringFromCGSize(lb), NSStringFromCC3Viewport(self.viewportManager.viewport));
 	
 	// We now have the location of the the top-right corner of the view, at the near
 	// clipping plane, taking into account device orientation. We can now map the glPoint
 	// onto the near clipping plane by multiplying by the glPoint's proportional X & Y
 	// location, relative to the top-right corner of the view, which was calculated above.
 	CC3Vector pointLocNear = cc3v(xNearTopRight * xp,
-								  yNearTopRight * yp,
-								  zNearTopRight);
-    
-    //NSLog(@"pointLocNear: %f, %f, %f", pointLocNear.x, pointLocNear.y, pointLocNear.z);
-    
+ yNearTopRight * yp,
+ zNearTopRight);
+ 
+ //NSLog(@"pointLocNear: %f, %f, %f", pointLocNear.x, pointLocNear.y, pointLocNear.z);
+ 
 	CC3Ray ray;
-    
+ 
 	if (projection == kRECameraProjectionOrthographic) {
-		// The location on the near clipping plane is relative to the camera's
-		// local coordinates. Convert it to global coordinates before returning.
-		// The ray direction is straight out from that global location in the 
-		// camera's globalForwardDirection.
-		//ray.startLocation =  [self.transformMatrix transformLocation:pointLocNear];
-		//ray.direction = self.globalForwardDirection;
-        
-        NSAssert(NO, @"Not implemented, kRECameraProjectionOrthographic");
+ // The location on the near clipping plane is relative to the camera's
+ // local coordinates. Convert it to global coordinates before returning.
+ // The ray direction is straight out from that global location in the
+ // camera's globalForwardDirection.
+ //ray.startLocation =  [self.transformMatrix transformLocation:pointLocNear];
+ //ray.direction = self.globalForwardDirection;
+ 
+ NSAssert(NO, @"Not implemented, kRECameraProjectionOrthographic");
 	} else {
-		// The location on the near clipping plane is relative to the camera's local
-		// coordinates. Since the camera's origin is zero in its local coordinates,
-		// this point on the near clipping plane forms a directional vector from the
-		// camera's origin. Rotate this directional vector with the camera's rotation
-		// matrix to convert it to a global direction vector in global coordinates.
-		// Thanks to cocos3d forum user Rogs for suggesting the use of the globalRotationMatrix.
-        
-        CC3Vector globalLocation = [self.globalTransformMatrix transformLocation:kCC3VectorZero];
-        
-        
-        CC3GLMatrix *rotationMatrix = [CC3GLMatrix matrix];
-        [rotationMatrix populateFromRotation:CC3VectorNegate([self.viewMatrix extractRotation])];
-        
-		ray.startLocation = globalLocation;
-        ray.direction = [rotationMatrix transformDirection:pointLocNear];
-        
-        
-		//ray.direction = [self.globalRotationMatrix transformDirection: pointLocNear];
-        
+ // The location on the near clipping plane is relative to the camera's local
+ // coordinates. Since the camera's origin is zero in its local coordinates,
+ // this point on the near clipping plane forms a directional vector from the
+ // camera's origin. Rotate this directional vector with the camera's rotation
+ // matrix to convert it to a global direction vector in global coordinates.
+ // Thanks to cocos3d forum user Rogs for suggesting the use of the globalRotationMatrix.
+ 
+ CC3Vector globalLocation = [self.globalTransformMatrix transformLocation:kCC3VectorZero];
+ 
+ 
+ CC3GLMatrix *rotationMatrix = [CC3GLMatrix matrix];
+ [rotationMatrix populateFromRotation:CC3VectorNegate([self.viewMatrix extractRotation])];
+ 
+ ray.startLocation = globalLocation;
+ ray.direction = [rotationMatrix transformDirection:pointLocNear];
+ 
+ 
+ //ray.direction = [self.globalRotationMatrix transformDirection: pointLocNear];
+ 
 	}
-    
+ 
 	
 	// Ensure the direction component is normalized before returning.
 	ray.direction = CC3VectorNormalize(ray.direction);
-    
+ 
 	return ray;
-
-}
+ 
+ }
  */
 
 -(CC3Ray)unprojectPoint:(CGPoint)cc2Point inView:(REGLView*)view {
     
-	// CC_CONTENT_SCALE_FACTOR = 2.0 if Retina display active, or 1.0 otherwise.
-	//CGPoint glPoint = ccpMult(cc2Point, CC_CONTENT_SCALE_FACTOR());
+    // CC_CONTENT_SCALE_FACTOR = 2.0 if Retina display active, or 1.0 otherwise.
+    //CGPoint glPoint = ccpMult(cc2Point, CC_CONTENT_SCALE_FACTOR());
     
     CGPoint glPoint = cc2Point;
-	
-	// Express the glPoint X & Y as proportion of the layer dimensions, based
-	// on an origin in the center of the layer (the center of the camera's view).
-	CGSize lb = view.frame.size;
-	GLfloat xp = ((2.0 * glPoint.x) / lb.width) - 1;
-	//GLfloat yp = ((2.0 * glPoint.y) / lb.height) - 1;
+    
+    // Express the glPoint X & Y as proportion of the layer dimensions, based
+    // on an origin in the center of the layer (the center of the camera's view).
+    CGSize lb = view.frame.size;
+    GLfloat xp = ((2.0 * glPoint.x) / lb.width) - 1;
+    //GLfloat yp = ((2.0 * glPoint.y) / lb.height) - 1;
     GLfloat yp = -1 * (((2.0 * glPoint.y) / lb.height) - 1);
-	
-	// Now that we have the location of the glPoint proportional to the layer dimensions,
-	// we need to map the layer dimensions onto the frustum near clipping plane.
-	// The layer dimensions change as device orientation changes, but the viewport
-	// dimensions remain the same. The field of view is always measured relative to the
-	// viewport height, independent of device orientation. We can find the top-right
-	// corner of the view on the near clipping plane (top-right is positive X & Y from
-	// the center of the camera's view) by multiplying by an orientation aspect in each
-	// direction. This orientation aspect depends on the device orientation, which can
-	// be expressed in terms of the relationship between the layer width and height and
-	// the constant viewport height. The Z-coordinate at the near clipping plane is
-	// negative since the camera points down the negative Z axis in its local coordinates.
-	CGFloat vph = view.frame.size.height;
-	GLfloat xNearTopRight = frustumTop * (lb.width / vph);
-	GLfloat yNearTopRight = frustumTop * (lb.height / vph);
-	GLfloat zNearTopRight = -frustumNear;
-	
-	LogTrace(@"%@ view point %@ mapped to proportion (%.3f, %.3f) of view bounds %@ and viewport %@",
-			 [self class], NSStringFromCGPoint(glPoint), xp, yp,
-			 NSStringFromCGSize(lb), NSStringFromCC3Viewport(self.viewportManager.viewport));
-	
-	// We now have the location of the the top-right corner of the view, at the near
-	// clipping plane, taking into account device orientation. We can now map the glPoint
-	// onto the near clipping plane by multiplying by the glPoint's proportional X & Y
-	// location, relative to the top-right corner of the view, which was calculated above.
-	CC3Vector pointLocNear = cc3v(xNearTopRight * xp,
-								  yNearTopRight * yp,
-								  zNearTopRight);
+    
+    // Now that we have the location of the glPoint proportional to the layer dimensions,
+    // we need to map the layer dimensions onto the frustum near clipping plane.
+    // The layer dimensions change as device orientation changes, but the viewport
+    // dimensions remain the same. The field of view is always measured relative to the
+    // viewport height, independent of device orientation. We can find the top-right
+    // corner of the view on the near clipping plane (top-right is positive X & Y from
+    // the center of the camera's view) by multiplying by an orientation aspect in each
+    // direction. This orientation aspect depends on the device orientation, which can
+    // be expressed in terms of the relationship between the layer width and height and
+    // the constant viewport height. The Z-coordinate at the near clipping plane is
+    // negative since the camera points down the negative Z axis in its local coordinates.
+    CGFloat vph = view.frame.size.height;
+    GLfloat xNearTopRight = frustumTop * (lb.width / vph);
+    GLfloat yNearTopRight = frustumTop * (lb.height / vph);
+    GLfloat zNearTopRight = -frustumNear;
+    
+    LogTrace(@"%@ view point %@ mapped to proportion (%.3f, %.3f) of view bounds %@ and viewport %@",
+             [self class], NSStringFromCGPoint(glPoint), xp, yp,
+             NSStringFromCGSize(lb), NSStringFromCC3Viewport(self.viewportManager.viewport));
+    
+    // We now have the location of the the top-right corner of the view, at the near
+    // clipping plane, taking into account device orientation. We can now map the glPoint
+    // onto the near clipping plane by multiplying by the glPoint's proportional X & Y
+    // location, relative to the top-right corner of the view, which was calculated above.
+    CC3Vector pointLocNear = cc3v(xNearTopRight * xp,
+                                  yNearTopRight * yp,
+                                  zNearTopRight);
     
     //NSLog(@"pointLocNear: %f, %f, %f", pointLocNear.x, pointLocNear.y, pointLocNear.z);
-
-	CC3Ray ray;
     
-	if (projection == kRECameraProjectionOrthographic) {
-		// The location on the near clipping plane is relative to the camera's
-		// local coordinates. Convert it to global coordinates before returning.
-		// The ray direction is straight out from that global location in the
-		// camera's globalForwardDirection.
-		ray.startLocation =  [self.transformMatrix transformLocation:pointLocNear];
-		//ray.direction = self.globalForwardDirection;
+    CC3Ray ray;
+    
+    if (projection == kRECameraProjectionOrthographic) {
+        // The location on the near clipping plane is relative to the camera's
+        // local coordinates. Convert it to global coordinates before returning.
+        // The ray direction is straight out from that global location in the
+        // camera's globalForwardDirection.
+        ray.startLocation =  [self.transformMatrix transformLocation:pointLocNear];
+        //ray.direction = self.globalForwardDirection;
         
         //NSAssert(NO, @"Not implemented, kRECameraProjectionOrthographic");
-	} else {
-		// The location on the near clipping plane is relative to the camera's local
-		// coordinates. Since the camera's origin is zero in its local coordinates,
-		// this point on the near clipping plane forms a directional vector from the
-		// camera's origin. Rotate this directional vector with the camera's rotation
-		// matrix to convert it to a global direction vector in global coordinates.
-		// Thanks to cocos3d forum user Rogs for suggesting the use of the globalRotationMatrix.
+    } else {
+        // The location on the near clipping plane is relative to the camera's local
+        // coordinates. Since the camera's origin is zero in its local coordinates,
+        // this point on the near clipping plane forms a directional vector from the
+        // camera's origin. Rotate this directional vector with the camera's rotation
+        // matrix to convert it to a global direction vector in global coordinates.
+        // Thanks to cocos3d forum user Rogs for suggesting the use of the globalRotationMatrix.
         
         CC3Vector globalLocation = [self.globalTransformMatrix transformLocation:kCC3VectorZero];
         
-
+        
         CC3GLMatrix *rotationMatrix = [CC3GLMatrix matrix];
         [rotationMatrix populateFromRotation:CC3VectorNegate([self.viewMatrix extractRotation])];
         
-		ray.startLocation = globalLocation;
+        ray.startLocation = globalLocation;
         ray.direction = [rotationMatrix transformDirection:pointLocNear];
         
         
-		//ray.direction = [self.globalRotationMatrix transformDirection: pointLocNear];
+        //ray.direction = [self.globalRotationMatrix transformDirection: pointLocNear];
         
-	}
-     
-	
-	// Ensure the direction component is normalized before returning.
-	ray.direction = CC3VectorNormalize(ray.direction);
+    }
     
-	return ray;
+    
+    // Ensure the direction component is normalized before returning.
+    ray.direction = CC3VectorNormalize(ray.direction);
+    
+    return ray;
 }
 
 
 /*
--(CC3Ray) unprojectPoint: (CGPoint) cc2Point {
-    
+ -(CC3Ray) unprojectPoint: (CGPoint) cc2Point {
+ 
 	// CC_CONTENT_SCALE_FACTOR = 2.0 if Retina display active, or 1.0 otherwise.
 	CGPoint glPoint = ccpMult(cc2Point, CC_CONTENT_SCALE_FACTOR());
 	
@@ -424,44 +424,44 @@
 	GLfloat zNearTopRight = -frustum.near;
 	
 	LogTrace(@"%@ view point %@ mapped to proportion (%.3f, %.3f) of view bounds %@ and viewport %@",
-			 [self class], NSStringFromCGPoint(glPoint), xp, yp,
-			 NSStringFromCGSize(lb), NSStringFromCC3Viewport(self.viewportManager.viewport));
+ [self class], NSStringFromCGPoint(glPoint), xp, yp,
+ NSStringFromCGSize(lb), NSStringFromCC3Viewport(self.viewportManager.viewport));
 	
 	// We now have the location of the the top-right corner of the view, at the near
 	// clipping plane, taking into account device orientation. We can now map the glPoint
 	// onto the near clipping plane by multiplying by the glPoint's proportional X & Y
 	// location, relative to the top-right corner of the view, which was calculated above.
 	CC3Vector pointLocNear = cc3v(xNearTopRight * xp,
-								  yNearTopRight * yp,
-								  zNearTopRight);
+ yNearTopRight * yp,
+ zNearTopRight);
 	CC3Ray ray;
 	if (self.isUsingParallelProjection) {
-		// The location on the near clipping plane is relative to the camera's
-		// local coordinates. Convert it to global coordinates before returning.
-		// The ray direction is straight out from that global location in the 
-		// camera's globalForwardDirection.
-		ray.startLocation =  [transformMatrix transformLocation: pointLocNear];
-		ray.direction = self.globalForwardDirection;
+ // The location on the near clipping plane is relative to the camera's
+ // local coordinates. Convert it to global coordinates before returning.
+ // The ray direction is straight out from that global location in the
+ // camera's globalForwardDirection.
+ ray.startLocation =  [transformMatrix transformLocation: pointLocNear];
+ ray.direction = self.globalForwardDirection;
 	} else {
-		// The location on the near clipping plane is relative to the camera's local
-		// coordinates. Since the camera's origin is zero in its local coordinates,
-		// this point on the near clipping plane forms a directional vector from the
-		// camera's origin. Rotate this directional vector with the camera's rotation
-		// matrix to convert it to a global direction vector in global coordinates.
-		// Thanks to cocos3d forum user Rogs for suggesting the use of the globalRotationMatrix.
-		ray.startLocation = self.globalLocation;
-		ray.direction = [self.globalRotationMatrix transformDirection: pointLocNear];
+ // The location on the near clipping plane is relative to the camera's local
+ // coordinates. Since the camera's origin is zero in its local coordinates,
+ // this point on the near clipping plane forms a directional vector from the
+ // camera's origin. Rotate this directional vector with the camera's rotation
+ // matrix to convert it to a global direction vector in global coordinates.
+ // Thanks to cocos3d forum user Rogs for suggesting the use of the globalRotationMatrix.
+ ray.startLocation = self.globalLocation;
+ ray.direction = [self.globalRotationMatrix transformDirection: pointLocNear];
 	}
 	
 	// Ensure the direction component is normalized before returning.
 	ray.direction = CC3VectorNormalize(ray.direction);
 	
 	LogTrace(@"%@ unprojecting point %@ to near plane location %@ and to ray starting at %@ and pointing towards %@",
-             [self class], NSStringFromCGPoint(glPoint), NSStringFromCC3Vector(pointLocNear),
-             NSStringFromCC3Vector(ray.startLocation), NSStringFromCC3Vector(ray.direction));
-    
+ [self class], NSStringFromCGPoint(glPoint), NSStringFromCC3Vector(pointLocNear),
+ NSStringFromCC3Vector(ray.startLocation), NSStringFromCC3Vector(ray.direction));
+ 
 	return ray;
-}
+ }
  */
 
 
@@ -476,12 +476,12 @@
     // http://www.lighthouse3d.com/tutorials/view-frustum-culling/geometric-approach-implementation/
     
     // compute the Z axis of camera
-	// this axis points in the opposite direction from
-	// the looking direction
+    // this axis points in the opposite direction from
+    // the looking direction
     CC3Vector Z = CC3VectorNormalize(CC3VectorNegate(lookDirection_));
     
     // X axis of camera with given "up" vector and Z axis
-	CC3Vector X = CC3VectorNormalize(CC3VectorCross(upDirection, Z));
+    CC3Vector X = CC3VectorNormalize(CC3VectorCross(upDirection, Z));
     
     // the real "up" vector is the cross product of Z and X (Anton: Why just not use upDirection?)
     CC3Vector Y = CC3VectorCross(Z, X);
@@ -496,7 +496,7 @@
     
     // The following (more efficient) alternative may be used to replace the computation of the eight corners and the six planes in the function above.
     CC3Vector aux, normal;
-        
+    
     // NEAR PLANE
     frustumNearPlane_ = CC3PlaneFromPointAndNormal(nc, CC3VectorNegate(Z));
     // FAR PLANE
@@ -548,15 +548,15 @@
     
     
     // compute the 4 corners of the frustum on the near plane
-
-/*    
-	ntl = nc + Y * nh - X * nw;
-	ntr = nc + Y * nh + X * nw;
-	nbl = nc - Y * nh - X * nw;
-	nbr = nc - Y * nh + X * nw;
- */
-
-
+    
+    /*
+     ntl = nc + Y * nh - X * nw;
+     ntr = nc + Y * nh + X * nw;
+     nbl = nc - Y * nh - X * nw;
+     nbr = nc - Y * nh + X * nw;
+     */
+    
+    
 }
 
 - (BOOL)boundingBoxIntersectsFrustum:(CC3BoundingBox)boundingBox {
@@ -564,7 +564,7 @@
 }
 
 - (BOOL)globalBoundingBoxCanBeCulled:(CC3BoundingBox)globalBoundingBox {
-
+    
     if (projection == kRECameraProjectionPerspective) {
         
         //NSLog(@"globalBoundingBoxCanBeCulled");
@@ -577,12 +577,12 @@
         
         CC3Plane *planes = calloc(6, sizeof(CC3Plane));
         /*
-        planes[0] = frustumNearPlane_;
-        planes[1] = frustumFarPlane_;
-        planes[2] = frustumTopPlane_;
-        planes[3] = frustumBottomPlane_;
-        planes[4] = frustumLeftPlane_;
-        planes[5] = frustumRightPlane_;
+         planes[0] = frustumNearPlane_;
+         planes[1] = frustumFarPlane_;
+         planes[2] = frustumTopPlane_;
+         planes[3] = frustumBottomPlane_;
+         planes[4] = frustumLeftPlane_;
+         planes[5] = frustumRightPlane_;
          */
         
         planes[0] = frustumLeftPlane_;
@@ -607,7 +607,7 @@
         
         CC3Vector globalBoundingBoxPoints[8] = {globalBoundingBoxPoint0, globalBoundingBoxPoint1, globalBoundingBoxPoint2, globalBoundingBoxPoint3, globalBoundingBoxPoint4, globalBoundingBoxPoint5, globalBoundingBoxPoint6, globalBoundingBoxPoint7};
         
-//        NSLog(@"globalBoundingBoxPoint0: %f, %f, %f", globalBoundingBoxPoint0.x, globalBoundingBoxPoint0.y, globalBoundingBoxPoint0)
+        //        NSLog(@"globalBoundingBoxPoint0: %f, %f, %f", globalBoundingBoxPoint0.x, globalBoundingBoxPoint0.y, globalBoundingBoxPoint0)
         
         // for each plane do ...
         for (int i = 0; i < 6; i++) {
@@ -637,10 +637,10 @@
                 // is the corner outside or inside
                 
                 /*
-                if (pl[i].distance(b.getVertex(k)) < 0)
-                    outCount++;
-                else
-                    inCount++;
+                 if (pl[i].distance(b.getVertex(k)) < 0)
+                 outCount++;
+                 else
+                 inCount++;
                  */
                 
                 BOOL outside = signedDistance < 0;
@@ -652,13 +652,13 @@
             //NSLog(@"inCount: %d, outCount: %d", inCount, outCount);
             
             //if all corners are out (then all corners are outside the same plane.) then we're sure we can cull
-            if (inCount == 0) { 
+            if (inCount == 0) {
                 canCull = YES;
                 break;
             }
             // if some corners are out and others are in, we can't do anything for now
             //else if (out)
-              //  result = INTERSECT;
+            //  result = INTERSECT;
         }
         
         free(planes);
@@ -670,23 +670,23 @@
 }
 
 /*
-// Only reliable for orthographic projections for no
-- (BOOL)boundingBoxIntersectsFrustum:(CC3BoundingBox)boundingBox {
-    NSAssert(YES, @"RECamera: boundingBoxIntersectsFrustum: Not implemented");
-    return YES;
-    
-
-    
-    BOOL intersects = YES;
-    if (projection == kRECameraProjectionOrthographic) {
-        CC3BoundingBox globalFrustum = CC3BoundingBoxFromMinMax([self.viewMatrix transformLocation:CC3VectorMake(frustumLeft, frustumBottom, -frustumNear)], [self.viewMatrix transformLocation:CC3VectorMake(frustumRight, frustumBottom, -frustumNear)]);
-        if (boundingBox.minimum.x >= fru
-    } else {
-        intersects = YES; // Should fix this later.
-    }
-    return intersects;
-
-}
+ // Only reliable for orthographic projections for no
+ - (BOOL)boundingBoxIntersectsFrustum:(CC3BoundingBox)boundingBox {
+ NSAssert(YES, @"RECamera: boundingBoxIntersectsFrustum: Not implemented");
+ return YES;
+ 
+ 
+ 
+ BOOL intersects = YES;
+ if (projection == kRECameraProjectionOrthographic) {
+ CC3BoundingBox globalFrustum = CC3BoundingBoxFromMinMax([self.viewMatrix transformLocation:CC3VectorMake(frustumLeft, frustumBottom, -frustumNear)], [self.viewMatrix transformLocation:CC3VectorMake(frustumRight, frustumBottom, -frustumNear)]);
+ if (boundingBox.minimum.x >= fru
+ } else {
+ intersects = YES; // Should fix this later.
+ }
+ return intersects;
+ 
+ }
  */
 
 @end

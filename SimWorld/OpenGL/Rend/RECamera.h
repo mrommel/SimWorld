@@ -11,10 +11,10 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -38,7 +38,7 @@ typedef enum {
  */
 
 @interface RECamera : RENode {
-    kRECameraProjection projection;    
+    kRECameraProjection projection;
     
     float frustumLeft, frustumRight;
     float frustumBottom, frustumTop;
@@ -48,7 +48,7 @@ typedef enum {
     
     CC3GLMatrix *viewMatrix;
     CC3GLMatrix *projectionMatrix;
-
+    
     
     BOOL isViewMatrixDirty;
     BOOL isProjectionMatrixDirty;
@@ -78,7 +78,7 @@ typedef enum {
 @property (nonatomic, readonly) CC3GLMatrix *viewMatrix;
 
 /** The projection matrix transforms eye space to normal space. It is calculacted from the frustom values. */
-@property (nonatomic, retain) CC3GLMatrix *projectionMatrix; 
+@property (nonatomic, retain) CC3GLMatrix *projectionMatrix;
 
 /** Designated initializer. Select between perspective and orthographic projection. */
 - (id)initWithProjection:(kRECameraProjection)p;
